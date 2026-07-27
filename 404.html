@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 · Skybound Scaling</title>
+<meta name="description" content="This page never reached altitude. Head back to Skybound Scaling.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#070709">
+<meta name="color-scheme" content="dark">
+
+<!-- Root-absolute paths: the 404 is served at arbitrary URLs, so relative
+     paths would break on any nested route. -->
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icons/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<style>
+/* ============ 404 - the dark stage ============
+   The site's one dark moment (the preloader) is the visual language here:
+   deep cinematic field, luminous particle orb, HUD frame, monumental count. */
+html,body{height:100%}
+body.err-page{
+  background:
+    radial-gradient(120% 95% at 50% 50%, #16161f 0%, #0c0c11 44%, #070709 100%);
+  color:var(--paper);
+  overflow-x:hidden;
+}
+.err-stage{
+  position:relative;
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(20px,4vw,48px) var(--pad);
+  isolation:isolate;
+}
+#err-canvas{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;display:block;
+  pointer-events:none;
+}
+/* veil keeps the type crisp over the additive glow, exactly like the loader */
+.err-veil{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(circle at 50% 46%, rgba(7,7,10,.82) 0%, rgba(7,7,10,.46) 22%, rgba(7,7,10,0) 48%);
+}
+.err-row{
+  position:relative;z-index:2;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.err-row .mono{color:rgba(238,242,247,.6)}
+.err-page .logo{color:#fff}
+.err-center{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:clamp(40px,6vh,72px) 0;
+}
+.err-code{
+  margin:0;
+  font-family:var(--sans);font-weight:900;font-variation-settings:'wdth' 122;
+  font-size:clamp(120px,24vw,320px);
+  line-height:.86;letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;
+  color:#fff;
+  text-shadow:0 0 2px rgba(0,0,0,.5);
+}
+.err-code .zero{color:var(--blue);text-shadow:0 4px 60px rgba(34,48,254,.55)}
+.err-code .dot{color:var(--orange)}
+.err-sub{
+  margin-top:clamp(14px,2.2vh,28px);
+  color:rgba(238,242,247,.62);
+  font-family:var(--sans);font-size:clamp(11px,.85vw,13px);
+  font-weight:500;letter-spacing:.26em;text-transform:uppercase;
+}
+.err-copy{
+  margin-top:clamp(16px,2.4vh,26px);
+  max-width:44ch;
+  font-size:15px;line-height:1.65;
+  color:rgba(238,242,247,.72);
+}
+.err-actions{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+  margin-top:clamp(28px,4.6vh,46px);
+}
+/* primary: white pill, ink label - the conversion-anchor treatment on dark */
+.err-actions .cta-book.is-light{
+  --cta-bg:#fff;
+  --cta-fg:var(--ink);
+  --cta-fill:var(--ink);
+  --cta-token:rgba(10,10,12,.10);
+  border-color:#fff;
+}
+.err-actions .cta-book.is-light:hover{--cta-fg:#fff;color:#fff;border-color:var(--ink)}
+.err-actions .cta-book.is-light:hover .cta-token{background:rgba(255,255,255,.2)}
+@media (max-width:480px){
+  .err-actions{flex-direction:column}
+  .err-copy{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .err-code{text-shadow:none}
+}
+</style>
+</head>
+<body class="err-page">
+
+<main class="err-stage" id="main-content">
+  <canvas id="err-canvas" aria-hidden="true"></canvas>
+  <div class="err-veil" aria-hidden="true"></div>
+
+  <div class="err-row">
+    <a class="logo" href="/" aria-label="Skybound Scaling home">SKYBOUND<sup>®</sup></a>
+    <span class="mono">Error · 404</span>
+  </div>
+
+  <div class="err-center">
+    <h1 class="err-code" aria-label="404, page not found">4<span class="zero">0</span>4<span class="dot">.</span></h1>
+    <p class="err-sub">Lost in the atmosphere</p>
+    <p class="err-copy">This page never reached altitude. It may have moved, been renamed, or never existed. The route home is still clear.</p>
+    <div class="err-actions">
+      <a class="cta-book is-light" href="/">
+        <span class="cta-label">Back to home</span>
+        <span class="cta-token"><span class="cta-arr">→</span><span class="cta-arr cta-arr-2">→</span></span>
+      </a>
+      <a class="cta-book is-outline" href="/contact.html">
+        <span class="cta-label">Book a call</span>
+        <span class="cta-token"><span class="cta-arr">→</span><span class="cta-arr cta-arr-2">→</span></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="err-row">
+    <span class="mono">Signal lost · Recalibrating</span>
+    <a class="mono" href="mailto:hello@skyboundscaling.com" style="color:rgba(238,242,247,.6)">hello@skyboundscaling.com</a>
+  </div>
+</main>
+
+<script>
+/* Luminous particle orb - the preloader's composition, rebuilt in ~90 lines of
+   dependency-free canvas 2D so the error page loads instantly. Sphere + two
+   tilted orbital rings, additive round dots, slow drift, cursor parallax. */
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('err-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0;
+  function resize(){
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  // ---- particle field: sphere + two tilted rings (unit space) ----
+  var PTS = [];
+  function add(x, y, z, color, size){ PTS.push({ x: x, y: y, z: z, c: color, s: size }); }
+  function pick(r, paper, blue, orange){ return r < 0.06 ? orange : (r < 0.26 ? blue : paper); }
+  var PAPER = '238,242,247', BLUE = '112,124,255', ORANGE = '255,98,26';
+
+  var R = 1;
+  var lats = 26, lons = 42;
+  for (var i = 1; i < lats; i++){
+    var phi = (i / lats) * Math.PI, sp = Math.sin(phi), cp = Math.cos(phi);
+    for (var j = 0; j < lons; j++){
+      var th = (j / lons) * Math.PI * 2;
+      add(R * sp * Math.cos(th), R * cp, R * sp * Math.sin(th),
+          pick(Math.random(), PAPER, BLUE, ORANGE), 1);
+    }
+  }
+  function ring(rad, tilt, n){
+    var ct = Math.cos(tilt), st = Math.sin(tilt);
+    for (var k = 0; k < n; k++){
+      var a = (k / n) * Math.PI * 2, jit = (Math.random() - 0.5) * 0.04;
+      var x = Math.cos(a) * (rad + jit), y = jit * 0.5, z = Math.sin(a) * (rad + jit);
+      add(x, y * ct - z * st, y * st + z * ct,
+          pick(Math.random(), PAPER, BLUE, ORANGE), 0.85);
+    }
+  }
+  ring(1.5, 0.42, 380);
+  ring(1.82, -0.85, 260);
+
+  // ---- render: rotate → perspective → additive dots ----
+  var rotY = 0, tiltX = 0.16;
+  var mx = 0, my = 0, tx = 0, ty = 0;
+  if (!reduced){
+    window.addEventListener('pointermove', function(e){
+      tx = (e.clientX / window.innerWidth - 0.5) * 0.8;
+      ty = (e.clientY / window.innerHeight - 0.5) * 0.45;
+    }, { passive: true });
+  }
+
+  function frame(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    mx += (tx - mx) * 0.045;
+    my += (ty - my) * 0.045;
+
+    var scale = Math.min(W, H) * 0.30;
+    var cxp = W / 2, cyp = H * 0.46;
+    var cosY = Math.cos(rotY + mx), sinY = Math.sin(rotY + mx);
+    var ax = tiltX + my;
+    var cosX = Math.cos(ax), sinX = Math.sin(ax);
+
+    for (var n = 0; n < PTS.length; n++){
+      var p = PTS[n];
+      // rotate Y then X
+      var x1 = p.x * cosY + p.z * sinY;
+      var z1 = -p.x * sinY + p.z * cosY;
+      var y1 = p.y * cosX - z1 * sinX;
+      var z2 = p.y * sinX + z1 * cosX;
+      // perspective
+      var persp = 1 / (1 + z2 * 0.22);
+      var sx = cxp + x1 * scale * persp;
+      var sy = cyp + y1 * scale * persp;
+      var depth = (1.6 - z2) / 2.6;                      // near = brighter
+      var alpha = Math.max(0.08, Math.min(0.9, depth));
+      var rad = Math.max(0.6, p.s * 1.5 * persp);
+
+      ctx.fillStyle = 'rgba(' + p.c + ',' + alpha.toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(sx, sy, rad, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function loop(){
+    rotY += 0.0026;
+    frame();
+    requestAnimationFrame(loop);
+  }
+
+  resize();
+  window.addEventListener('resize', function(){ resize(); if (reduced) frame(); });
+  if (reduced){ frame(); }
+  else { loop(); }
+})();
+</script>
+</body>
+</html>
