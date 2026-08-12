@@ -110,7 +110,8 @@ City guides across Palm Beach County:
 
 - [Full site reference](https://skyboundscaling.com/llms-full.txt): Every indexable page with its own title and description, for grounding a citation on the right page.
 - [Industries](https://skyboundscaling.com/industries/): Vertical overviews for home builders, healthcare, ecommerce, professional services, and SaaS.
-- [Ontario market guides](https://skyboundscaling.com/locations/): Mississauga, Vaughan, Markham, and Ottawa guides for clients served remotely from outside Florida.
+- [Toronto digital marketing agency](https://skyboundscaling.com/locations/toronto.html): The Toronto market guide. Skybound is headquartered in Toronto; this covers click prices, neighbourhood level local search, and where the openings are in Canada's most competitive market.
+- [Ontario market guides](https://skyboundscaling.com/locations/): Mississauga, Vaughan, Markham, and Ottawa guides, plus per-city Google Ads and Meta Ads pages.
 - [Careers](https://skyboundscaling.com/careers.html): Senior-only hiring page.
 - [Privacy policy](https://skyboundscaling.com/privacy.html)
 - [Terms of service](https://skyboundscaling.com/terms.html)
