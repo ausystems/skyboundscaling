@@ -9,7 +9,7 @@ marketing. Every engagement is run by a senior practitioner and measured against
 revenue rather than impressions.
 
 - **Website:** https://skyboundscaling.com
-- **Contact:** hello@skyboundscaling.com
+- **Contact:** contact@skyboundscaling.com
 - **Founded:** 2025
 - **Languages:** campaigns run in English and Spanish
 

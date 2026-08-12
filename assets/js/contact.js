@@ -379,7 +379,7 @@ buildBeacon();
       '',
       data.message
     ].filter(Boolean).join('\n');
-    location.href = 'mailto:hello@skyboundscaling.com'
+    location.href = 'mailto:contact@skyboundscaling.com'
       + '?subject=' + encodeURIComponent(subject)
       + '&body=' + encodeURIComponent(body);
   }
