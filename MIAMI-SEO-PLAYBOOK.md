@@ -219,7 +219,7 @@ Cadence recommendation: 4 to 6 posts per month, every post interlinked per the m
 ## 6. Conversion framework (BUILT)
 
 Every Miami page ships with: hero promise + Book a call CTA, proof band (4.2x ROAS,
-$42M tracked, senior-run), mid-page contextual links to pricing and contact, FAQ
+$2M tracked, senior-run), mid-page contextual links to pricing and contact, FAQ
 section answering objections, related-pages asides, and a final CTA panel. The
 contact page carries the form (wire data-endpoint per README) plus mailto fallback.
 Recommended OPS additions: a Calendly or SavvyCal embed on /contact.html and a

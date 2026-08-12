@@ -38,7 +38,7 @@
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="assets/css/main.css?v=23">
-<link rel="stylesheet" href="assets/css/work-index.css?v=22">
+<link rel="stylesheet" href="assets/css/case-showcase.css?v=1">
 <link rel="stylesheet" href="assets/css/services-bento.css?v=5">
 
 <!-- Structured data -->
@@ -746,58 +746,124 @@
 </section>
 
 <!-- CASE STUDIES -->
-<section id="cases" class="section wk-sec">
-  <h2 class="sr-only">Case studies: web design, brand identity, and funnel work</h2>
-  <header class="wk-head">
-    <p class="mono wk-eyebrow rv">Selected work · 04 case studies</p>
-    <p class="mono wk-count rv" aria-hidden="true">04 case studies</p>
+<section id="cases" class="section cs" data-cs aria-labelledby="cases-title">
+  <header class="cs-head">
+    <p class="mono cs-eyebrow rv">Selected work</p>
+    <h2 class="cs-title rv-title" id="cases-title"><span class="cs-ln">Case</span> <span class="cs-ln">Studies</span></h2>
+    <div class="cs-rail">
+      <p class="cs-sub rv">Web design, brand identity, and funnel work. Four builds, every one designed, built, and shipped by the same senior team.</p>
+      <p class="mono cs-count rv"><b>04</b> case studies</p>
+    </div>
   </header>
-  <div class="wk-list" data-wk>
-    <a class="wk-row rv" href="/work/saadi-builds.html" data-wk-row data-url="saadibuilds.com">
-      <span class="wk-media" aria-hidden="true">
+
+  <div class="cs-list">
+    <a class="cs-case rv" href="/work/saadi-builds.html">
+      <div class="cs-shot">
         <img src="assets/images/work/saadi-builds-cover-1600.jpg"
              srcset="assets/images/work/saadi-builds-cover-1600.jpg 1600w, assets/images/work/saadi-builds-cover-2560.jpg 2560w"
-             sizes="92vw" width="2560" height="1474" loading="lazy" decoding="async" alt="">
-      </span>
-      <span class="mono wk-idx" aria-hidden="true">[ 01 ]</span>
-      <span class="wk-name"><span class="wk-roll"><span class="wk-word">Saadi Builds</span></span></span>
-      <span class="mono wk-sect">Luxury home builder</span>
-      <span class="mono wk-read">Read case<span class="arr">→</span></span>
+             sizes="(min-width:900px) 58vw, 100vw" width="2560" height="1474" loading="lazy" decoding="async"
+             alt="The Saadi Builds website homepage">
+      </div>
+      <div class="cs-panel">
+        <div class="cs-index">
+          <span class="cs-num" aria-hidden="true">01</span>
+          <span class="cs-rule" aria-hidden="true"></span>
+          <span class="mono cs-sector">Luxury home builder</span>
+        </div>
+        <h3 class="cs-name">Saadi Builds</h3>
+        <p class="cs-blurb">Custom homes, new construction, and high-end renovations across Northern Virginia.</p>
+        <ul class="cs-scope">
+          <li>Site architecture</li>
+          <li>Design &amp; build in Framer</li>
+          <li>Launch</li>
+        </ul>
+        <div class="cs-foot">
+          <span class="mono cs-domain">saadibuilds.com</span>
+          <span class="cs-go">Read case<span class="arr">→</span></span>
+        </div>
+      </div>
     </a>
-    <a class="wk-row rv" href="/work/vaza.html" data-wk-row data-url="vaza.vote">
-      <span class="wk-media" aria-hidden="true">
+
+    <a class="cs-case rv" href="/work/vaza.html">
+      <div class="cs-shot">
         <img src="assets/images/work/vaza-cover-1600.jpg"
              srcset="assets/images/work/vaza-cover-1600.jpg 1600w, assets/images/work/vaza-cover-2560.jpg 2560w"
-             sizes="92vw" width="2560" height="1438" loading="lazy" decoding="async" alt="">
-      </span>
-      <span class="mono wk-idx" aria-hidden="true">[ 02 ]</span>
-      <span class="wk-name"><span class="wk-roll"><span class="wk-word">VAZA</span></span></span>
-      <span class="mono wk-sect">Opinion platform</span>
-      <span class="mono wk-read">Read case<span class="arr">→</span></span>
+             sizes="(min-width:900px) 58vw, 100vw" width="2560" height="1438" loading="lazy" decoding="async"
+             alt="The VAZA waitlist landing page">
+      </div>
+      <div class="cs-panel">
+        <div class="cs-index">
+          <span class="cs-num" aria-hidden="true">02</span>
+          <span class="cs-rule" aria-hidden="true"></span>
+          <span class="mono cs-sector">Opinion platform</span>
+        </div>
+        <h3 class="cs-name">VAZA</h3>
+        <p class="cs-blurb">An opinion platform where people vote on matchups across sports, entertainment, music, and pop culture.</p>
+        <ul class="cs-scope">
+          <li>Lead-capture landing page</li>
+          <li>Pre-launch funnel</li>
+          <li>Backend automation</li>
+        </ul>
+        <div class="cs-foot">
+          <span class="mono cs-domain">vaza.vote</span>
+          <span class="cs-go">Read case<span class="arr">→</span></span>
+        </div>
+      </div>
     </a>
-    <a class="wk-row rv" href="/work/callura.html" data-wk-row data-url="calluravoice.ai">
-      <span class="wk-media" aria-hidden="true">
+
+    <a class="cs-case rv" href="/work/callura.html">
+      <div class="cs-shot">
         <img src="assets/images/work/callura-cover-1600.jpg"
              srcset="assets/images/work/callura-cover-1600.jpg 1600w, assets/images/work/callura-cover-2560.jpg 2560w"
-             sizes="92vw" width="2560" height="1474" loading="lazy" decoding="async" alt="">
-      </span>
-      <span class="mono wk-idx" aria-hidden="true">[ 03 ]</span>
-      <span class="wk-name"><span class="wk-roll"><span class="wk-word">Callura</span></span></span>
-      <span class="mono wk-sect">Healthcare AI</span>
-      <span class="mono wk-read">Read case<span class="arr">→</span></span>
+             sizes="(min-width:900px) 58vw, 100vw" width="2560" height="1474" loading="lazy" decoding="async"
+             alt="The Callura website homepage">
+      </div>
+      <div class="cs-panel">
+        <div class="cs-index">
+          <span class="cs-num" aria-hidden="true">03</span>
+          <span class="cs-rule" aria-hidden="true"></span>
+          <span class="mono cs-sector">Healthcare AI</span>
+        </div>
+        <h3 class="cs-name">Callura</h3>
+        <p class="cs-blurb">AI phone support for healthcare clinics: answering calls, booking appointments, and following up with patients.</p>
+        <ul class="cs-scope">
+          <li>Brand identity</li>
+          <li>Visual system</li>
+          <li>Web design in Framer</li>
+        </ul>
+        <div class="cs-foot">
+          <span class="mono cs-domain">calluravoice.ai</span>
+          <span class="cs-go">Read case<span class="arr">→</span></span>
+        </div>
+      </div>
     </a>
-    <a class="wk-row rv" href="/work/ecom-heroes.html" data-wk-row data-url="ecomheroes.io">
-      <span class="wk-media" aria-hidden="true">
+
+    <a class="cs-case rv" href="/work/ecom-heroes.html">
+      <div class="cs-shot">
         <img src="assets/images/work/ecom-heroes-cover-1600.jpg"
              srcset="assets/images/work/ecom-heroes-cover-1600.jpg 1600w, assets/images/work/ecom-heroes-cover-2560.jpg 2560w"
-             sizes="92vw" width="2560" height="1472" loading="lazy" decoding="async" alt="">
-      </span>
-      <span class="mono wk-idx" aria-hidden="true">[ 04 ]</span>
-      <span class="wk-name"><span class="wk-roll"><span class="wk-word">Ecom Heroes</span></span></span>
-      <span class="mono wk-sect">Ecommerce staffing</span>
-      <span class="mono wk-read">Read case<span class="arr">→</span></span>
+             sizes="(min-width:900px) 58vw, 100vw" width="2560" height="1472" loading="lazy" decoding="async"
+             alt="The Ecom Heroes website homepage">
+      </div>
+      <div class="cs-panel">
+        <div class="cs-index">
+          <span class="cs-num" aria-hidden="true">04</span>
+          <span class="cs-rule" aria-hidden="true"></span>
+          <span class="mono cs-sector">Ecommerce staffing</span>
+        </div>
+        <h3 class="cs-name">Ecom Heroes</h3>
+        <p class="cs-blurb">Vetted remote hires for ecommerce brands, with sourcing, training, onboarding, and payroll handled.</p>
+        <ul class="cs-scope">
+          <li>Brand identity</li>
+          <li>Web design</li>
+          <li>Web development</li>
+        </ul>
+        <div class="cs-foot">
+          <span class="mono cs-domain">ecomheroes.io</span>
+          <span class="cs-go">Read case<span class="arr">→</span></span>
+        </div>
+      </div>
     </a>
-    </div>
   </div>
 </section>
 
@@ -900,5 +966,6 @@
 <script src="assets/js/core.js?v=18" defer></script>
 <script src="assets/js/home.js?v=18" defer></script>
 <script src="assets/js/services-bento.js?v=3" defer></script>
+<script src="assets/js/case-showcase.js?v=1" defer></script>
 </body>
 </html>
