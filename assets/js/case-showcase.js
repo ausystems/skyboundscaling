@@ -17,6 +17,13 @@
    element that is already composited - so a scroll frame costs a handful of
    getBoundingClientRect calls and nothing else. Reduced motion opts out
    entirely; the CSS then paints every fill at its finished state.
+
+   It hooks on data attributes rather than class names, so the two case-study
+   components - the poster wall on the home page and the spreads on /work/ -
+   share one signal without sharing a stylesheet:
+     [data-cs]        the section
+     [data-cs-list]   the run of cases, whose travel becomes --sp
+     [data-cs-card]   one case, which gets --p and --pc
    ========================================================================== */
 (function(){
   'use strict';
@@ -27,8 +34,8 @@
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
 
-  var list  = sec.querySelector('.cs-list');
-  var cards = Array.prototype.slice.call(sec.querySelectorAll('.cs-case'));
+  var list  = sec.querySelector('[data-cs-list]');
+  var cards = Array.prototype.slice.call(sec.querySelectorAll('[data-cs-card]'));
   if (!list || !cards.length) return;
 
   // Hands the rails and the shot pan over to the scroll signal. Until this is
@@ -65,6 +72,10 @@
         // remap 0.18-0.62 of the travel onto 0-1 so the rule finishes drawing
         // about when the card settles at centre, not when it leaves
         el.style.setProperty('--pc', clamp((p - 0.18) / 0.44).toFixed(4));
+        // peak: 1 with the card dead centre, 0 at either edge of its travel.
+        // The home page lifts the poster's scrim by this, so a project's site
+        // is at its clearest exactly while you are looking at it.
+        el.style.setProperty('--pk', (1 - Math.abs(p - 0.5) * 2).toFixed(4));
       }
     }
 

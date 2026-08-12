@@ -1,0 +1,350 @@
+/* ==========================================================================
+   SKYBOUND SCALING - case-home.css
+   The home page CASE STUDIES section: a poster wall.
+
+   The move is to stop treating the screenshot as an illustration sitting next
+   to a headline. Each project's site shot IS the poster - the client's name is
+   set across its base over a scrim, the way a film one-sheet carries its title -
+   and the column beside it drops to a quiet record of what was built. Identity
+   on the work, evidence beside it.
+
+   Geometry: the poster runs past the type grid and off alternating page edges,
+   corner radius flat on the side it leaves and rounded on the side it meets the
+   type. Nothing is cropped; the poster grows into the gutter rather than being
+   clipped by it. The index numeral hangs one gutter out of the record column so
+   it lands flush against the poster, and both columns register on the same top
+   and bottom edge.
+
+   Depth comes from four layers moving at four rates against one scroll signal
+   (--p, set per card by case-showcase.js): the shot pans inside its frame, the
+   name drifts against the shot, the numeral counter-drifts, and the record
+   column trails. Separating the layers is what stops it reading flat - it is
+   also the whole of the interaction, so a phone gets exactly what a desktop
+   gets and nothing is behind a hover.
+
+   Loaded by: / only. /work/ keeps case-showcase.css.
+
+   TABLE OF CONTENTS
+   ------------------------------------------------------------------
+   01  Section shell + gallery wall
+   02  Head - the CASE STUDIES title
+   03  The case: shell + bleed geometry
+   04  The poster: shot, scrim, identity
+   05  The record column
+   06  Wide layout (two columns, alternating)
+   07  Press + focus
+   08  Reduced motion
+   ------------------------------------------------------------------ */
+
+/* ============ 01 SECTION SHELL ============ */
+.csh{
+  position:relative;
+  padding:clamp(78px,12vh,164px) 0 clamp(46px,7vh,104px);
+  /* the poster bleeds by exactly one gutter, so it lands on the viewport edge
+     at every width up to --maxw and reads as a deliberate overhang past it.
+     Tying it to the fluid half of --pad (rather than --pad itself) is what
+     stops it sprawling on ultra-wide displays. */
+  --csh-bleed:clamp(20px,4vw,64px);
+  --csh-r:clamp(16px,1.7vw,26px);   /* inner corner radius on the poster */
+  --csh-gap:clamp(30px,4vw,80px);   /* column gutter between poster and record */
+}
+/* The wall: a soft deeper wash the posters hang on, so the section separates
+   from the ambient field above and below without going to a dark slab - the
+   page already spends its dark on the services stage and its blue on the CTA. */
+.csh::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(72% 42% at 50% 0%, rgba(255,255,255,.5) 0%, transparent 70%),
+    linear-gradient(180deg,
+      transparent 0%,
+      rgba(203,215,232,.46) 14%,
+      rgba(203,215,232,.46) 86%,
+      transparent 100%);
+}
+.csh-head,.csh-list{padding-inline:var(--pad)}
+
+/* ============ 02 HEAD ============
+   One title and one rule. Archivo's width axis is pushed to its ceiling and the
+   tracking pulled in hard, so the two words set as a solid block that fills the
+   measure instead of floating in it. */
+.csh-head{margin-bottom:clamp(34px,5.5vh,74px)}
+.csh-title{
+  margin:0;
+  font-weight:900;font-variation-settings:'wdth' 125;
+  font-size:clamp(44px,13.4vw,200px);
+  line-height:.8;letter-spacing:-.045em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.csh-title .csh-ln{display:block}
+
+/* the rule under the title doubles as the section's readout: it fills as you
+   move through the four posters */
+.csh-rule{
+  position:relative;height:1px;margin-top:clamp(20px,3vh,34px);
+  background:var(--line);overflow:hidden;
+}
+.csh-rule::after{
+  content:"";position:absolute;inset:0;background:var(--blue);
+  transform:scaleX(1);transform-origin:0 50%;
+}
+[data-cs-live] .csh-rule::after{
+  transform:scaleX(var(--sp,0));
+  transition:transform .1s linear;
+}
+
+/* ============ 03 THE CASE ============ */
+.csh-list{
+  display:flex;flex-direction:column;
+  gap:clamp(52px,9vh,120px);
+}
+.csh-case{
+  --ac:var(--blue);
+  --ac-lift:rgba(34,48,254,.32);   /* the accent, reused as the poster's shadow */
+  position:relative;display:block;
+  color:inherit;text-decoration:none;
+  isolation:isolate;
+}
+/* Colour alternates with the bleed direction, so side and hue move together and
+   the four posters read as four brands rather than four copies. */
+.csh-case:nth-child(even){--ac:var(--orange);--ac-lift:rgba(255,77,0,.26)}
+
+/* ============ 04 THE POSTER ============ */
+.csh-poster{
+  position:relative;z-index:2;display:block;overflow:hidden;
+  /* the frame owns the ratio, not the image - that is what gives the image a
+     definite height to be 108% of, and what stops the pan resizing the card */
+  aspect-ratio:2904/1672;
+  background:var(--ink);
+  border:1px solid var(--line);
+  box-shadow:
+    0 54px 100px -48px var(--ac-lift),
+    0 18px 42px -22px rgba(15,25,70,.30),
+    inset 0 1px 0 rgba(255,255,255,.42);
+  transform:translateZ(0);
+}
+.csh-poster img{
+  position:absolute;top:0;left:0;
+  display:block;width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+}
+/* Oversize only when the pan is running: 108% against the frame gives it eight
+   points of travel, and the crop that buys is ~4% top and bottom, invisible on
+   a site screenshot. Left alone, the shot sits uncropped. */
+[data-cs-live] .csh-poster img{
+  height:108%;
+  transform:translate3d(0,calc(var(--p,.5) * -8%),0);
+  will-change:transform;
+}
+
+/* A soft wash over the whole poster that clears as the case reaches the middle
+   of the screen: the client's site is at its brightest exactly while you are
+   looking at it, and settles back to a vignette on the way out. It is kept off
+   the identity block's own scrim on purpose - lifting the type's backing would
+   trade legibility for the effect, and legibility wins. */
+.csh-poster::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(5,7,18,.30) 0%,
+    rgba(5,7,18,.10) 40%,
+    transparent 70%);
+}
+[data-cs-live] .csh-poster::after{opacity:calc(1 - var(--pk,0) * .85)}
+
+/* the identity block: sector over name, set into the poster's base */
+.csh-id{
+  position:absolute;left:0;bottom:0;z-index:2;
+  width:100%;
+  /* the generous top padding is the scrim's runway - it is the room the fade
+     below needs to reach nothing before it clears the type */
+  padding:clamp(52px,8vw,116px) clamp(16px,2.4vw,34px) clamp(15px,2.3vw,30px);
+  color:#fff;
+}
+/* The scrim is what makes the name safe to set over any screenshot - light,
+   dark, busy, whatever the client's site does. Scaling it to this block rather
+   than to a fixed share of the poster is the point: a name that wraps to two
+   lines carries its own cover down with it, so the type never lands on a thin
+   patch of gradient the way a percentage stop would let it. */
+.csh-id::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(5,7,18,.96) 0%,
+    rgba(5,7,18,.93) 42%,
+    rgba(5,7,18,.68) 72%,
+    rgba(5,7,18,0) 100%);
+}
+.csh-id > *{position:relative;z-index:1}
+[data-cs-live] .csh-id{
+  /* drifts against the shot rather than with it - the layer separation is what
+     reads as depth */
+  transform:translate3d(0,calc((var(--p,.5) - .5) * -26px),0);
+  will-change:transform;
+}
+.csh-sector{
+  display:block;margin-bottom:clamp(6px,1vh,12px);
+  color:rgba(255,255,255,.76);
+}
+.csh-name{
+  margin:0;
+  font-weight:900;font-variation-settings:'wdth' 122;
+  font-size:clamp(26px,4.2vw,60px);
+  line-height:.92;letter-spacing:-.035em;
+  text-transform:uppercase;
+  color:#fff;
+}
+
+/* ============ 05 THE RECORD COLUMN ============ */
+.csh-rec{
+  position:relative;z-index:1;
+  padding-top:clamp(22px,3.4vh,34px);
+  display:flex;flex-direction:column;
+}
+[data-cs-live] .csh-rec{
+  transform:translate3d(0,calc((var(--p,.5) - .5) * -14px),0);
+}
+
+.csh-index{
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  align-items:center;column-gap:clamp(12px,1.6vw,22px);
+}
+.csh-num{
+  font-weight:900;font-variation-settings:'wdth' 125;
+  font-size:clamp(46px,5.6vw,104px);
+  line-height:.78;letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;
+  color:var(--ac);
+}
+[data-cs-live] .csh-num{
+  /* counter-drift: the numeral moves against the name, which is what pulls the
+     two columns apart in depth as the card crosses */
+  transform:translate3d(0,calc((var(--p,.5) - .5) * 22px),0);
+  will-change:transform;
+}
+.csh-track{position:relative;height:1px;background:var(--line);overflow:hidden}
+.csh-track::after{
+  content:"";position:absolute;inset:0;background:var(--ac);
+  transform:scaleX(1);transform-origin:0 50%;
+}
+[data-cs-live] .csh-track::after{transform:scaleX(var(--pc,0))}
+
+.csh-blurb{
+  margin:clamp(18px,2.6vh,26px) 0 0;max-width:40ch;
+  font-size:clamp(14px,1.05vw,16px);line-height:1.6;
+  color:rgba(10,10,12,.7);
+}
+/* What was actually built. Three real deliverables per project, set as a spec
+   strip rather than pill tags - it reads as a record, not a keyword list. */
+.csh-scope{
+  list-style:none;margin:clamp(20px,3vh,30px) 0 0;
+  border-top:1px solid var(--line);
+}
+.csh-scope li{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 0;border-bottom:1px solid var(--line);
+  font-family:var(--sans);font-size:12px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(10,10,12,.74);
+}
+.csh-scope li::before{
+  content:"";flex:none;width:5px;height:5px;border-radius:50%;
+  background:var(--ac);opacity:.55;
+}
+.csh-foot{
+  margin-top:clamp(20px,3vh,30px);
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:14px 20px;
+}
+.csh-domain{color:rgba(10,10,12,.5)}
+/* The read control: an ink pill that inverts, matching the button language used
+   everywhere else on the site. It is a span, not a link - the whole case is the
+   anchor. */
+.csh-go{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 20px;border-radius:999px;
+  border:1px solid var(--ink);
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--ink);
+  transition:background .3s cubic-bezier(.65,0,.35,1),color .3s cubic-bezier(.65,0,.35,1);
+}
+.csh-go .arr{display:inline-block;transition:transform .35s cubic-bezier(.65,0,.35,1)}
+.csh-case:hover .csh-go,
+.csh-case:focus-visible .csh-go{background:var(--ink);color:var(--paper)}
+.csh-case:hover .csh-go .arr,
+.csh-case:focus-visible .csh-go .arr{transform:translateX(5px)}
+
+/* ============ 06 WIDE LAYOUT ============
+   From tablet-landscape up the case turns on its side: poster in one column,
+   record beside it, both registering on the poster's top and bottom edge. */
+@media (min-width:900px){
+  .csh-case{
+    display:grid;
+    grid-template-columns:minmax(0,1.24fr) minmax(0,.76fr);
+    column-gap:var(--csh-gap);
+    align-items:stretch;
+  }
+  .csh-case:nth-child(odd)  .csh-poster{grid-column:1;grid-row:1}
+  .csh-case:nth-child(odd)  .csh-rec   {grid-column:2;grid-row:1}
+  /* the wider track belongs to the poster on both sides, so mirroring the case
+     has to mirror the ratio too - otherwise 2 and 4 quietly show a smaller shot */
+  .csh-case:nth-child(even){grid-template-columns:minmax(0,.76fr) minmax(0,1.24fr)}
+  .csh-case:nth-child(even) .csh-poster{grid-column:2;grid-row:1}
+  .csh-case:nth-child(even) .csh-rec   {grid-column:1;grid-row:1}
+
+  .csh-poster{align-self:start}
+  .csh-rec{padding-top:0;align-self:stretch}
+  .csh-foot{margin-top:auto}
+
+  /* The index numeral hangs out of the record column by exactly one gutter, so
+     its outer edge lands flush against the poster rather than floating in the
+     gap. That single registration is what bridges the two columns. On mirrored
+     cases the meta row runs the other way - track, then numeral - purely so the
+     numeral stays the piece that touches the poster. Everything below it stays
+     left-aligned on both sides; flipping the body copy as well would make the
+     even cases read as a different component. */
+  .csh-case:nth-child(odd) .csh-num{margin-left:calc(var(--csh-gap) * -1)}
+  .csh-case:nth-child(even) .csh-index{grid-template-columns:minmax(0,1fr) auto}
+  .csh-case:nth-child(even) .csh-track{order:1}
+  .csh-case:nth-child(even) .csh-num  {order:2;margin-right:calc(var(--csh-gap) * -1)}
+  [data-cs-live] .csh-case:nth-child(even) .csh-track::after{transform-origin:100% 50%}
+
+  /* "STUDIES" is the longer word, so hanging it off the right margin squares the
+     block against both edges and turns the leftover space into one clean
+     diagonal instead of a hole in the top-right corner. */
+  .csh-title .csh-ln + .csh-ln{text-align:right}
+}
+
+/* Odd cases run off the left edge, even cases off the right. The flat side is
+   always the side that leaves the page. */
+.csh-case:nth-child(odd) .csh-poster{
+  margin-left:calc(var(--csh-bleed) * -1);
+  border-radius:0 var(--csh-r) var(--csh-r) 0;
+  border-left:0;
+}
+.csh-case:nth-child(even) .csh-poster{
+  margin-right:calc(var(--csh-bleed) * -1);
+  border-radius:var(--csh-r) 0 0 var(--csh-r);
+  border-right:0;
+}
+/* the identity block follows the poster's flat edge, so the name always starts
+   on the side the poster runs off */
+.csh-case:nth-child(odd) .csh-id{padding-left:calc(clamp(16px,2.4vw,34px) + var(--csh-bleed))}
+.csh-case:nth-child(even) .csh-id{padding-right:calc(clamp(16px,2.4vw,34px) + var(--csh-bleed))}
+
+@media (min-width:1500px){
+  .csh-case{grid-template-columns:minmax(0,1fr) minmax(0,.58fr)}
+  .csh-case:nth-child(even){grid-template-columns:minmax(0,.58fr) minmax(0,1fr)}
+}
+
+/* ============ 07 PRESS + FOCUS ============ */
+.csh-case:active .csh-poster{transform:scale(.99);transition:transform .18s ease}
+.csh-case:active .csh-go{background:var(--ink);color:var(--paper)}
+.csh-case:focus-visible{outline:2px solid var(--blue);outline-offset:6px;border-radius:4px}
+
+/* ============ 08 REDUCED MOTION ============
+   The scroll signal never starts under reduced motion - case-showcase.js bails
+   before setting [data-cs-live] - so every layer is already static here. All
+   that is left is the press and button easing. */
+@media (prefers-reduced-motion:reduce){
+  .csh-go,.csh-go .arr{transition:none}
+  .csh-case:active .csh-poster{transition:none;transform:none}
+}
