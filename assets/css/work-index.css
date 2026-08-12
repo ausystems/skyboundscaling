@@ -1,0 +1,160 @@
+/* ==========================================================================
+   SKYBOUND SCALING - work-index.css
+   The selected-work index: a full-bleed list of case studies where every
+   project leads with its own site shot.
+
+   There is deliberately no hover state on the rows - no cursor-following
+   preview, no name roll, no dimming of the siblings. The work is the thing
+   being sold, so it is shown outright rather than hidden behind an
+   interaction a touch device can never perform.
+
+   Every project shows the same five pieces in the same reading order on
+   every device: index, sector, shot, name, link. Narrow screens stack them;
+   from tablet-landscape up the row turns on its side so a project occupies
+   a sane slice of the viewport instead of two screenfuls.
+
+   Loaded by: / (home #cases) and /work/ (case study index), plus the
+   service / industry / location pages that embed the same list.
+
+   TABLE OF CONTENTS
+   ------------------------------------------------------------------
+   01  Section shell + head
+   02  Project cards
+   03  Wide layout (tablet-landscape and up)
+   04  Press + focus states
+   05  Reduced motion
+   ------------------------------------------------------------------ */
+
+/* ============ 01 SECTION SHELL + HEAD ============ */
+.wk-sec{
+  position:relative;
+  padding:clamp(72px,11vh,150px) 0 0;
+}
+.wk-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:0 var(--pad);
+  margin-bottom:clamp(22px,3.4vh,40px);
+}
+.wk-head h2{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+.wk-eyebrow{display:inline-flex;align-items:center;gap:10px;color:rgba(10,10,12,.62)}
+.wk-count{color:rgba(10,10,12,.6);font-variant-numeric:tabular-nums}
+
+/* Next-case block on the individual case studies: the same list component,
+   showing the one project that follows. The section owns the page gutter,
+   so its head drops the duplicate padding and aligns with the inset rows. */
+.case-next-sec{padding:clamp(56px,9vh,110px) var(--pad) 0}
+.case-next-sec .wk-head{padding:0}
+
+/* ============ 02 PROJECT CARDS ============ */
+.wk-list{position:relative}
+/* Inset variant: used when the list sits inside a section that already
+   carries the page gutter (the service / industry / location pages), so the
+   rows align to that section's edges instead of padding a second time. */
+.wk-list.is-inset .wk-row{padding-left:0;padding-right:0}
+
+.wk-row{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  grid-template-areas:
+    "idx   sect"
+    "media media"
+    "name  name"
+    "read  read";
+  align-items:center;
+  row-gap:16px;
+  padding:clamp(26px,4.5vh,48px) var(--pad);
+  border-top:1px solid var(--line);
+  text-decoration:none;color:inherit;
+  isolation:isolate;
+}
+.wk-list .wk-row:last-child{border-bottom:1px solid var(--line)}
+
+.wk-idx{
+  grid-area:idx;align-self:center;
+  color:var(--blue);letter-spacing:.08em;
+}
+.wk-sect{
+  grid-area:sect;justify-self:end;align-self:center;
+  color:rgba(10,10,12,.6);text-align:right;
+}
+.wk-media{
+  grid-area:media;display:block;
+  border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--paper-deep);
+  box-shadow:0 28px 56px -28px rgba(15,25,70,.32);
+  transform:translateZ(0);
+}
+.wk-media img{
+  width:100%;height:auto;display:block;
+  aspect-ratio:2904/1672;object-fit:cover;object-position:top center;
+}
+.wk-name{
+  grid-area:name;
+  display:block;
+  font-weight:900;font-variation-settings:'wdth' 122;
+  font-size:clamp(34px,7vw,112px);
+  line-height:1;letter-spacing:-.03em;text-transform:uppercase;
+}
+.wk-read{
+  grid-area:read;justify-self:start;
+  display:inline-flex;align-items:center;gap:10px;
+  font-weight:700;
+}
+
+/* ============ 03 WIDE LAYOUT ============
+   From tablet-landscape up the stacked card gets far too tall - a full-width
+   cover is ~760px on its own, so a single project filled the viewport twice
+   over. The same five pieces turn on their side instead: the shot takes one
+   column, the meta and title sit beside it, optically centred. Same content,
+   same reading order, roughly half the height. */
+@media (min-width:821px){
+  .wk-row{
+    /* The shot leads: it earns the wider column, and the narrower text
+       column keeps the meta line, the title, and the link reading as one
+       tight block instead of stranding the title in open space. */
+    grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;
+    grid-template-areas:
+      "media idx  sect"
+      "media name name"
+      "media read read";
+    align-content:center;
+    column-gap:clamp(28px,3.4vw,62px);
+    row-gap:clamp(10px,1.2vh,16px);
+    padding:clamp(28px,4vh,52px) var(--pad);
+  }
+  .wk-media{align-self:center;grid-row:1 / -1}
+  .wk-idx{align-self:end}
+  .wk-sect{align-self:end}
+  /* the title is the anchor of the text column, so it takes the free row and
+     is sized to the column rather than the viewport */
+  .wk-name{
+    align-self:center;
+    font-size:clamp(28px,3.1vw,50px);
+    padding:clamp(2px,.6vh,8px) 0;
+  }
+  .wk-read{align-self:start}
+}
+/* Very wide displays: stop the shot growing past the point where it reads as
+   a screenshot rather than a poster. */
+@media (min-width:1500px){
+  .wk-media{max-width:660px}
+}
+
+/* ============ 04 PRESS + FOCUS STATES ============
+   Press feedback only - it fires on tap and on click alike, so the row
+   behaves the same however it is reached. Keyboard users still get a ring. */
+.wk-row:active .wk-media{transform:scale(.985);transition:transform .18s ease}
+.wk-row:active .wk-read .arr{transform:translateX(6px);transition:transform .18s ease}
+.wk-row:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+
+/* ============ 05 REDUCED MOTION ============ */
+@media (prefers-reduced-motion:reduce){
+  .wk-row:active .wk-media,
+  .wk-row:active .wk-read .arr{transition:none;transform:none}
+}

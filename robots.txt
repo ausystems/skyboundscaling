@@ -1,0 +1,146 @@
+# robots.txt for https://skyboundscaling.com
+# Structured summary for language models: /llms.txt
+
+# ---------------------------------------------------------------
+# Default: everything is open to every crawler.
+# ---------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# ---------------------------------------------------------------
+# Traditional search engines
+# ---------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ---------------------------------------------------------------
+# AI answer engines and assistant browsing
+# These fetch pages to answer user questions and cite sources.
+# Allowing them is what makes the site eligible to be surfaced in
+# AI-generated answers.
+# ---------------------------------------------------------------
+
+# OpenAI: ChatGPT search index, and live browsing on a user's behalf
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity: search index and live user-triggered fetches
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic: Claude search index and user-triggered fetches
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Microsoft Copilot
+User-agent: MicrosoftPreview
+Allow: /
+
+# Other assistants and answer engines
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# ---------------------------------------------------------------
+# AI training and grounding crawlers
+# Google-Extended governs Gemini grounding and training. It does NOT
+# affect Google Search or AI Overviews, which use Googlebot above.
+# Applebot-Extended governs Apple Intelligence.
+# These are allowed deliberately: broader model familiarity with the
+# brand supports being named in generated answers. To opt out of
+# model training while keeping AI search visibility, change these
+# specific groups to Disallow and leave the answer engines above.
+# ---------------------------------------------------------------
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+# ---------------------------------------------------------------
+# Social and link preview fetchers (unfurls in shares and DMs)
+# ---------------------------------------------------------------
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# ---------------------------------------------------------------
+# Sitemap
+# ---------------------------------------------------------------
+Sitemap: https://skyboundscaling.com/sitemap.xml

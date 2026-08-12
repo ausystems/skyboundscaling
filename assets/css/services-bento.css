@@ -1,0 +1,186 @@
+/* ==========================================================================
+   SKYBOUND SCALING - services-bento.css
+   The services section: a dark stage card floating on the light page,
+   holding an asymmetric bento of four service cards. Each card carries one
+   static glassmorphic 3D illustration - no canvases, no animation - in the
+   electric-blue-on-black system.
+   ========================================================================== */
+
+/* Bottom padding matches the top: with the track-record panel gone, the
+   services card sits directly above the pinned process stage and needs its
+   own breathing room on both edges to read as a self-contained band. */
+.sv-sec{
+  padding:clamp(64px,9vh,140px) clamp(14px,2vw,30px);
+}
+
+/* ---------- The stage: one dark rounded chamber ---------- */
+.sv-stage{
+  --sv-elec:#3D6BFF;          /* primary electric blue for glow on black */
+  --sv-volt:#6FA8FF;          /* lifted highlight blue */
+  --sv-ice:#B8D4FF;           /* brightest - cores, hot text */
+  --sv-text:#E9EFFC;
+  --sv-dim:rgba(190,206,238,.62);
+  --sv-faint:rgba(170,192,235,.38);
+  --sv-line:rgba(102,140,255,.14);
+  position:relative;overflow:hidden;isolation:isolate;
+  max-width:var(--maxw);margin-inline:auto;
+  border-radius:clamp(22px,2.4vw,36px);
+  padding:clamp(24px,3.4vw,56px) clamp(18px,3vw,56px) clamp(24px,3.4vw,56px);
+  color:var(--sv-text);
+  background:
+    radial-gradient(96% 72% at 82% -8%,  rgba(38,68,210,.34) 0%, rgba(38,68,210,0) 55%),
+    radial-gradient(70% 58% at 8% 108%,  rgba(24,44,150,.28) 0%, rgba(24,44,150,0) 60%),
+    radial-gradient(48% 38% at 50% 52%,  rgba(16,28,92,.20)  0%, rgba(16,28,92,0)  70%),
+    linear-gradient(168deg,#070B18 0%,#04060F 42%,#02030A 100%);
+  border:1px solid rgba(96,134,255,.16);
+  box-shadow:
+    0 60px 130px -60px rgba(8,14,52,.65),
+    0 24px 60px -30px rgba(20,40,160,.25),
+    inset 0 1px 0 rgba(150,180,255,.14);
+}
+/* vignette - pools the light toward the middle like a graded shot */
+.sv-stage::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;
+  background:
+    radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(1,2,7,.55) 100%);
+}
+/* fine grain - kills banding, adds the film layer */
+.sv-stage::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27180%27%20height%3D%27180%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.85%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");
+  background-size:200px 200px;opacity:.06;mix-blend-mode:overlay;
+}
+
+/* ---------- Bento grid ---------- */
+.sv-grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:clamp(14px,1.5vw,22px);
+}
+.sv-web{grid-column:span 7}
+.sv-paid{grid-column:span 5}
+.sv-social{grid-column:span 5}
+.sv-ai{grid-column:span 7}
+
+/* ---------- Cards ---------- */
+.sv-card{
+  position:relative;overflow:hidden;isolation:isolate;
+  display:flex;flex-direction:column;
+  min-height:clamp(440px,52vh,560px);
+  border-radius:clamp(18px,1.6vw,26px);
+  background:
+    radial-gradient(90% 70% at 70% 0%, rgba(30,52,150,.20) 0%, rgba(30,52,150,0) 60%),
+    linear-gradient(168deg,#0A1020 0%,#060A16 46%,#04060F 100%);
+  border:1px solid var(--sv-line);
+  transition:border-color .5s ease;
+}
+/* stacked-layout cards (copy above or below the art) need room for both,
+   sized for the narrowest desktop column where the copy wraps deepest */
+.sv-paid,.sv-social{min-height:clamp(600px,64vh,680px)}
+@media (hover:hover){
+  .sv-card:hover{border-color:rgba(130,166,255,.26)}
+}
+
+/* ---------- The 3D service objects ----------
+   One static glass illustration per card, floating in the band its copy
+   leaves free, over a soft ambient pool. No motion anywhere. */
+.sv-obj{
+  position:absolute;z-index:1;pointer-events:none;
+}
+.sv-obj::before{ /* ambient light the object stands in */
+  content:"";position:absolute;inset:-14% -20%;z-index:-1;
+  background:radial-gradient(52% 46% at 50% 56%, rgba(46,91,255,.17) 0%, transparent 72%);
+}
+.sv-obj svg{
+  display:block;width:100%;height:auto;
+  filter:drop-shadow(0 26px 44px rgba(16,34,140,.5));
+}
+/* placement rhythm: A object right, B low, C high, D right - mirroring
+   where each card's copy sits */
+.sv-web  .sv-obj{right:5%;top:50%;transform:translateY(-50%);width:clamp(230px,44%,400px)}
+.sv-paid .sv-obj{left:50%;bottom:5%;transform:translateX(-50%);width:clamp(200px,48%,240px)}
+.sv-social .sv-obj{left:50%;top:18%;transform:translate(-50%,-50%);width:clamp(220px,56%,275px)}
+.sv-ai   .sv-obj{right:6%;top:50%;transform:translateY(-50%);width:clamp(220px,40%,330px)}
+
+/* ---------- Card copy ---------- */
+.sv-copy{
+  position:relative;z-index:3;
+  padding:clamp(24px,2.4vw,38px);
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+/* placement rhythm: A copy low-left, B copy top, C copy low, D copy mid-left */
+.sv-web  .sv-copy{margin-top:auto;max-width:30ch}
+.sv-paid .sv-copy{margin-bottom:auto;max-width:34ch}
+.sv-social .sv-copy{margin-top:auto;max-width:34ch}
+.sv-ai   .sv-copy{margin-block:auto;max-width:30ch}
+
+.sv-title{
+  font-size:clamp(26px,2.2vw,38px);font-weight:900;
+  font-variation-settings:'wdth' 116;letter-spacing:-.02em;line-height:1.02;
+  text-transform:uppercase;margin-bottom:13px;color:var(--sv-text);
+  text-shadow:0 0 34px rgba(61,107,255,.35);
+}
+.sv-title .sv-amp,.sv-title .sv-punct{
+  color:var(--sv-volt);
+  text-shadow:0 0 18px rgba(111,168,255,.6);
+}
+.sv-desc{font-size:14.5px;line-height:1.62;color:var(--sv-dim)}
+.sv-includes{
+  margin-top:14px;font-size:12px;line-height:1.55;
+  display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
+}
+.sv-includes .sv-incl-label{
+  font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:10.5px;
+  color:var(--sv-volt);flex:none;
+}
+.sv-includes .sv-incl-text{color:var(--sv-faint)}
+.sv-links{
+  margin-top:clamp(16px,2.2vh,24px);
+  display:flex;gap:20px;flex-wrap:wrap;font-weight:700;
+}
+.sv-links a{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--sv-volt);
+  padding-bottom:3px;border-bottom:1.5px solid rgba(111,168,255,.4);
+  transition:color .35s ease,border-color .35s ease;
+}
+.sv-links a:hover{color:var(--sv-ice);border-color:rgba(184,212,255,.7)}
+.sv-links .sv-link-hot{color:var(--sv-ice);border-color:rgba(184,212,255,.55)}
+
+/* ============ Responsive ============ */
+@media (max-width:1100px){
+  .sv-grid{grid-template-columns:1fr 1fr}
+  .sv-web,.sv-ai{grid-column:span 2}
+  .sv-paid,.sv-social{grid-column:span 1}
+  .sv-card{min-height:clamp(420px,48vh,520px)}
+  .sv-paid,.sv-social{min-height:clamp(560px,62vh,640px)}
+  .sv-paid .sv-copy,.sv-social .sv-copy{max-width:none}
+  .sv-paid .sv-obj{width:clamp(190px,50%,240px)}
+  .sv-social .sv-obj{width:clamp(210px,56%,280px)}
+}
+@media (max-width:720px){
+  .sv-sec{padding-inline:clamp(10px,2vw,16px)}
+  .sv-grid{grid-template-columns:1fr}
+  .sv-web,.sv-paid,.sv-social,.sv-ai{grid-column:span 1}
+  .sv-card,.sv-paid,.sv-social{min-height:min(540px,128vw)}
+  /* single column: copy settles at the foot of every card, object above it */
+  .sv-web .sv-copy,.sv-paid .sv-copy,.sv-social .sv-copy,.sv-ai .sv-copy{
+    margin:auto 0 0;max-width:none;padding:22px 20px 24px;
+  }
+  .sv-web .sv-obj,.sv-paid .sv-obj,.sv-social .sv-obj,.sv-ai .sv-obj{
+    right:auto;bottom:auto;left:50%;top:25%;
+    transform:translate(-50%,-50%);
+    width:clamp(200px,54%,270px);
+  }
+  .sv-social .sv-obj{width:clamp(230px,64%,300px)}
+  /* the robot is the tallest object and AI carries the longest copy:
+     give that card extra height and a slightly smaller figure */
+  .sv-ai{min-height:min(600px,142vw)}
+  .sv-ai .sv-obj{width:clamp(190px,50%,230px)}
+  .sv-title{font-size:clamp(26px,7.2vw,34px)}
+}
+
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion: reduce){
+  .sv-card,.sv-links a{transition:none}
+}

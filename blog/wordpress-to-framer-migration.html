@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress to Framer Migration Guide 2026 | Skybound</title>
+<meta name="description" content="How to migrate WordPress to Framer without losing rankings: URL inventory, content moves, the 301 redirect map, and launch checks, from a studio that does this.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="Skybound Scaling">
+<meta name="theme-color" content="#EAF2FB">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://skyboundscaling.com/blog/wordpress-to-framer-migration.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Skybound Scaling">
+<meta property="og:title" content="WordPress to Framer Migration Guide 2026 | Skybound">
+<meta property="og:description" content="How to migrate WordPress to Framer without losing rankings: URL inventory, content moves, the 301 redirect map, and launch checks, from a studio that does this.">
+<meta property="og:url" content="https://skyboundscaling.com/blog/wordpress-to-framer-migration.html">
+<meta property="og:image" content="https://skyboundscaling.com/assets/images/og-image.jpg">
+<meta property="og:image:alt" content="Skybound Scaling, growth engineered.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WordPress to Framer Migration Guide 2026 | Skybound">
+<meta name="twitter:description" content="How to migrate WordPress to Framer without losing rankings: URL inventory, content moves, the 301 redirect map, and launch checks, from a studio that does this.">
+<meta name="twitter:image" content="https://skyboundscaling.com/assets/images/og-image.jpg">
+
+<!-- Icons + manifest -->
+<link rel="icon" href="../assets/icons/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+
+<link rel="preload" href="../assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="../assets/css/main.css?v=23">
+<link rel="stylesheet" href="../assets/css/services.css?v=2">
+<link rel="stylesheet" href="../assets/css/blog.css">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://skyboundscaling.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://skyboundscaling.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "WordPress to Framer: the migration guide",
+          "item": "https://skyboundscaling.com/blog/wordpress-to-framer-migration.html"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://skyboundscaling.com/blog/wordpress-to-framer-migration.html#article",
+      "headline": "WordPress to Framer, without losing rankings.",
+      "description": "How to migrate WordPress to Framer without losing rankings: URL inventory, content moves, the 301 redirect map, and launch checks, from a studio that does this.",
+      "url": "https://skyboundscaling.com/blog/wordpress-to-framer-migration.html",
+      "mainEntityOfPage": "https://skyboundscaling.com/blog/wordpress-to-framer-migration.html",
+      "datePublished": "2026-08-03",
+      "dateModified": "2026-08-03",
+      "author": {
+        "@id": "https://skyboundscaling.com/#org"
+      },
+      "publisher": {
+        "@id": "https://skyboundscaling.com/#org"
+      },
+      "image": "https://skyboundscaling.com/assets/images/og-image.jpg",
+      "articleSection": "Framer",
+      "wordCount": 641,
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://skyboundscaling.com/blog/wordpress-to-framer-migration.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Will I lose my Google rankings moving from WordPress to Framer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not if the migration is done properly. Rankings drop from missed redirects, thinned content, or performance regressions, not from the platform change itself. The redirect map is the critical artifact."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I move my WordPress blog into Framer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Posts move into the Framer CMS, ideally with a cleanup pass that updates stale content and merges overlap. Slugs and metadata should be carried deliberately for every post that earns traffic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a WordPress to Framer migration take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A typical marketing site migrates in two to five weeks including redesign. A like for like content move with light design updates can go faster."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my WordPress plugins?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most exist to patch things Framer does natively: SEO controls, forms, speed, backups. Genuine functionality like gated portals or complex ecommerce needs a purpose built solution and gets scoped before the move."
+          }
+        }
+      ]
+    },
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://skyboundscaling.com/#org",
+      "name": "Skybound Scaling",
+      "legalName": "Skybound Scaling Inc.",
+      "description": "Skybound Scaling is a digital growth agency serving Miami, West Palm Beach, and businesses across South Florida and North America. We build complete customer acquisition systems: conversion-focused websites, SEO and local SEO, Google Ads and Meta Ads management, lead generation funnels, AI and CRM automation, and conversion rate optimization. Every engagement is run by a senior and measured against revenue rather than impressions.",
+      "slogan": "Growth, engineered.",
+      "url": "https://skyboundscaling.com/",
+      "logo": "https://skyboundscaling.com/assets/icons/apple-touch-icon.png",
+      "image": "https://skyboundscaling.com/assets/images/og-image.jpg",
+      "email": "hello@skyboundscaling.com",
+      "foundingDate": "2025",
+      "knowsLanguage": [
+        "en",
+        "es"
+      ],
+      "areaServed": [
+        "Miami",
+        "Miami-Dade County",
+        "West Palm Beach",
+        "Palm Beach County",
+        "Boca Raton",
+        "Delray Beach",
+        "Palm Beach Gardens",
+        "Jupiter",
+        "Wellington",
+        "Boynton Beach",
+        "Fort Lauderdale",
+        "Broward County",
+        "South Florida",
+        "Florida",
+        "United States",
+        "North America"
+      ],
+      "knowsAbout": [
+        "Digital marketing",
+        "Search engine optimization",
+        "Local SEO",
+        "Google Ads",
+        "Pay-per-click advertising",
+        "Meta Ads",
+        "Facebook advertising",
+        "Instagram advertising",
+        "Web design",
+        "Website development",
+        "Conversion rate optimization",
+        "Lead generation",
+        "Marketing funnels",
+        "AI automation",
+        "CRM automation",
+        "Marketing automation",
+        "Brand identity",
+        "Miami digital marketing",
+        "West Palm Beach digital marketing",
+        "South Florida small business marketing"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/skyboundscaling",
+        "https://www.linkedin.com/company/skyboundscaling",
+        "https://x.com/skyboundscaling",
+        "https://dribbble.com/skyboundscaling"
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="no-js">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="post-progress" aria-hidden="true"><span></span></div>
+
+<!-- HEADER -->
+<header id="site-header">
+  <a class="logo" href="/" aria-label="Skybound Scaling home"><img class="logo-dark" src="/assets/brand/logo-nav.webp" alt="Skybound Scaling" width="862" height="200" fetchpriority="high" decoding="async"></a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/about.html">About</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/blog/">Blog</a>
+  </nav>
+  <a class="cta-book cta-compact" href="/contact.html">
+    <span class="cta-label">Book a call</span>
+    <span class="cta-token"><span class="cta-arr">&rarr;</span><span class="cta-arr cta-arr-2">&rarr;</span></span>
+  </a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span class="nav-toggle-box"><span class="nav-toggle-inner"></span></span>
+  </button>
+</header>
+
+<!-- MOBILE / TABLET MENU -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menu">
+  <nav class="mm-nav" aria-label="Mobile primary">
+    <a href="/services/" class="mm-link"><span class="mm-idx">01</span><span class="mm-word">Services</span></a>
+    <a href="/work/" class="mm-link"><span class="mm-idx">02</span><span class="mm-word">Work</span></a>
+    <a href="/about.html" class="mm-link"><span class="mm-idx">03</span><span class="mm-word">About</span></a>
+    <a href="/pricing.html" class="mm-link"><span class="mm-idx">04</span><span class="mm-word">Pricing</span></a>
+    <a href="/blog/" class="mm-link"><span class="mm-idx">05</span><span class="mm-word">Blog</span></a>
+  </nav>
+  <div class="mm-foot">
+    <a class="mm-cta" href="/contact.html"><span>Book a call</span><span class="mm-cta-arr">&rarr;</span></a>
+    <div class="mm-meta">
+      <a class="mm-email" href="mailto:hello@skyboundscaling.com">hello@skyboundscaling.com</a>
+      <div class="mm-social" aria-label="Social links">
+        <a href="https://www.instagram.com/skyboundscaling" target="_blank" rel="noopener" aria-label="Skybound on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.linkedin.com/company/skyboundscaling" target="_blank" rel="noopener" aria-label="Skybound on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.81 0-2.09 1.4-2.09 2.86V21H9z"/></svg></a>
+        <a href="https://x.com/skyboundscaling" target="_blank" rel="noopener" aria-label="Skybound on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.53 3h3.02l-6.6 7.54L21.75 21h-5.97l-4.67-6.1L5.75 21H2.72l7.06-8.07L2.25 3h6.12l4.22 5.58L17.53 3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="main-content" class="page-main" data-rv-scope tabindex="-1">
+
+  <article class="post">
+    <header class="post-hero">
+      <p class="mono post-eyebrow rv"><a href="/blog/">Blog</a>&nbsp;&middot; Framer &middot; 7 min read</p>
+      <h1 class="post-title rv-title">WordPress to Framer, without losing rankings<span class="punct">.</span></h1>
+      <p class="post-standfirst rv">The five step migration we run for clients: inventory, rebuild, content, the redirect map that protects your authority, and the launch checks that catch problems early.</p>
+      <p class="mono post-meta rv"><span>Published August 3, 2026</span><span>By Skybound Scaling</span><span>Toronto, ON</span></p>
+    </header>
+
+    <div class="post-layout">
+      <aside class="post-toc rv" aria-label="On this page">
+        <p class="mono post-toc-label">On this page</p>
+        <ol>
+      <li><a href="#why-migrate">Why businesses are leaving WordPress</a></li>
+      <li><a href="#inventory">Step 1: Inventory everything</a></li>
+      <li><a href="#rebuild">Step 2: Rebuild structure and design in Framer</a></li>
+      <li><a href="#content">Step 3: Move content deliberately</a></li>
+      <li><a href="#redirects">Step 4: The redirect map, the whole game</a></li>
+      <li><a href="#launch">Step 5: Launch and verify</a></li>
+      <li><a href="#after">What changes after the move</a></li>
+        </ol>
+      </aside>
+      <div class="post-body rv">
+<h2 id="why-migrate">Why businesses are leaving WordPress</h2>
+<p>WordPress still powers a huge share of the web, and for some sites it remains the right tool. But the complaints that bring businesses to us repeat almost word for word: plugin stacks that break on update, hosting that needs babysitting, page builders stacked on page builders, slow mobile scores nobody can fix, and a site the marketing team is afraid to touch. Framer solves that specific cluster of problems: no plugins to maintain, hosting included, fast by default, and editing a marketer can do safely. The catch is getting there without dropping the rankings your WordPress site spent years earning. That is what this guide is for.</p>
+
+<h2 id="inventory">Step 1: Inventory everything</h2>
+<p>Crawl your WordPress site and export every URL, then pull Search Console and analytics data for the last twelve months. Sort pages into three buckets: pages that earn traffic or links and must move carefully, pages you still need but that earn nothing, and dead weight to retire. Most WordPress sites are shocked by bucket three: years of tag archives, thin posts, and auto generated pages that dilute the site. A migration is the cheapest moment you will ever have to fix that.</p>
+
+<h2 id="rebuild">Step 2: Rebuild structure and design in Framer</h2>
+<p>Recreate your URL structure in Framer where it is sound, and improve it where it is not. Keep slugs identical for your load bearing pages when possible: the fewer URLs that change, the less redirect risk you carry. This is also the moment to rebuild the design around conversion rather than around what a theme allowed: one job per page, proof where buyers need it, and the speed Framer gives you by default.</p>
+
+<h2 id="content">Step 3: Move content deliberately</h2>
+<p>Blog posts and case studies move into the Framer CMS. Resist the temptation to bulk paste: the migration is your chance to update stale posts, merge overlapping ones, and rewrite titles and descriptions that never earned their click. Carry over your metadata deliberately, page by page for the pages that matter. Content that moves thoughtfully tends to rank better after migration, not just equal.</p>
+
+<aside class="post-cta" aria-label="From Skybound">
+<p class="mono">[ Migrating? ]</p>
+<p>We have moved sites off WordPress without losing rankings, and the redirect map is the whole game. We build it before we build pages.</p>
+<div class="post-cta-row"><a class="post-cta-link" href="/services/framer-web-design.html">See the Framer migration service &rarr;</a><span class="mono">Replies within 24h</span></div>
+</aside>
+
+<h2 id="redirects">Step 4: The redirect map, the whole game</h2>
+<p>Every WordPress URL that changes or dies gets a 301 redirect to its closest living equivalent, set up inside Framer before launch. Three rules keep this safe: redirect to the most relevant page rather than dumping everything on the homepage, avoid chains where A points to B points to C, and keep the map in a spreadsheet you can audit. For a typical business site this is an afternoon of careful work that protects years of accumulated authority.</p>
+
+<h2 id="launch">Step 5: Launch and verify</h2>
+<ul>
+<li>Point the domain to Framer and confirm SSL is active</li>
+<li>Submit the new sitemap in Search Console the same day</li>
+<li>Spot check your top pages: metadata intact, headings sane, analytics firing</li>
+<li>Crawl the live site for broken links and redirect errors</li>
+<li>Watch Search Console coverage and positions daily for two weeks</li>
+</ul>
+<p>Expect small ranking wobbles for a week or two as Google recrawls. Sustained drops mean a missed redirect or a thinned page, both findable in the crawl. Our post on <a href="/blog/website-lost-rankings-after-redesign.html">why sites lose rankings after a redesign</a> is the debugging companion to this guide.</p>
+
+<h2 id="after">What changes after the move</h2>
+<p>The practical wins arrive immediately: no plugin updates, no hosting maintenance, mobile scores that pass without tuning, and edits your team ships in minutes. The strategic win compounds: because publishing is easy, publishing happens, and the content engine that SEO depends on actually runs. That is the honest case for the move, and our <a href="/blog/framer-vs-webflow.html">platform comparison</a> covers when it is not the right call.</p>
+      </div>
+    </div>
+
+    <section class="svc-faq-wrap" aria-label="Frequently asked questions" style="max-width:1180px">
+      <header class="svc-faq-head rv"><h2>Questions, answered</h2></header>
+    <details class="svc-faq rv">
+      <summary>Will I lose my Google rankings moving from WordPress to Framer?<span class="svc-faq-x" aria-hidden="true"></span></summary>
+      <div class="svc-faq-a"><p>Not if the migration is done properly. Rankings drop from missed redirects, thinned content, or performance regressions, not from the platform change itself. The redirect map is the critical artifact.</p></div>
+    </details>
+    <details class="svc-faq rv">
+      <summary>Can I move my WordPress blog into Framer?<span class="svc-faq-x" aria-hidden="true"></span></summary>
+      <div class="svc-faq-a"><p>Yes. Posts move into the Framer CMS, ideally with a cleanup pass that updates stale content and merges overlap. Slugs and metadata should be carried deliberately for every post that earns traffic.</p></div>
+    </details>
+    <details class="svc-faq rv">
+      <summary>How long does a WordPress to Framer migration take?<span class="svc-faq-x" aria-hidden="true"></span></summary>
+      <div class="svc-faq-a"><p>A typical marketing site migrates in two to five weeks including redesign. A like for like content move with light design updates can go faster.</p></div>
+    </details>
+    <details class="svc-faq rv">
+      <summary>What happens to my WordPress plugins?<span class="svc-faq-x" aria-hidden="true"></span></summary>
+      <div class="svc-faq-a"><p>Most exist to patch things Framer does natively: SEO controls, forms, speed, backups. Genuine functionality like gated portals or complex ecommerce needs a purpose built solution and gets scoped before the move.</p></div>
+    </details>
+    </section>
+
+    <section class="post-related" aria-label="Keep reading">
+      <header class="post-related-head rv">
+        <h2>Keep reading</h2>
+        <a class="mono" href="/blog/">All resources &rarr;</a>
+      </header>
+      <div class="svc-index-grid">
+      <a class="post-card rv-card" href="/blog/framer-vs-webflow.html">
+        <div class="post-card-top mono"><span>Framer</span><span>8 min</span></div>
+        <h3 class="post-card-title">Framer vs Webflow: which should you pick?</h3>
+        <p class="post-card-excerpt">An honest comparison from a studio that ships client sites: speed, CMS, SEO, pricing, and who each tool actually fits.</p>
+        <div class="post-card-foot mono"><span>Read</span><span class="arr">&rarr;</span></div>
+      </a>
+      <a class="post-card rv-card" href="/blog/is-framer-good-for-seo.html">
+        <div class="post-card-top mono"><span>Framer</span><span>6 min</span></div>
+        <h3 class="post-card-title">Is Framer good for SEO?</h3>
+        <p class="post-card-excerpt">The direct answer, what Framer handles for you, what still needs a human, and the checklist we launch with.</p>
+        <div class="post-card-foot mono"><span>Read</span><span class="arr">&rarr;</span></div>
+      </a>
+      <a class="post-card rv-card" href="/blog/website-redesign-checklist.html">
+        <div class="post-card-top mono"><span>Web design</span><span>8 min</span></div>
+        <h3 class="post-card-title">The website redesign checklist</h3>
+        <p class="post-card-excerpt">The 21 steps that protect your rankings, your analytics, and your sanity when you rebuild a site.</p>
+        <div class="post-card-foot mono"><span>Read</span><span class="arr">&rarr;</span></div>
+      </a>
+      </div>
+    </section>
+  </article>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-panel">
+      <span class="cta-edge" aria-hidden="true"></span>
+      <p class="cta-eyebrow rv">Let's build your growth engine</p>
+      <h2 class="rv-title">Ready to<br>scale<span class="accent">?</span></h2>
+      <p class="cta-sub rv">Web &middot; Brand &middot; Ads &middot; SEO &middot; Social</p>
+      <a class="cta-book rv" href="/contact.html">
+        <span class="cta-label">Book a call</span>
+        <span class="cta-token"><span class="cta-arr">&rarr;</span><span class="cta-arr cta-arr-2">&rarr;</span></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="sf">
+  <div class="sf-card">
+    <div class="sf-bg" aria-hidden="true"></div>
+    <div class="sf-inner">
+
+      <div class="sf-top">
+        <p class="sf-tag">Growth,<br>Engineered.</p>
+        <button class="sf-totop" type="button" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>
+        </button>
+      </div>
+
+      <div class="sf-cols">
+        <div class="sf-col sf-col-brand">
+          <p class="sf-head">Skybound</p>
+          <address class="sf-addr">
+            Toronto, Ontario<br>
+            Canada, est. 2025<br>
+            <a href="mailto:hello@skyboundscaling.com">hello@skyboundscaling.com</a>
+          </address>
+        </div>
+        <nav class="sf-col foot-nav" aria-label="Navigation">
+          <p class="sf-head">Navigation</p>
+          <div class="sf-subs">
+            <div class="sf-sub">
+              <a href="/services/">Services</a>
+              <a href="/work/">Work</a>
+              <a href="/industries/">Industries</a>
+              <a href="/locations/">Locations</a>
+              <a href="/process.html">Process</a>
+            </div>
+            <div class="sf-sub">
+              <a href="/about.html">About</a>
+              <a href="/pricing.html">Pricing</a>
+              <a href="/blog/">Blog</a>
+              <a href="/careers.html">Careers</a>
+              <a href="/contact.html">Contact</a>
+            </div>
+          </div>
+        </nav>
+        <nav class="sf-col foot-nav" aria-label="Follow">
+          <p class="sf-head">Follow</p>
+          <div class="sf-subs">
+            <div class="sf-sub">
+              <a href="https://www.instagram.com/skyboundscaling" target="_blank" rel="noopener">Instagram</a>
+              <a href="https://www.linkedin.com/company/skyboundscaling" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+            <div class="sf-sub">
+              <a href="https://x.com/skyboundscaling" target="_blank" rel="noopener">X</a>
+              <a href="https://dribbble.com/skyboundscaling" target="_blank" rel="noopener">Dribbble</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="foot-wordmark" aria-hidden="true">
+        <span class="fw-line fw-full">Skybound</span>
+      </div>
+
+      <div class="sf-legal">
+        <span class="sf-copy">&copy; 2026 Skybound Scaling Inc.</span>
+        <nav class="foot-legal-links" aria-label="Legal">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<!-- Vendor -->
+<script src="../assets/js/vendor/gsap.min.js" defer></script>
+<script src="../assets/js/vendor/ScrollTrigger.min.js" defer></script>
+<script src="../assets/js/vendor/lenis.min.js" defer></script>
+<!-- Site -->
+<script src="../assets/js/core.js" defer></script>
+<script src="../assets/js/services.js" defer></script>
+</body>
+</html>

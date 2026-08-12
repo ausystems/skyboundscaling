@@ -1,0 +1,581 @@
+/* ==========================================================================
+   SKYBOUND SCALING - services.css
+   Service hub (/services/) + the eight service pages. Reuses the design
+   system in main.css (tokens, header, footer, buttons, reveals, case cards,
+   CTA panel) and adds the service-page layout language:
+
+     01  Hero (copy + contained particle formation)
+     02  Proof band (dark stat panel, same gradient recipe as case metrics)
+     03  Deliverable rows
+     04  Approach statement
+     05  Case proof + win rows
+     06  FAQ accordion
+     07  Related services
+     08  Hub index grid
+     09  Responsive
+     10  Reduced motion / no WebGL
+   ========================================================================== */
+
+/* ============ 01 HERO ============ */
+/* Full-bleed editorial hero. The headline spans the whole measure, then the
+   sub-copy and CTAs split the row beneath it, so the type fills the space
+   instead of hugging one column. Kept deliberately short vertically: only
+   the homepage and contact page carry a canvas visual. */
+.svc-hero{
+  padding:calc(var(--header-h) + clamp(34px,5.5vh,68px)) var(--pad) clamp(30px,5vh,58px);
+  display:block;
+}
+.svc-hero-copy{
+  display:grid;
+  grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+  column-gap:clamp(28px,4.5vw,80px);
+  align-items:end;
+}
+.svc-hero-copy > .svc-eyebrow,
+.svc-hero-copy > .svc-display{grid-column:1/-1}
+.svc-hero-copy > .svc-sub{grid-column:1/2}
+.svc-hero-copy > .svc-hero-cta{
+  grid-column:2/3;
+  justify-self:end;
+  justify-content:flex-end;
+}
+.svc-eyebrow{display:flex;align-items:center;gap:10px;color:rgba(10,10,12,.62)}
+.svc-display{
+  margin:clamp(16px,2.2vh,24px) 0 0;
+  font-family:var(--sans);
+  font-weight:900;font-variation-settings:'wdth' 120;
+  font-size:clamp(40px,6.6vw,92px);
+  line-height:.95;letter-spacing:-.035em;
+  max-width:23ch;
+  text-wrap:balance;
+}
+.svc-display .ln{display:block}
+.svc-display .punct{color:var(--blue)}
+/* non-link tier cards on the pricing page */
+.svc-card.static{cursor:default}
+.svc-sub{
+  margin-top:clamp(20px,3vh,34px);
+  max-width:62ch;
+  font-size:clamp(15px,1.25vw,18px);
+  line-height:1.65;color:rgba(10,10,12,.78);
+}
+.svc-hero-cta{
+  margin-top:clamp(22px,3.4vh,38px);
+  display:flex;align-items:center;gap:clamp(16px,2vw,28px);flex-wrap:wrap;
+}
+.svc-secondary{
+  position:relative;color:rgba(10,10,12,.72);
+  letter-spacing:.08em;
+  transition:color .3s cubic-bezier(.65,0,.35,1);
+}
+.svc-secondary::after{
+  content:'';position:absolute;left:0;bottom:-3px;height:1px;width:100%;
+  background:var(--blue);transform:scaleX(0);transform-origin:right;
+  transition:transform .35s cubic-bezier(.65,0,.35,1);
+}
+.svc-secondary:hover{color:var(--ink)}
+.svc-secondary:hover::after{transform:scaleX(1);transform-origin:left}
+/* the contained particle formation - the page's single particle moment */
+.svc-visual{
+  width:100%;max-width:560px;
+  justify-self:center;
+  aspect-ratio:1/1;
+  position:relative;
+}
+#svc-canvas{width:100%;height:100%;display:block}
+/* WebGL unavailable: keep the reserved box so the layout never shifts,
+   just leave it unpainted (the formation is decorative) */
+.svc-visual.no-webgl #svc-canvas{visibility:hidden}
+
+/* ============ 02 PROOF BAND ============ */
+.svc-proof{padding:clamp(64px,10vh,132px) var(--pad) 0}
+.svc-proof-panel{
+  position:relative;isolation:isolate;overflow:hidden;
+  border-radius:26px;
+  padding:clamp(26px,3.4vh,40px) clamp(24px,3vw,52px);
+  color:var(--paper);
+  background:
+    radial-gradient(70% 80% at 50% 20%, rgba(34,48,254,.14) 0%, transparent 65%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 100%);
+  transform:perspective(1300px) rotateX(0deg) rotateY(0deg);
+  transform-style:preserve-3d;
+  will-change:transform;
+  box-shadow:0 44px 96px -38px rgba(20,30,55,.45);
+}
+.svc-proof-panel::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
+  opacity:.3;mix-blend-mode:overlay;
+  background-image:
+    radial-gradient(1px 1px at 17px 23px, rgba(255,255,255,.5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 63px 71px, rgba(255,255,255,.4) 50%, transparent 51%),
+    radial-gradient(1px 1px at 109px 41px, rgba(255,255,255,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 139px 97px, rgba(255,255,255,.45) 50%, transparent 51%);
+  background-size:150px 130px;
+}
+.svc-proof-panel > *{position:relative;z-index:2}
+.svc-proof-panel .cm-top{
+  display:flex;justify-content:space-between;align-items:center;
+  opacity:.72;letter-spacing:.08em;
+}
+.svc-stats{
+  margin-top:clamp(26px,4vh,44px);
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(18px,2.6vw,40px);
+}
+.svc-stats.is-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.svc-stat-num{
+  margin:0;
+  font-weight:900;font-variation-settings:'wdth' 122;
+  font-size:clamp(38px,4.6vw,74px);
+  line-height:.9;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+}
+.svc-stat-num b{font-weight:900;opacity:.5}
+.svc-stat-label{margin-top:12px;opacity:.72;letter-spacing:.08em}
+
+/* ============ 03 DELIVERABLE ROWS ============ */
+.svc-scope{padding:clamp(72px,11vh,150px) var(--pad) 0}
+.svc-scope-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(10,10,12,.14);
+}
+.svc-scope-head h2{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+.svc-scope-head .mono{color:rgba(10,10,12,.6)}
+.svc-row{
+  display:grid;
+  grid-template-columns:auto minmax(0,.5fr) minmax(0,1fr);
+  gap:clamp(20px,3.5vw,64px);
+  align-items:baseline;
+  padding:clamp(22px,3.4vh,34px) 0;
+  border-bottom:1px solid rgba(10,10,12,.1);
+}
+.svc-row:last-child{border-bottom:none}
+.svc-idx{color:rgba(10,10,12,.5)}
+.svc-row-title{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 112;
+  font-size:clamp(19px,1.9vw,26px);letter-spacing:-.01em;
+}
+.svc-row-desc{
+  margin:0;color:rgba(10,10,12,.72);
+  font-size:clamp(14.5px,1.12vw,16.5px);line-height:1.65;
+}
+
+/* ============ 04 APPROACH ============ */
+.svc-approach{
+  padding:clamp(80px,12vh,160px) var(--pad) 0;
+}
+.svc-approach-label{color:rgba(10,10,12,.6)}
+.svc-statement{
+  margin:18px 0 0;
+  font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 112;
+  font-size:clamp(24px,3vw,44px);
+  line-height:1.18;letter-spacing:-.02em;
+}
+.svc-statement .hl{color:var(--blue)}
+.svc-approach-body{
+  margin-top:clamp(18px,2.6vh,28px);
+  max-width:64ch;
+  color:rgba(10,10,12,.75);
+  font-size:clamp(14.5px,1.15vw,17px);line-height:1.7;
+}
+
+/* ============ 05 CASE PROOF + WINS ============ */
+.svc-cases{padding:clamp(72px,11vh,150px) var(--pad) 0}
+.svc-cases-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:clamp(22px,3.4vh,36px);
+}
+.svc-cases-head h2{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+.svc-cases-head .mono{color:rgba(10,10,12,.6)}
+/* contained 2-up variant of the home case grid */
+.svc-case-grid{
+  border:1px solid rgba(10,10,12,.12);
+  border-radius:20px;
+  overflow:hidden;
+  background:rgba(255,255,255,.28);
+}
+.svc-case-grid .case-card{border-bottom:none}
+.svc-case-grid.is-1{grid-template-columns:1fr;max-width:680px}
+.svc-case-grid.is-1 .case-card{border-right:none}
+/* win rows reuse home's .wins/.win styles; contained here */
+.svc-wins{
+  margin-top:clamp(20px,3vh,32px);
+  border:1px solid rgba(10,10,12,.12);
+  border-radius:20px;
+  padding:6px clamp(20px,2.6vw,40px);
+  background:rgba(255,255,255,.28);
+}
+.svc-wins .wins{margin:0}
+
+/* ============ 06 FAQ ============ */
+.svc-faq-wrap{
+  padding:clamp(72px,11vh,150px) var(--pad) 0;
+}
+.svc-faq-head{margin-bottom:clamp(18px,2.8vh,30px)}
+.svc-faq-head h2{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+.svc-faq{
+  border-bottom:1px solid rgba(10,10,12,.12);
+}
+.svc-faq summary{
+  list-style:none;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:18px;
+  padding:clamp(18px,2.6vh,26px) 0;
+  font-family:var(--sans);font-weight:700;font-variation-settings:'wdth' 110;
+  font-size:clamp(15.5px,1.35vw,19px);letter-spacing:-.005em;
+}
+.svc-faq summary::-webkit-details-marker{display:none}
+.svc-faq summary:hover{color:var(--blue)}
+.svc-faq-x{
+  flex:none;position:relative;width:16px;height:16px;
+}
+.svc-faq-x::before,.svc-faq-x::after{
+  content:'';position:absolute;left:50%;top:50%;
+  width:14px;height:2px;border-radius:2px;
+  background:currentColor;
+  transform:translate(-50%,-50%);
+  transition:transform .32s cubic-bezier(.65,0,.35,1);
+}
+.svc-faq-x::after{transform:translate(-50%,-50%) rotate(90deg)}
+.svc-faq[open] .svc-faq-x::after{transform:translate(-50%,-50%) rotate(0deg)}
+.svc-faq[open] summary{color:var(--blue)}
+.svc-faq-a{padding:0 0 clamp(18px,2.6vh,26px)}
+.svc-faq-a p{
+  margin:0;max-width:66ch;
+  color:rgba(10,10,12,.75);
+  font-size:clamp(14.5px,1.1vw,16.5px);line-height:1.7;
+}
+
+/* ============ 07 RELATED SERVICES ============ */
+.svc-related{
+  margin:clamp(72px,11vh,150px) var(--pad) 0;
+  padding:clamp(20px,3vh,30px) clamp(20px,2.6vw,36px);
+  border:1px solid rgba(10,10,12,.12);
+  border-radius:18px;
+  display:flex;align-items:center;gap:clamp(16px,2.4vw,32px);flex-wrap:wrap;
+  background:rgba(255,255,255,.28);
+}
+.svc-related-label{color:rgba(10,10,12,.6)}
+.svc-related nav{display:flex;gap:clamp(14px,2vw,26px);flex-wrap:wrap}
+.svc-related a{
+  position:relative;
+  font-family:var(--sans);font-weight:700;font-variation-settings:'wdth' 110;
+  font-size:clamp(14px,1.15vw,16.5px);
+  color:rgba(10,10,12,.82);
+  transition:color .3s cubic-bezier(.65,0,.35,1);
+}
+.svc-related a::after{
+  content:'';position:absolute;left:0;bottom:-3px;height:1px;width:100%;
+  background:var(--blue);transform:scaleX(0);transform-origin:right;
+  transition:transform .35s cubic-bezier(.65,0,.35,1);
+}
+.svc-related a:hover{color:var(--blue)}
+.svc-related a:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* ============ 07b PILL LISTS (industries / nearby areas) ============ */
+.loc-pills{
+  padding:clamp(18px,2.6vh,28px) var(--pad) 0;
+}
+/* A pills block lives in a class-less <section>, and the head and pill row
+   each carry their own gutter. A trailing note added after them has none, so
+   it would sit flush against the viewport edge while its siblings are inset.
+   Scoped to class-less sections so notes inside .svc-approach are untouched. */
+main > section:not([class]) > .svc-approach-body{
+  padding-left:var(--pad);padding-right:var(--pad);
+}
+.loc-pills-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:clamp(54px,8vh,96px) var(--pad) 0;
+}
+.loc-pills-head h2{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+.loc-pills-head .mono{color:rgba(10,10,12,.6)}
+.loc-pill-row{
+  display:flex;flex-wrap:wrap;gap:10px 12px;
+  list-style:none;margin:0;padding:0;
+}
+.loc-pill{
+  font-size:clamp(11.5px,.92vw,13.5px);
+  font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:rgba(10,10,12,.72);
+  padding:9px 18px;
+  border:1px solid rgba(10,10,12,.18);
+  border-radius:100px;
+  background:rgba(255,255,255,.3);
+}
+.loc-pill.is-accent{border-color:rgba(34,48,254,.4);color:var(--blue)}
+
+/* ============ 08 HUB INDEX GRID ============ */
+.svc-index{padding:clamp(64px,10vh,132px) var(--pad) 0}
+.svc-index-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:clamp(22px,3.4vh,36px);
+}
+.svc-index-head h2{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+.svc-index-head .mono{color:rgba(10,10,12,.6)}
+.svc-index-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,1.8vw,26px);
+}
+.svc-card{
+  position:relative;isolation:isolate;overflow:hidden;
+  display:flex;flex-direction:column;
+  min-height:clamp(230px,30vh,300px);
+  padding:clamp(20px,2.4vh,28px) clamp(20px,2.2vw,32px);
+  border:1px solid rgba(10,10,12,.12);
+  border-radius:22px;
+  background:rgba(255,255,255,.32);
+  transform:perspective(1200px) rotateX(0deg) rotateY(0deg);
+  transform-style:preserve-3d;
+  will-change:transform;
+  transition:border-color .35s cubic-bezier(.65,0,.35,1), box-shadow .35s cubic-bezier(.65,0,.35,1);
+}
+.svc-card:hover{
+  border-color:rgba(34,48,254,.45);
+  box-shadow:0 34px 70px -34px rgba(20,30,55,.35);
+}
+.svc-card-top{
+  display:flex;justify-content:space-between;align-items:center;
+  color:rgba(10,10,12,.55);letter-spacing:.08em;
+}
+.svc-card-title{
+  margin:clamp(16px,2.4vh,26px) 0 0;
+  font-family:var(--sans);
+  font-weight:900;font-variation-settings:'wdth' 118;
+  font-size:clamp(24px,2.5vw,36px);
+  line-height:.98;letter-spacing:-.02em;
+}
+.svc-card-title .punct{color:var(--blue)}
+.svc-card:nth-child(4n+2) .svc-card-title .punct{color:var(--orange)}
+.svc-card-blurb{
+  margin:12px 0 0;
+  color:rgba(10,10,12,.72);
+  font-size:clamp(14px,1.05vw,16px);line-height:1.6;
+  max-width:46ch;
+}
+.svc-card-incl{
+  margin:14px 0 0;
+  color:rgba(10,10,12,.55);letter-spacing:.06em;
+}
+.svc-card-foot{
+  margin-top:auto;padding-top:18px;
+  display:flex;justify-content:space-between;align-items:center;
+  color:rgba(10,10,12,.7);letter-spacing:.08em;
+}
+.svc-card-foot .arr{transition:transform .35s cubic-bezier(.65,0,.35,1)}
+.svc-card:hover .svc-card-foot .arr{transform:translateX(8px)}
+.svc-card:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+
+/* ============ 09 RESPONSIVE ============ */
+@media (max-width:1020px){
+  .svc-hero-copy{grid-template-columns:1fr;row-gap:clamp(4px,1vh,10px)}
+  .svc-hero-copy > .svc-sub,
+  .svc-hero-copy > .svc-hero-cta{grid-column:1/-1}
+  .svc-hero-copy > .svc-hero-cta{justify-self:start;justify-content:flex-start}
+  .svc-display{max-width:26ch}
+  .svc-visual{max-width:440px}
+  .svc-row{grid-template-columns:auto minmax(0,1fr)}
+  .svc-row-desc{grid-column:2/3}
+  .svc-stats,.svc-stats.is-4{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+  .svc-index-grid{grid-template-columns:1fr}
+  .svc-card{min-height:0}
+}
+@media (max-width:720px){
+  .svc-hero{padding-top:calc(var(--header-h) + clamp(28px,4.5vh,48px))}
+  .svc-display{letter-spacing:-.03em;max-width:none}
+  .svc-visual{max-width:340px}
+  .svc-stat-num{font-size:clamp(34px,9.5vw,52px)}
+  .svc-row{gap:12px 18px}
+  .svc-row-title{font-size:clamp(18px,5vw,22px)}
+  .svc-related{flex-direction:column;align-items:flex-start;gap:14px}
+}
+@media (max-width:420px){
+  .svc-stats,.svc-stats.is-4{grid-template-columns:1fr}
+}
+
+/* ============ 11 PACKAGES (pricing) ============
+   Four tiers, each carrying a real price, a full inclusions list, and the
+   "best for" line that tells a visitor whether to keep reading. The lists run
+   long, so these are tall two-up cards rather than the compact .svc-card. */
+.pkg-sec{padding:clamp(64px,10vh,132px) var(--pad) 0}
+.pkg-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+  margin-bottom:clamp(22px,3.4vh,36px);
+}
+.pkg-head h2{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+.pkg-head .mono{color:rgba(10,10,12,.6)}
+.pkg-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,1.8vw,26px);
+  align-items:stretch;
+}
+.pkg{
+  position:relative;isolation:isolate;overflow:hidden;
+  display:flex;flex-direction:column;
+  padding:clamp(24px,3vh,36px) clamp(22px,2.4vw,36px) clamp(22px,2.6vh,32px);
+  border:1px solid rgba(10,10,12,.12);
+  border-radius:22px;
+  background:rgba(255,255,255,.32);
+  transition:border-color .35s cubic-bezier(.65,0,.35,1),
+             box-shadow .35s cubic-bezier(.65,0,.35,1),
+             transform .35s cubic-bezier(.2,.7,.2,1);
+}
+@media (hover:hover){
+  .pkg:hover{
+    transform:translateY(-4px);
+    border-color:rgba(34,48,254,.45);
+    box-shadow:0 34px 70px -34px rgba(20,30,55,.35);
+  }
+}
+/* the tier a visitor is most likely to land on gets the quiet emphasis */
+.pkg.is-featured{
+  border-color:rgba(34,48,254,.34);
+  background:rgba(255,255,255,.52);
+}
+.pkg-top{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  color:rgba(10,10,12,.55);letter-spacing:.08em;
+}
+.pkg-flag{
+  color:var(--blue);font-weight:700;
+  border:1px solid rgba(34,48,254,.34);border-radius:999px;
+  padding:4px 10px;white-space:nowrap;
+}
+.pkg-name{
+  margin:clamp(14px,2.2vh,22px) 0 0;
+  font-family:var(--sans);
+  font-weight:900;font-variation-settings:'wdth' 118;
+  font-size:clamp(24px,2.5vw,36px);line-height:.98;letter-spacing:-.02em;
+}
+.pkg-name .punct{color:var(--blue)}
+.pkg:nth-child(2) .pkg-name .punct{color:var(--orange)}
+.pkg-tag{
+  margin:10px 0 0;color:rgba(10,10,12,.72);
+  font-size:clamp(14px,1.05vw,16px);line-height:1.55;max-width:44ch;
+}
+/* Price block: the number is the loudest thing in the card, with the
+   qualifier set small beside it so "starting at" never reads as the price. */
+.pkg-price{
+  margin:clamp(16px,2.4vh,24px) 0 0;
+  padding-top:clamp(14px,2vh,20px);
+  border-top:1px solid rgba(10,20,40,.12);
+}
+.pkg-from{display:block;color:rgba(10,10,12,.55);margin-bottom:6px}
+.pkg-fig{
+  font-family:var(--sans);
+  font-weight:900;font-variation-settings:'wdth' 116;
+  font-size:clamp(26px,2.6vw,38px);line-height:1;letter-spacing:-.025em;
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:0 8px;
+}
+.pkg-fig .per{
+  font-size:clamp(13px,1vw,15px);font-weight:600;
+  font-variation-settings:'wdth' 100;letter-spacing:0;
+  color:rgba(10,10,12,.6);
+}
+.pkg-fig .plus{color:var(--blue)}
+.pkg-second{
+  margin:8px 0 0;color:rgba(10,10,12,.6);
+  font-size:13.5px;line-height:1.5;
+}
+.pkg-desc{
+  margin:clamp(16px,2.2vh,22px) 0 0;
+  color:rgba(10,10,12,.72);
+  font-size:clamp(14px,1.02vw,15.5px);line-height:1.62;max-width:46ch;
+}
+.pkg-incl-label{
+  margin:clamp(18px,2.6vh,26px) 0 10px;
+  color:rgba(10,10,12,.55);letter-spacing:.1em;
+}
+.pkg-list{
+  list-style:none;margin:0;padding:0;
+  display:grid;gap:7px;
+}
+.pkg-list li{
+  position:relative;padding-left:22px;
+  font-size:14px;line-height:1.5;color:rgba(10,10,12,.78);
+}
+/* hand-drawn check, so the list needs no icon font or extra requests */
+.pkg-list li::before{
+  content:"";position:absolute;left:2px;top:.42em;
+  width:9px;height:5px;
+  border-left:1.8px solid var(--blue);border-bottom:1.8px solid var(--blue);
+  transform:rotate(-45deg);
+}
+.pkg-list li.is-carry{font-weight:700;color:rgba(10,10,12,.9)}
+.pkg-list li.is-carry::before{border-color:var(--orange)}
+.pkg-best{
+  margin-top:auto;padding-top:clamp(18px,2.6vh,26px);
+  color:rgba(10,10,12,.7);font-size:13.5px;line-height:1.55;
+}
+.pkg-best b{font-weight:700;color:var(--ink)}
+.pkg-cta{
+  margin-top:clamp(14px,2vh,20px);
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+  padding-bottom:3px;border-bottom:2px solid currentColor;align-self:flex-start;
+}
+.pkg-cta .arr{transition:transform .35s cubic-bezier(.65,0,.35,1)}
+.pkg-cta:hover .arr{transform:translateX(6px)}
+
+/* ---- Custom / "something different" panel ---- */
+.pkg-custom{
+  margin-top:clamp(16px,1.8vw,26px);
+  padding:clamp(26px,3.4vh,42px) clamp(24px,3vw,44px);
+  border:1px dashed rgba(34,48,254,.34);
+  border-radius:22px;
+  background:rgba(255,255,255,.24);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;gap:clamp(16px,2.4vw,40px);
+}
+.pkg-custom h3{
+  margin:0 0 8px;font-family:var(--sans);
+  font-weight:900;font-variation-settings:'wdth' 116;
+  font-size:clamp(20px,2vw,28px);letter-spacing:-.02em;
+}
+.pkg-custom p{margin:0;color:rgba(10,10,12,.72);font-size:14.5px;line-height:1.6;max-width:60ch}
+.pkg-custom .mono{margin-top:12px;color:rgba(10,10,12,.5);letter-spacing:.1em}
+
+@media (max-width:1020px){
+  .pkg-grid{grid-template-columns:1fr}
+  .pkg-custom{grid-template-columns:1fr;gap:20px}
+}
+@media (max-width:720px){
+  .pkg-head{flex-direction:column;align-items:flex-start;gap:6px}
+  .pkg-list{grid-template-columns:1fr}
+}
+
+/* ============ 10 REDUCED MOTION / FALLBACKS ============ */
+@media (prefers-reduced-motion:reduce){
+  .svc-secondary::after,.svc-related a::after,
+  .svc-faq-x::before,.svc-faq-x::after,
+  .svc-card,.svc-card-foot .arr,
+  .pkg,.pkg-cta .arr{transition:none}
+}

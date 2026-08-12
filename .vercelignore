@@ -1,0 +1,8 @@
+# Files that belong in the repo but not on the CDN.
+# Everything else — all HTML and the whole assets/ tree — ships.
+
+.claude/
+tools/
+MIAMI-SEO-PLAYBOOK.md
+WEST-PALM-BEACH-SEO-PLAYBOOK.md
+README.md
