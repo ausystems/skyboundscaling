@@ -1,5 +1,6 @@
 # robots.txt for https://skyboundscaling.com
 # Structured summary for language models: /llms.txt
+# Full page-by-page reference:      /llms-full.txt
 
 # ---------------------------------------------------------------
 # Default: everything is open to every crawler.
@@ -144,3 +145,7 @@ Allow: /
 # Sitemap
 # ---------------------------------------------------------------
 Sitemap: https://skyboundscaling.com/sitemap.xml
+
+# Plain-language briefs for answer engines
+# https://skyboundscaling.com/llms.txt
+# https://skyboundscaling.com/llms-full.txt
