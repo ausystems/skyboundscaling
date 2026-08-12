@@ -24,6 +24,12 @@
   var hasGSAP = typeof gsap !== 'undefined';
   var hasST   = typeof ScrollTrigger !== 'undefined';
 
+  /* ---------- 0. The close chamber's stripe-flow ------------------------
+     Same module the home page manifesto runs, so the two fields are the same
+     background by construction. It self-gates on WebGL, visibility, and
+     reduced motion; without it the section keeps its CSS gradient. */
+  if (window.SkyboundFlow) window.SkyboundFlow('gs-flow');
+
   /* ---------- 4. Before/after slider (always on - it is the content) ---- */
   document.querySelectorAll('[data-ba]').forEach(function(ba){
     var frame = ba.querySelector('.gs-ba-frame');
