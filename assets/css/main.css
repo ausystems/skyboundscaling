@@ -1264,6 +1264,71 @@ body.menu-open .logo{color:#fff}
 .sf-totop:hover svg{transform:translateY(-5px)}
 .sf-totop:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
+/* ---- Footer conversion plate ----
+   The last chance on every page. A frosted plate set into the blue field, so
+   it reads as an object placed on the footer rather than one more row of it.
+   It carries the only CTA in the footer; the nav column below points at the
+   same page in text form for people who scan lists instead of buttons. */
+.sf-cta{
+  position:relative;overflow:hidden;isolation:isolate;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:clamp(20px,3vw,52px);flex-wrap:wrap;
+  margin-bottom:clamp(44px,7vh,90px);
+  padding:clamp(24px,3.4vw,44px) clamp(24px,3.4vw,48px);
+  border-radius:clamp(18px,2vw,28px);
+  background:
+    radial-gradient(120% 170% at 88% -34%, rgba(255,255,255,.20) 0%, rgba(255,255,255,0) 62%),
+    linear-gradient(180deg, rgba(255,255,255,.15) 0%, rgba(255,255,255,.055) 100%);
+  -webkit-backdrop-filter:blur(14px) saturate(135%);
+  backdrop-filter:blur(14px) saturate(135%);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:
+    0 34px 74px -34px rgba(3,7,38,.62),
+    inset 0 1px 0 rgba(255,255,255,.30);
+}
+/* fine light along the top edge, the same trick the CTA panel uses */
+.sf-cta::before{
+  content:"";position:absolute;left:11%;right:11%;top:0;height:1px;z-index:2;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent);
+}
+/* the tagline above it can breathe less once the plate follows it */
+.sf-top:has(+ .sf-cta){margin-bottom:clamp(26px,4vh,54px)}
+.sf-cta-copy{position:relative;z-index:1;min-width:0}
+.sf-cta-eyebrow{
+  display:block;margin-bottom:10px;
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(234,240,255,.66);
+}
+.sf-cta-line{
+  margin:0;color:#fff;
+  font-family:var(--sans);font-weight:800;
+  font-variation-settings:'wdth' 112;
+  font-size:clamp(19px,2.3vw,34px);
+  line-height:1.08;letter-spacing:-.02em;
+  max-width:20ch;
+}
+/* white pill on the blue field; keeps the site's arrow-swap choreography */
+.sf-cta .cta-book{
+  --cta-bg:#fff;
+  --cta-fg:var(--ink);
+  --cta-fill:var(--ink);
+  --cta-token:rgba(10,10,12,.10);
+  flex:none;position:relative;z-index:1;
+  padding:18px 20px 18px 34px;font-size:13px;
+  border-color:#fff;
+}
+.sf-cta .cta-book:hover{--cta-fg:#fff;color:#fff;border-color:var(--ink)}
+.sf-cta .cta-book .cta-token{width:36px;height:36px}
+.sf-cta .cta-book:hover .cta-token{background:rgba(255,255,255,.20)}
+@media (max-width:640px){
+  .sf-cta{flex-direction:column;align-items:flex-start;gap:22px}
+  .sf-cta .cta-book{width:100%;justify-content:space-between}
+}
+@media (prefers-reduced-motion:reduce){
+  .sf-cta .cta-book{transition:none}
+}
+
 /* columns */
 .sf-cols{display:grid;grid-template-columns:1.05fr 1.5fr 1fr;
   gap:clamp(28px,3.4vw,60px);align-items:start;margin-bottom:clamp(40px,7vh,80px);}
