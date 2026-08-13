@@ -38,7 +38,7 @@
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="assets/css/main.css?v=24">
-<link rel="stylesheet" href="assets/css/get-started.css?v=17">
+<link rel="stylesheet" href="assets/css/get-started.css?v=19">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -496,17 +496,34 @@
 
     <div class="gs-bento">
       <article class="gs-card c-web rv-card" data-tilt>
-        <div class="g-browser" aria-hidden="true">
-          <div class="gb-bar"><i></i><i></i><i></i><span class="gb-url"></span></div>
-          <div class="gb-body">
-            <span class="gb-kicker"></span>
-            <span class="gb-h1"></span>
-            <span class="gb-h2"></span>
-            <span class="gb-line w1"></span>
-            <span class="gb-line w2"></span>
-            <span class="gb-cta"></span>
-            <span class="gb-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l5-5 4 4 7-7"/><path d="M15 6h5v5"/></svg></span>
-          </div>
+        <div class="g-studio" aria-hidden="true">
+          <span class="gst-screen">
+            <span class="gst-bar"><i></i><i></i><i></i><span class="gst-url"></span></span>
+            <span class="gst-stage">
+              <svg class="gst-art" viewBox="0 0 320 180" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="gstWaveA" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#8A5CFF"/><stop offset="1" stop-color="#2E6BFF"/>
+                  </linearGradient>
+                  <linearGradient id="gstWaveB" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#D08CFF"/><stop offset="1" stop-color="#6E9CFF"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,84 C58,50 96,96 150,68 C204,40 252,84 320,52 L320,180 L0,180 Z" fill="url(#gstWaveA)"/>
+                <path d="M0,116 C70,90 112,128 168,104 C224,80 268,116 320,90 L320,180 L0,180 Z" fill="url(#gstWaveB)" opacity=".62"/>
+              </svg>
+              <span class="gst-orb o1"></span>
+              <span class="gst-orb o2"></span>
+              <span class="gst-nav"><span class="gst-logo"></span><b></b><b></b><b></b><span class="gst-pill"></span></span>
+              <span class="gst-h1"></span>
+              <span class="gst-h2"></span>
+              <span class="gst-thumbs"><s></s><s></s><s></s><s></s></span>
+            </span>
+          </span>
+          <span class="gst-panel">
+            <span class="gst-panel-top"><b></b><i></i></span>
+            <span class="gst-sw"><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s><s></s></span>
+          </span>
         </div>
         <div class="gs-card-foot">
           <h3 class="gs-card-t">Web Design That Sells Before You Speak</h3>
@@ -515,10 +532,21 @@
       </article>
 
       <article class="gs-card c-seo rv-card" data-tilt>
-        <div class="g-rank" aria-hidden="true">
-          <span class="gr-row is-you"><b>1</b><span class="gr-fav"></span><span class="gr-lines"><i></i><i></i></span></span>
-          <span class="gr-row"><b>2</b><span class="gr-fav"></span><span class="gr-lines"><i></i><i></i></span></span>
-          <span class="gr-row"><b>3</b><span class="gr-fav"></span><span class="gr-lines"><i></i><i></i></span></span>
+        <div class="g-serp" aria-hidden="true">
+          <span class="gsp-chrome"><i></i><i></i><i></i></span>
+          <span class="gsp-search">
+            <span class="gsp-mark"><b></b><b></b><b></b><b></b></span>
+            <span class="gsp-field"><i></i></span>
+            <span class="gsp-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.4-4.4"/></svg></span>
+          </span>
+          <span class="gsp-hit is-one">
+            <span class="gsp-badge">#1</span>
+            <span class="gsp-rank">1</span>
+            <span class="gsp-fav"></span>
+            <span class="gsp-lines"><b class="t"></b><b class="u"></b><b class="d"></b><b class="d s"></b></span>
+          </span>
+          <span class="gsp-hit"><span class="gsp-rank">2</span><span class="gsp-fav"></span><span class="gsp-lines"><b class="t"></b><b class="u"></b><b class="d"></b></span></span>
+          <span class="gsp-hit"><span class="gsp-rank">3</span><span class="gsp-fav"></span><span class="gsp-lines"><b class="t"></b><b class="u"></b><b class="d"></b></span></span>
         </div>
         <div class="gs-card-foot">
           <h3 class="gs-card-t">SEO That Owns The Searches That Matter</h3>
@@ -527,13 +555,25 @@
       </article>
 
       <article class="gs-card c-gads rv-card" data-tilt>
-        <div class="g-target" aria-hidden="true">
-          <svg viewBox="0 0 200 140">
-            <circle cx="100" cy="70" r="58" class="tg-ring r3"/>
-            <circle cx="100" cy="70" r="38" class="tg-ring r2"/>
-            <circle cx="100" cy="70" r="19" class="tg-ring r1"/>
-            <circle cx="100" cy="70" r="6" class="tg-core"/>
-          </svg>
+        <div class="g-dash" aria-hidden="true">
+          <span class="gdb-side"><b class="on"></b><b></b><b></b><b></b><b></b><b></b></span>
+          <span class="gdb-main">
+            <span class="gdb-kpis"><s class="k1"><i></i><u></u></s><s class="k2"><i></i><u></u></s><s><i></i><u></u></s></span>
+            <svg class="gdb-chart" viewBox="0 0 236 76" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="gdbFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#4E82FF" stop-opacity=".42"/>
+                  <stop offset="1" stop-color="#4E82FF" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path class="gdb-grid" d="M0,20 H236 M0,42 H236 M0,64 H236"/>
+              <path class="gdb-area" d="M2,58 L24,50 L46,55 L68,36 L90,43 L112,26 L134,33 L156,17 L178,24 L200,11 L234,16 L234,76 L2,76 Z" fill="url(#gdbFill)"/>
+              <polyline class="gdb-l2" points="2,68 24,64 46,68 68,59 90,64 112,54 134,60 156,49 178,55 200,45 234,50"/>
+              <polyline class="gdb-l1" points="2,58 24,50 46,55 68,36 90,43 112,26 134,33 156,17 178,24 200,11 234,16"/>
+              <circle class="gdb-dot" cx="200" cy="11" r="3.4"/>
+            </svg>
+            <span class="gdb-rows"><u><em></em></u><u><em></em></u><u><em></em></u></span>
+          </span>
         </div>
         <div class="gs-card-foot">
           <h3 class="gs-card-t">Google Ads That Catch Buyers In The Act</h3>
@@ -542,9 +582,26 @@
       </article>
 
       <article class="gs-card c-meta rv-card" data-tilt>
-        <div class="g-ripple" aria-hidden="true">
-          <span class="rp r1"></span><span class="rp r2"></span><span class="rp r3"></span>
-          <span class="rp-core"></span>
+        <div class="g-mad" aria-hidden="true">
+          <span class="gmd-top"><span class="gmd-logo"></span><b></b><b></b></span>
+          <span class="gmd-stats">
+            <s><i></i><u></u><em class="up"></em></s>
+            <s><i></i><u></u><em class="up"></em></s>
+            <s><i></i><u></u><em class="up"></em></s>
+          </span>
+          <svg class="gmd-chart" viewBox="0 0 236 64" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="gmdFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5F92FF" stop-opacity=".34"/>
+                <stop offset="1" stop-color="#5F92FF" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="gmd-area" d="M2,44 C34,28 56,20 86,23 C116,26 132,40 162,33 C192,26 210,12 234,17 L234,64 L2,64 Z" fill="url(#gmdFill)"/>
+            <path class="gmd-b" d="M2,54 C34,44 56,38 86,41 C116,44 132,50 162,45 C192,40 210,30 234,34"/>
+            <path class="gmd-a" d="M2,44 C34,28 56,20 86,23 C116,26 132,40 162,33 C192,26 210,12 234,17"/>
+            <circle class="gmd-dot" cx="86" cy="23" r="3"/>
+            <circle class="gmd-dot" cx="162" cy="33" r="3"/>
+          </svg>
         </div>
         <div class="gs-card-foot">
           <h3 class="gs-card-t">Meta Ads That Make You Unforgettable</h3>
@@ -553,10 +610,19 @@
       </article>
 
       <article class="gs-card c-content rv-card" data-tilt>
-        <div class="g-reels" aria-hidden="true">
-          <span class="rl rl-1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.8v10.4l8.4-5.2L9 6.8z"/></svg></span>
-          <span class="rl rl-2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.8v10.4l8.4-5.2L9 6.8z"/></svg></span>
-          <span class="rl rl-3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.8v10.4l8.4-5.2L9 6.8z"/></svg></span>
+        <div class="g-phones" aria-hidden="true">
+          <span class="gph p1"><span class="gph-scr"><span class="gph-art"></span><span class="gph-line l1"></span><span class="gph-line l2"></span></span></span>
+          <span class="gph p2"><span class="gph-scr"><span class="gph-art"></span><span class="gph-line l1"></span><span class="gph-line l2"></span></span></span>
+          <span class="gph p3">
+            <span class="gph-notch"></span>
+            <span class="gph-scr">
+              <span class="gph-art"></span>
+              <span class="gph-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.8v10.4l8.4-5.2L9 6.8z"/></svg></span>
+              <span class="gph-line l1"></span><span class="gph-line l2"></span>
+            </span>
+          </span>
+          <span class="gph p4"><span class="gph-scr"><span class="gph-art"></span><span class="gph-line l1"></span><span class="gph-line l2"></span></span></span>
+          <span class="gph p5"><span class="gph-scr"><span class="gph-art"></span><span class="gph-line l1"></span><span class="gph-line l2"></span></span></span>
         </div>
         <div class="gs-card-foot">
           <h3 class="gs-card-t">Content That Builds Trust While You Sleep</h3>
