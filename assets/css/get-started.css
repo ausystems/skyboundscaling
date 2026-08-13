@@ -2,11 +2,9 @@
    SKYBOUND SCALING - get-started.css
    The Get Started funnel: one page, one job - book the free strategy call.
 
-   The page's argument is "you look average, we make you look like the
-   authority", so the page performs it. The hero literally loads as the
-   average version - flat grey, default serif, a beveled 2009 button - and a
-   scanline sweeps down and re-renders it as the premium brand. That flip is
-   the signature; everything after it is disciplined funnel theater.
+   The page arrives like every other page on the site: core.js reveals the
+   hero through the shared .rv / .rv-title classes, with no entrance sequence
+   of its own. The funnel does its work through staging and pacing instead.
 
    Staging: the page alternates dark and light stages. Dark carries the
    confrontation (truth, proof, the close), light carries the clarity (the
@@ -95,45 +93,7 @@
   padding-top:calc(var(--header-h) + clamp(28px,5vh,64px));
 }
 
-/* --- the average layer: the "before" the whole pitch is about.
-   Hidden by default; get-started.js reveals it only when it can also run the
-   transformation, so no-JS and reduced-motion users land on the finished
-   brand. Everything in it is aria-hidden duplicate content. --- */
-.gs-hero-avg{
-  display:none;
-  position:absolute;inset:0;z-index:3;
-  background:#E9E7E2;
-  color:#4A4A48;
-  padding:calc(var(--header-h) + 60px) var(--pad) 60px;
-}
-.gs-anim .gs-hero-avg{display:block}
-.gs-avg-eyebrow{font-family:Verdana,Arial,sans-serif;font-size:10px;letter-spacing:.02em;color:#8A8A86;text-transform:uppercase;margin:0 0 18px}
-.gs-avg-head{
-  font-family:Georgia,'Times New Roman',serif;font-weight:700;
-  font-size:clamp(24px,3.6vw,44px);line-height:1.18;letter-spacing:0;
-  color:#3C3C3A;max-width:26ch;margin:0 0 16px;
-}
-.gs-avg-sub{font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#6E6E6A;max-width:60ch;margin:0 0 22px}
-.gs-avg-btn{
-  display:inline-block;padding:9px 18px;
-  font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;color:#3A3A38;
-  background:linear-gradient(180deg,#F2F1EE 0%,#D8D6D0 100%);
-  border:1px solid #A9A7A0;border-radius:3px;
-  box-shadow:inset 0 1px 0 #fff, 0 1px 2px rgba(0,0,0,.18);
-}
-
-/* the scanline that re-renders the page */
-.gs-scan{
-  display:none;
-  position:absolute;left:0;right:0;top:0;height:2px;z-index:6;pointer-events:none;
-  background:linear-gradient(90deg, transparent 0%, var(--blue) 18%, #9FB0FF 50%, var(--blue) 82%, transparent 100%);
-  box-shadow:0 0 24px 4px rgba(70,92,255,.55), 0 0 80px 12px rgba(46,64,255,.25);
-}
-.gs-anim .gs-scan{display:block}
-
-/* --- the premium layer --- */
 .gs-hero-pro{position:relative;z-index:4;width:100%}
-.gs-anim .gs-hero-pro{clip-path:inset(0 0 100% 0)}
 .gs-eyebrow{
   display:inline-flex;align-items:center;gap:10px;
   color:rgba(234,240,255,.62);
@@ -475,11 +435,9 @@
 }
 
 /* ============ 13 REDUCED MOTION / NO-JS ============
-   The average hero layer, the scanline, and the sticky bar's slide are all
-   gated behind JS classes, so without JS the page is simply the finished
-   premium page. Reduced motion keeps the slider usable but kills easing. */
+   Everything decorative is gated behind a JS class or the shared .rv system,
+   so with JS off the page is simply itself. Reduced motion keeps the
+   before/after slider fully usable and only drops the easing. */
 @media (prefers-reduced-motion:reduce){
   .gs-bar{transition:none}
-  .gs-hero-avg,.gs-scan{display:none!important}
-  .gs-hero-pro{clip-path:none!important}
 }

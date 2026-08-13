@@ -111,37 +111,12 @@
 
   if (!hasGSAP || reduced) return;   // everything below is decoration
 
-  /* ---------- 1. Hero transformation ------------------------------------ */
-  var hero = document.querySelector('.gs-hero');
-  if (hero){
-    hero.classList.add('gs-anim');          // shows avg layer, clips pro layer
-    var pro  = hero.querySelector('.gs-hero-pro');
-    var scan = hero.querySelector('.gs-scan');
-    var kids = pro ? Array.prototype.slice.call(pro.children) : [];
+  /* The hero has no load sequence of its own. It carries the site's standard
+     .rv and .rv-title classes and is revealed by core.js exactly like every
+     other page, which is the whole point: this page should arrive the same
+     way the rest of the site does. */
 
-    gsap.set(kids, { y: 26, autoAlpha: 0 });
-    var tl = gsap.timeline({ delay: .55 });
-    tl.to(scan, { top: '100%', duration: 1.05, ease: 'power3.inOut' }, 0)
-      .to(pro,  { clipPath: 'inset(0 0 0% 0)', duration: 1.05, ease: 'power3.inOut' }, 0)
-      .to(kids, { y: 0, autoAlpha: 1, duration: .8, ease: 'power3.out', stagger: .09 }, .45)
-      .add(function(){
-        // drop the class BEFORE clearing the inline clip - the .gs-anim rule
-        // re-clips the layer to nothing otherwise, and it also retires the
-        // average layer and the scanline via their own display gates
-        hero.classList.remove('gs-anim');
-        gsap.set(pro, { clearProps: 'clipPath' });
-      });
-
-    // Insurance: GSAP's ticker rides requestAnimationFrame, which browsers
-    // suspend in background tabs. If the page loads unseen, land on the
-    // finished hero no later than 4s in; the visitor never meets the average
-    // layer without its payoff.
-    setTimeout(function(){
-      if (hero.classList.contains('gs-anim')) tl.progress(1).kill();
-    }, 4000);
-  }
-
-  /* ---------- 3. Shift emphasis swap ------------------------------------ */
+  /* ---------- 1. Shift emphasis swap ------------------------------------ */
   if (hasST){
     var a = document.querySelector('.gs-shift-a');
     var b = document.querySelector('.gs-shift-b');
