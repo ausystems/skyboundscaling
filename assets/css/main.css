@@ -1544,12 +1544,13 @@ body.menu-open .logo{color:#fff}
   position:relative;
   padding:clamp(64px,8vw,120px) var(--pad);
 }
-.tstm-head{display:grid;justify-items:center;text-align:center;gap:14px;margin-bottom:clamp(32px,4vw,52px)}
-.tstm-eyebrow{color:var(--tstm-dim)}
-.tstm-head h2{
-  font-size:clamp(28px,4vw,46px);font-weight:620;letter-spacing:-.022em;line-height:1.1;
-  color:var(--tstm-text);max-width:20ch;text-wrap:balance;
-}
+/* The heading is NOT part of this component. Each page introduces sections in
+   its own voice - the home page with a blue-tick eyebrow over massive uppercase
+   type, the case-study index with a ruled label row - so the section reuses
+   that page's real header component and only neutralises the double gutter its
+   own padding would otherwise add. */
+.tstm-headline{margin-bottom:clamp(30px,4vw,54px)}
+.tstm-sec .csh-head{padding-inline:0}
 .tstm-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
   max-width:1180px;margin:0 auto;align-items:stretch;
