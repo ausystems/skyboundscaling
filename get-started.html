@@ -38,7 +38,7 @@
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="assets/css/main.css?v=24">
-<link rel="stylesheet" href="assets/css/get-started.css?v=10">
+<link rel="stylesheet" href="assets/css/get-started.css?v=11">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -357,10 +357,7 @@
   </div>
 </div>
 
-<!-- Cinematic background: particle depth field (Three.js) + ambient light pools -->
-<div class="gs-bgfx" aria-hidden="true">
-  <canvas id="gs-bg"></canvas>
-</div>
+
 <div class="gs-grain" aria-hidden="true"></div>
 
 <main id="main-content" class="page-main gs-main" data-rv-scope tabindex="-1">
@@ -369,16 +366,8 @@
   <section class="gs-hero" aria-label="Get started with Skybound Scaling">
     <div class="gs-hero-glow" aria-hidden="true"></div>
 
-    <!-- Floating glass chips (standalone 3D elements, desktop only) -->
-    <div class="gs-chip-field" aria-hidden="true">
-      <span class="gs-fchip fc-1" data-depth="26"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L9.5 22 18 10.5h-6.5L13 2z"/></svg></span>
-      <span class="gs-fchip fc-2" data-depth="42"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 5.4L20 9.2l-4.4 3.9 1.3 5.9L12 16l-4.9 3 1.3-5.9L4 9.2l5.8-.8L12 3z"/></svg></span>
-      <span class="gs-fchip fc-3" data-depth="34"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l5-5 4 4 7-7"/><path d="M15 6h5v5"/></svg></span>
-      <span class="gs-fchip fc-4" data-depth="50"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l6.5 15 1.8-6.2L19.5 11 5 4z"/><path d="M13 13l5 5"/></svg></span>
-    </div>
-
     <div class="gs-hero-inner">
-      <p class="gs-pill gsi" id="gs-hero-pill"><span class="gs-pill-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L9.5 22 18 10.5h-6.5L13 2z"/></svg></span>For Owners Who Refuse To Look Average</p>
+      <p class="gs-pill gsi" id="gs-hero-pill">For Owners Who Refuse To Look Average</p>
 
       <h1 class="gs-h1" id="gs-h1"><span class="gs-h1-line">Look Premium.</span> <span class="gs-h1-line">Get Chosen.</span> <span class="gs-h1-line gs-h1-accent">Charge More.</span></h1>
 
@@ -436,71 +425,53 @@
     </div>
   </section>
 
-  <!-- ============ 02 TRUST TRIO ============ -->
-  <section class="gs-trio-sec" aria-label="Why owners trust Skybound">
-    <div class="gs-trio">
-      <div class="gs-trio-item rv">
-        <p class="gs-trio-t">Premium Presence</p>
-        <p class="gs-trio-c">A brand that commands trust on sight</p>
-      </div>
-      <div class="gs-trio-item is-glow rv" data-glowcard>
-        <p class="gs-trio-t">One Senior Team</p>
-        <p class="gs-trio-c">Website, ads, SEO and content under one strategy</p>
-      </div>
-      <div class="gs-trio-item rv">
-        <p class="gs-trio-t">Built For Revenue</p>
-        <p class="gs-trio-c">Measured against booked jobs, not likes</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 03 THE PROBLEM ============ -->
+  <!-- ============ 02 THE PROBLEM ============ -->
   <section class="gs-sec gs-problem" aria-labelledby="gs-problem-t">
     <div class="gs-sec-glow gl-left" aria-hidden="true"></div>
-    <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>The Problem</p>
-    <h2 class="gs-h2 rv-title" id="gs-problem-t">Here's The Truth Nobody Tells You</h2>
-    <div class="gs-prose">
-      <p class="rv">Your work is excellent. Maybe the best in your area. But your website and your marketing don't say that. They say <span class="gs-avg" data-avg>average</span>.</p>
-      <p class="rv">And average is expensive. When you look average, people assume you charge average prices, deliver average work, and cut average corners. So they haggle, they ghost, and they keep shopping.</p>
-      <p class="rv">Meanwhile the competitor with the sleek website and the polished ads is booking the clients you deserve, charging more for the privilege, and delivering less than you would.</p>
-    </div>
-    <p class="gs-fix rv">It's not fair. <b>But it's fixable.</b></p>
+    <div class="gs-split">
+      <div class="gs-split-copy">
+        <p class="gs-pill rv">The Problem</p>
+        <h2 class="gs-h2 rv-title" id="gs-problem-t">Here's The Truth Nobody Tells You</h2>
+        <p class="gs-lead rv">Your work is excellent. Maybe the best in your area. But your website and your marketing don't say that. They say <span class="gs-avg" data-avg>average</span>.</p>
+        <p class="gs-lead rv">And average is expensive. It tells buyers you charge average prices, deliver average work, and cut average corners. So they haggle, they stall, and they keep shopping until someone looks worth paying more for.</p>
+        <p class="gs-fix rv">It's not fair. <b>But it's fixable.</b></p>
+        <div class="gs-cta-line is-left rv"><a class="gs-btn gs-btn-blue" href="#book" data-magnet><span>Show Me How To Fix This</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
+      </div>
 
-    <div class="gs-pain-grid">
-      <div class="gs-card gs-pain rv-card" data-tilt>
-        <span class="gs-icochip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
-        <h3 class="gs-card-t">Judged In Seconds</h3>
-        <p class="gs-card-c">Buyers decide whether you look credible before they read a single word on your site.</p>
-      </div>
-      <div class="gs-card gs-pain rv-card" data-tilt>
-        <span class="gs-icochip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2V3.4h10l7.2 7.2a2 2 0 0 1 0 2.8z"/><circle cx="7.9" cy="7.9" r="1.4"/></svg></span>
-        <h3 class="gs-card-t">Compared On Price</h3>
-        <p class="gs-card-c">When nothing looks different about you, the only difference left to judge is the number.</p>
-      </div>
-      <div class="gs-card gs-pain rv-card" data-tilt>
-        <span class="gs-icochip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.8-4.8"/></svg></span>
-        <h3 class="gs-card-t">Invisible On Google</h3>
-        <p class="gs-card-c">The best work in town still loses to whoever shows up first in the search results.</p>
+      <div class="gs-panel rv-card" data-glowcard>
+        <p class="gs-panel-head">What looking average quietly costs you</p>
+        <div class="gs-costs">
+          <div class="gs-cost">
+            <span class="gs-cost-n" aria-hidden="true">01</span>
+            <div class="gs-cost-body">
+              <h3 class="gs-cost-t">Judged In Seconds</h3>
+              <p class="gs-cost-c">Buyers decide whether you look credible long before they read a single word about your work.</p>
+            </div>
+          </div>
+          <div class="gs-cost">
+            <span class="gs-cost-n" aria-hidden="true">02</span>
+            <div class="gs-cost-body">
+              <h3 class="gs-cost-t">Compared On Price</h3>
+              <p class="gs-cost-c">When nothing about you looks different, the only thing left to compare is the number on the quote.</p>
+            </div>
+          </div>
+          <div class="gs-cost">
+            <span class="gs-cost-n" aria-hidden="true">03</span>
+            <div class="gs-cost-body">
+              <h3 class="gs-cost-t">Invisible On Google</h3>
+              <p class="gs-cost-c">The best work in town still loses every time to whoever shows up first in the search results.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="gs-cta-line rv"><a class="gs-btn gs-btn-blue" href="#book" data-magnet><span>Show Me How To Fix This</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
   </section>
 
-  <!-- ============ 04 THE SHIFT ============ -->
-  <section class="gs-sec gs-shift" aria-labelledby="gs-shift-t">
-    <div class="gs-ribbon-wrap" aria-hidden="true">
-      <canvas id="gs-ribbon"></canvas>
-    </div>
-    <h2 class="gs-shift-title" id="gs-shift-t"><span class="gs-shift-a">People don't choose the best business.</span> <span class="gs-shift-b">They choose the business that <em>looks</em> the best.</span></h2>
-    <p class="gs-shift-p rv">Before anyone calls you, they've already judged you. Your website, your ads, your reviews, your content. That first impression happens in seconds, and it decides who gets the call. We make sure it's you.</p>
-  </section>
-
-  <!-- ============ 05 WHAT WE DO ============ -->
+  <!-- ============ 03 WHAT WE DO ============ -->
   <section class="gs-sec gs-svc" id="services" aria-labelledby="gs-svc-t">
     <div class="gs-sec-glow gl-right" aria-hidden="true"></div>
     <header class="gs-sec-head">
-      <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>What We Do</p>
+      <p class="gs-pill rv">What We Do</p>
       <h2 class="gs-h2 rv-title" id="gs-svc-t">Everything You Need To Look Like The Premium Choice</h2>
       <p class="gs-sec-sub rv">Five disciplines, one strategy, one senior team. Your entire market presence, engineered to win.</p>
     </header>
@@ -544,7 +515,6 @@
             <circle cx="100" cy="70" r="38" class="tg-ring r2"/>
             <circle cx="100" cy="70" r="19" class="tg-ring r1"/>
             <circle cx="100" cy="70" r="6" class="tg-core"/>
-            <path class="tg-cursor" d="M132 96l14 34 4.5-14.5L165 111l-33-15z"/>
           </svg>
         </div>
         <div class="gs-card-foot">
@@ -557,7 +527,6 @@
         <div class="g-ripple" aria-hidden="true">
           <span class="rp r1"></span><span class="rp r2"></span><span class="rp r3"></span>
           <span class="rp-core"></span>
-          <span class="rp-dot d1"></span><span class="rp-dot d2"></span><span class="rp-dot d3"></span>
         </div>
         <div class="gs-card-foot">
           <h3 class="gs-card-t">Meta Ads That Make You Unforgettable</h3>
@@ -584,37 +553,11 @@
     </div>
   </section>
 
-  <!-- ============ 06 HOW IT WORKS ============ -->
-  <section class="gs-sec gs-how" id="how" aria-labelledby="gs-how-t">
-    <header class="gs-sec-head">
-      <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>How It Works</p>
-      <h2 class="gs-h2 rv-title" id="gs-how-t">From First Call To Market Leader</h2>
-    </header>
-    <div class="gs-steps">
-      <div class="gs-card gs-step rv-card" data-tilt>
-        <span class="gs-step-n" aria-hidden="true">01</span>
-        <h3 class="gs-card-t">Book Your Free Call</h3>
-        <p class="gs-card-c">Pick a time that works. Zero pressure, zero obligation, just a straight conversation about your market.</p>
-      </div>
-      <div class="gs-card gs-step rv-card" data-tilt>
-        <span class="gs-step-n" aria-hidden="true">02</span>
-        <h3 class="gs-card-t">Get Your Custom Game Plan</h3>
-        <p class="gs-card-c">We audit your presence against your top competitors and map exactly what it takes for you to lead. You keep the plan either way.</p>
-      </div>
-      <div class="gs-card gs-step rv-card" data-tilt>
-        <span class="gs-step-n" aria-hidden="true">03</span>
-        <h3 class="gs-card-t">Watch Your Market Notice</h3>
-        <p class="gs-card-c">We build, launch, and optimize while you run your business. You just answer the phone more often.</p>
-      </div>
-    </div>
-    <div class="gs-cta-line rv"><a class="gs-btn gs-btn-primary" href="#book" data-magnet><span>Start With Step One, It's Free</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
-  </section>
-
-  <!-- ============ 07 PROOF ============ -->
+  <!-- ============ 04 PROOF (before/after + testimonials) ============ -->
   <section class="gs-sec gs-proof" aria-labelledby="gs-proof-t">
     <div class="gs-sec-glow gl-center" aria-hidden="true"></div>
     <header class="gs-sec-head">
-      <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>Proof</p>
+      <p class="gs-pill rv">Proof</p>
       <h2 class="gs-h2 rv-title" id="gs-proof-t">See The Difference For Yourself</h2>
       <p class="gs-sec-sub rv">Drag the handle. This is the gap between looking average and looking like the leader.</p>
     </header>
@@ -653,15 +596,7 @@
     </div>
 
     <p class="gs-proof-cap rv">This is what happens when a business finally looks as good as the work it delivers.</p>
-    <div class="gs-cta-line rv"><a class="gs-btn gs-btn-blue" href="#book" data-magnet><span>I Want This For My Business</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
-  </section>
 
-  <!-- ============ 08 TESTIMONIALS ============ -->
-  <section class="gs-sec gs-tstm-sec" aria-labelledby="gs-tstm-t">
-    <header class="gs-sec-head">
-      <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>Testimonials</p>
-      <h2 class="gs-h2 rv-title" id="gs-tstm-t">What Business Owners Are Saying</h2>
-    </header>
     <div class="gs-tstm-grid">
       <div class="gs-tstm rv-card">
         <span class="gs-tstm-ava" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8.6" r="3.6"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span>
@@ -679,15 +614,42 @@
         <p class="mono gs-tstm-slot">Client screenshot drops in here &middot; Slot 03</p>
       </div>
     </div>
-    <p class="gs-precta rv">This could be you next.</p>
-    <div class="gs-cta-line rv"><a class="gs-btn gs-btn-primary" href="#book" data-magnet><span>Book Your Free Call Now</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
+
+    <div class="gs-cta-line rv"><a class="gs-btn gs-btn-blue" href="#book" data-magnet><span>I Want This For My Business</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
   </section>
 
-  <!-- ============ 09 WHY SKYBOUND ============ -->
+  <!-- ============ 05 HOW IT WORKS ============ -->
+  <section class="gs-sec gs-how" id="how" aria-labelledby="gs-how-t">
+    <header class="gs-sec-head">
+      <p class="gs-pill rv">How It Works</p>
+      <h2 class="gs-h2 rv-title" id="gs-how-t">From First Call To Market Leader</h2>
+      <p class="gs-sec-sub rv">Three steps. You bring the business. We handle everything that makes it look unbeatable.</p>
+    </header>
+    <div class="gs-steps">
+      <div class="gs-card gs-step rv-card" data-tilt>
+        <span class="gs-step-n" aria-hidden="true">01</span>
+        <h3 class="gs-card-t">Book Your Free Call</h3>
+        <p class="gs-card-c">Pick a time that works. Zero pressure, zero obligation, just a straight conversation about your market.</p>
+      </div>
+      <div class="gs-card gs-step rv-card" data-tilt>
+        <span class="gs-step-n" aria-hidden="true">02</span>
+        <h3 class="gs-card-t">Get Your Custom Game Plan</h3>
+        <p class="gs-card-c">We audit your presence against your top competitors and map exactly what it takes for you to lead. You keep the plan either way.</p>
+      </div>
+      <div class="gs-card gs-step rv-card" data-tilt>
+        <span class="gs-step-n" aria-hidden="true">03</span>
+        <h3 class="gs-card-t">Watch Your Market Notice</h3>
+        <p class="gs-card-c">We build, launch, and optimize while you run your business. You just answer the phone more often.</p>
+      </div>
+    </div>
+    <div class="gs-cta-line rv"><a class="gs-btn gs-btn-primary" href="#book" data-magnet><span>Start With Step One, It's Free</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
+  </section>
+
+  <!-- ============ 06 WHY SKYBOUND ============ -->
   <section class="gs-sec gs-vs" aria-labelledby="gs-vs-t">
     <div class="gs-sec-glow gl-left" aria-hidden="true"></div>
     <header class="gs-sec-head">
-      <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>Why Skybound</p>
+      <p class="gs-pill rv">Why Skybound</p>
       <h2 class="gs-h2 rv-title" id="gs-vs-t">Why Owners Pick Skybound Over Every Other Option</h2>
     </header>
     <div class="gs-vs-grid">
@@ -715,38 +677,10 @@
     <p class="gs-pull rv">You don't need five vendors. You need <em>one partner</em> who makes you look unstoppable everywhere at once.</p>
   </section>
 
-  <!-- ============ 10 BOOKING ============ -->
-  <section class="gs-sec gs-book" id="book" aria-labelledby="gs-book-t">
-    <div class="gs-sec-glow gl-book" aria-hidden="true"></div>
-    <div class="gs-book-grid">
-      <div class="gs-book-copy">
-        <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>Your Free Strategy Call</p>
-        <h2 class="gs-h2 rv-title" id="gs-book-t">Here's What Happens On Your Call</h2>
-        <div class="gs-prose">
-          <p class="rv">This is not a sales pitch disguised as a call. It's a working session where we look at where your brand stands today, what it's costing you, and exactly what it would take to make you the obvious premium choice in your market.</p>
-        </div>
-        <ul class="gs-list gs-list-loose">
-          <li class="rv"><span class="gs-ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>A straight look at how your presence stacks up against your top three competitors</li>
-          <li class="rv"><span class="gs-ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>The fastest path to looking like the authority in your space</li>
-          <li class="rv"><span class="gs-ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>A real plan you keep, whether we work together or not</li>
-        </ul>
-        <div class="gs-cta-line rv"><a class="gs-btn gs-btn-primary" href="https://calendar.app.google/TkLnqQJ8TyJ9joKH9" target="_blank" rel="noopener" data-magnet><span>Claim Your Free Strategy Call</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
-        <p class="gs-micro rv">One free call. One real plan your competitors hope you never see.</p>
-      </div>
-      <div class="gs-cal rv-card">
-        <div class="gs-cal-top">
-          <span class="gs-live" aria-hidden="true"></span>
-          <span class="mono">Live availability &middot; booking takes under 60 seconds</span>
-        </div>
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3GX4akMgkDgZJJPijOWYafTXODJxBGpPSUQSgw3ipvXUwvReihDuvANt-FhAUZ2bzHWlkj43-j?gv=true" title="Book your free strategy call" loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 11 FAQ ============ -->
+  <!-- ============ 07 FAQ ============ -->
   <section class="gs-sec gs-faq" aria-labelledby="gs-faq-t">
     <header class="gs-sec-head">
-      <p class="gs-pill rv"><span class="gs-pill-dot" aria-hidden="true"></span>FAQ</p>
+      <p class="gs-pill rv">FAQ</p>
       <h2 class="gs-h2 rv-title" id="gs-faq-t">Your Questions, Answered</h2>
     </header>
     <div class="gs-faq-list">
@@ -777,7 +711,33 @@
     </div>
   </section>
 
-  <!-- ============ 12 FINAL CLOSE ============ -->
+  <!-- ============ 08 BOOKING ============ -->
+  <section class="gs-sec gs-book" id="book" aria-labelledby="gs-book-t">
+    <div class="gs-sec-glow gl-book" aria-hidden="true"></div>
+    <div class="gs-book-grid">
+      <div class="gs-book-copy">
+        <p class="gs-pill rv">Your Free Strategy Call</p>
+        <h2 class="gs-h2 rv-title" id="gs-book-t">Here's What Happens On Your Call</h2>
+        <p class="gs-lead rv">This is not a sales pitch disguised as a call. It's a working session where we look at where your brand stands today, what it's costing you, and exactly what it would take to make you the obvious premium choice in your market.</p>
+        <ul class="gs-list gs-list-loose">
+          <li class="rv"><span class="gs-ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>A straight look at how your presence stacks up against your top three competitors</li>
+          <li class="rv"><span class="gs-ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>The fastest path to looking like the authority in your space</li>
+          <li class="rv"><span class="gs-ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>A real plan you keep, whether we work together or not</li>
+        </ul>
+        <div class="gs-cta-line is-left rv"><a class="gs-btn gs-btn-primary" href="https://calendar.app.google/TkLnqQJ8TyJ9joKH9" target="_blank" rel="noopener" data-magnet><span>Claim Your Free Strategy Call</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
+        <p class="gs-micro rv">One free call. One real plan your competitors hope you never see.</p>
+      </div>
+      <div class="gs-cal rv-card">
+        <div class="gs-cal-top">
+          <span class="gs-live" aria-hidden="true"></span>
+          <span class="mono">Live availability &middot; booking takes under 60 seconds</span>
+        </div>
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3GX4akMgkDgZJJPijOWYafTXODJxBGpPSUQSgw3ipvXUwvReihDuvANt-FhAUZ2bzHWlkj43-j?gv=true" title="Book your free strategy call" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 FINAL CLOSE ============ -->
   <section class="gs-sec gs-close" aria-labelledby="gs-close-t">
     <div class="gs-close-glow" aria-hidden="true"></div>
     <span class="gs-brand-tile rv-card" aria-hidden="true"><img src="/assets/brand/logo-mark.webp" alt="" width="200" height="200" loading="lazy" decoding="async"></span>
@@ -888,6 +848,6 @@
 <script src="assets/js/vendor/three.min.js" defer></script>
 <!-- Site -->
 <script src="assets/js/core.js?v=18" defer></script>
-<script src="assets/js/get-started.js?v=10" defer></script>
+<script src="assets/js/get-started.js?v=11" defer></script>
 </body>
 </html>
