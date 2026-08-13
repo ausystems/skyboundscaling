@@ -284,14 +284,6 @@ if (hasGSAP && hasST && !reduced){
     scrollTrigger: { trigger: '.gs-vsl-wrap', start: 'top 92%', end: 'top 34%', scrub: .6 }
   });
 
-  // "average" quietly corrodes as it scrolls into view
-  var avg = qs('[data-avg]');
-  if (avg){
-    gsap.fromTo(avg, { opacity: 1, filter: 'blur(0px)' }, {
-      opacity: .55, filter: 'blur(1.1px)', ease: 'none',
-      scrollTrigger: { trigger: avg, start: 'top 82%', end: 'top 44%', scrub: .6 }
-    });
-  }
 }
 
 /* ---------- 4b. The cost deck --------------------------------------------

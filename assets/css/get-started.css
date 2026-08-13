@@ -402,7 +402,8 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
   background:linear-gradient(92deg,#6F9EFF,#CFE2FF);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.gs-avg{color:#8E99AF;font-weight:480;letter-spacing:.02em;filter:blur(.4px);opacity:.85}
+/* Muted, never blurred: the word reads as dull, but it stays perfectly sharp */
+.gs-avg{color:#8A94A8;font-weight:500;letter-spacing:.01em}
 
 /* ---- The cost deck ----------------------------------------------------
    Default (mobile, no-JS, reduced motion): three cards in normal flow.
@@ -606,21 +607,54 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
   box-shadow:0 20px 50px rgba(43,94,255,.42),inset 0 1px 0 rgba(255,255,255,.25);
 }
 
-/* cta tile */
-.c-cta{display:grid;align-content:center;justify-items:start;gap:20px;padding:32px;min-height:214px}
-.gs-cta-tile-t{font-size:clamp(19px,2.1vw,24px);font-weight:620;letter-spacing:-.015em;line-height:1.25;color:#F4F8FF;text-align:left}
-.gs-cta-tile-t em{font-style:normal;border-bottom:2px solid rgba(255,255,255,.5)}
-.gs-cta-tile-b{
-  display:inline-flex;align-items:center;gap:12px;
-  padding:11px 13px 11px 20px;border-radius:999px;
-  background:rgba(252,253,255,.94);color:#0B1120;
-  font-size:14px;font-weight:620;
-  box-shadow:0 12px 30px rgba(6,12,36,.45);
-  transition:transform .35s cubic-bezier(.2,.7,.2,1);
+/* ---- CTA tile ----
+   The whole tile is the button: no small pill floating inside a large box.
+   Content is centred and the tile stretches to its grid row, so it always
+   squares off exactly against the cards beside it. */
+/* Centred with flex, not grid: `.gs-bento .gs-card` already sets
+   display:flex at a higher specificity, so grid centring here would be
+   silently ignored and the content would sit jammed against the top. */
+.c-cta{
+  align-items:center;justify-content:center;gap:16px;
+  padding:34px 28px;text-align:center;
 }
-.gs-cta-tile-b .gs-btn-tok{width:28px;height:28px;background:#0B1120;color:#F4F8FF}
-.gs-cta-tile-b .gs-btn-tok svg{width:14px;height:14px}
-.c-cta:hover .gs-cta-tile-b{transform:translateX(3px)}
+.c-cta > :not(.c-cta-sheen){position:relative;z-index:1}
+.c-cta-label{
+  font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(226,238,255,.7);
+}
+.c-cta-t{
+  font-size:clamp(19px,2.05vw,24px);font-weight:640;letter-spacing:-.018em;line-height:1.24;
+  color:#F8FAFF;max-width:15ch;text-wrap:balance;
+}
+.c-cta-t em{
+  font-style:normal;
+  text-decoration:underline;text-decoration-thickness:2px;
+  text-decoration-color:rgba(255,255,255,.5);text-underline-offset:4px;
+}
+.c-cta-go{
+  display:inline-flex;align-items:center;gap:11px;margin-top:4px;
+  font-size:14px;font-weight:620;color:#F8FAFF;
+}
+.c-cta-arr{
+  display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
+  background:rgba(252,253,255,.96);color:#0B1120;
+  box-shadow:0 10px 26px rgba(6,12,36,.42);
+  transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;
+}
+.c-cta-arr svg{width:16px;height:16px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.c-cta:hover .c-cta-arr{transform:scale(1.08);box-shadow:0 14px 34px rgba(6,12,36,.52)}
+.c-cta:hover .c-cta-arr svg{transform:translateX(2px)}
+/* a single light sweep across the tile on hover */
+.c-cta-sheen{position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;overflow:hidden}
+.c-cta-sheen::before{
+  content:"";position:absolute;top:-60%;left:0;width:38%;height:220%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.17),transparent);
+  transform:rotate(18deg) translateX(-160%);
+  transition:transform 1s cubic-bezier(.2,.7,.2,1);
+}
+.c-cta:hover .c-cta-sheen::before{transform:rotate(18deg) translateX(430%)}
+.c-cta:focus-visible{outline:2px solid #EAF1FF;outline-offset:3px}
 
 /* ============ 06 PROOF ============ */
 .gs-ba{max-width:1000px;margin:0 auto;border-radius:24px;overflow:visible;background:none;border:0;box-shadow:none}
@@ -941,7 +975,8 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
 /* ============ 14 MOTION SAFETY ============ */
 @media (prefers-reduced-motion:reduce){
   .gs-vsl-play-ring,.gs-vsl-halo-css,.tg-ring,.rp,.gs-live{animation:none}
-  .gs-btn,.gs-card,.gs-dcard,.gs-faq-ic,.gs-cta-tile-b,.gs-vsl-replay,.gs-tstm,.gs-deck-seg i{transition:none}
+  .gs-btn,.gs-card,.gs-dcard,.gs-faq-ic,.gs-vsl-replay,.gs-tstm,.gs-deck-seg i,
+  .c-cta-arr,.c-cta-arr svg,.c-cta-sheen::before{transition:none}
   /* every card reads as active when the deck never animates */
   .gs-deck-seg i{transform:scaleX(1)}
 }
