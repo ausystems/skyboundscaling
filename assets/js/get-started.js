@@ -6,10 +6,8 @@
      2. The playable video sales letter: a GSAP-driven kinetic type reel
         inside the video frame, with live progress, timestamp, pause and
         an end-card CTA. When a real VSL lands it drops into this shell.
-     3. One Three.js scene, and only one: the volumetric halo behind the
-        pitch inside the video frame. It brightens while the pitch plays.
-        Gated on WebGL, visibility and reduced motion; without it the CSS
-        halo carries the same look.
+     3. The hero background: the supplied animated-gradient shader, ported
+        from React to vanilla WebGL2 and driven by the shared GSAP ticker.
      4. Scroll choreography: the VSL settling out of a slight tilt, and
         the word "average" corroding as it enters view.
      5. Micro-interactions: cursor glow on cards, tilt, magnetic CTAs.
@@ -22,7 +20,6 @@ var SKY     = window.SKY || {};
 var reduced = SKY.reduced != null ? SKY.reduced : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var hasGSAP = SKY.hasGSAP != null ? SKY.hasGSAP : typeof gsap !== 'undefined';
 var hasST   = SKY.hasST   != null ? SKY.hasST   : typeof ScrollTrigger !== 'undefined';
-var hasTHREE= SKY.hasTHREE!= null ? SKY.hasTHREE: typeof THREE !== 'undefined';
 var pxr     = SKY.pxr || function(){ return Math.min(window.devicePixelRatio || 1, 2); };
 var fine    = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
@@ -132,22 +129,20 @@ if (hasGSAP && !reduced && h1){
   }
   if (timeEl) timeEl.textContent = '00:00 / ' + totalLabel;
 
-  var state = 'idle';  // idle | playing | paused | ended
-  function setBoost(v){ if (window.__gsHaloBoost) window.__gsHaloBoost(v); }
+  var state = "idle";  // idle | playing | paused | ended
+  // The placeholder bloom is driven by CSS off .is-playing, no JS needed.
 
   function start(){
     if (end) end.hidden = true;
     vsl.classList.add('is-playing');
     play.setAttribute('aria-label', 'Pause the pitch');
     state = 'playing';
-    setBoost(1);
     tl.play();
   }
   function pause(){
     vsl.classList.remove('is-playing');
     play.setAttribute('aria-label', 'Resume the pitch');
     state = 'paused';
-    setBoost(.35);
     tl.pause();
   }
   function onEnd(){
@@ -157,7 +152,6 @@ if (hasGSAP && !reduced && h1){
     play.style.opacity = 0;
     play.style.pointerEvents = 'none';
     if (end){ end.hidden = false; gsap.from(end, { autoAlpha: 0, duration: .6, ease: 'power2.out' }); }
-    setBoost(.5);
   }
   function restart(){
     if (end) end.hidden = true;
@@ -192,87 +186,216 @@ if (hasGSAP && !reduced && h1){
   }
 })();
 
-/* ---------- 3. The VSL halo (the page's only WebGL scene) ---------------- */
+/* ---------- 3. Hero background: the animated gradient field --------------
+   A vanilla port of the supplied React component. Same WebGL2 shader and
+   same uniform set; the React wrapper's useEffect/ResizeObserver/rAF loop
+   become a plain IIFE driven by the page's shared GSAP ticker, so it stays
+   in step with everything else and pauses with the tab.
+
+   Tuned as a custom preset in the site's own blue: near-black base, a low
+   proportion so only thin filaments of colour show, and half speed. The
+   canvas fades in once the first frame is on screen, so a blocked or
+   unsupported context simply leaves the hero as it was. */
 (function(){
-  if (!hasTHREE || !hasGSAP || reduced) return;
-  var canvas = qs('#gs-vsl-canvas');
-  var frame  = qs('#gs-vsl');
-  if (!canvas || !frame) return;
+  var canvas = qs('#gs-hero-shader');
+  var host   = canvas && canvas.parentElement;
+  if (!canvas || !host || reduced || !hasGSAP) return;
 
-  var renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false, powerPreference: 'high-performance' });
-    renderer.setClearColor(0x000000, 0);
-  } catch(e){ canvas.style.display = 'none'; return; }
-  canvas.addEventListener('webglcontextlost', function(ev){ ev.preventDefault(); canvas.style.display = 'none'; });
-
-  var scene = new THREE.Scene();
-  var cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 10);
-  cam.position.z = 1;
-
-  var boost = { value: 0 };
-  window.__gsHaloBoost = function(v){
-    gsap.to(boost, { value: v, duration: 1.2, ease: 'power2.out', overwrite: true });
+  var P = {
+    color1: '#04060C',   // page black, so the field sits on brand ground
+    color2: '#2E6BFF',   // --gsB, the blue used across the site
+    color3: '#BBD4FF',   // ice highlight
+    rotation: -50, proportion: 6, scale: 0.05, speed: 13, distortion: 0,
+    swirl: 50, swirlIterations: 16, softness: 47, offset: -299,
+    shape: 0 /* Checks */, shapeSize: 45
   };
 
-  var mat = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-    uniforms: {
-      uTime:   { value: 0 },
-      uAspect: { value: 1.78 },
-      uBoost:  { value: 0 }
-    },
-    vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
-    fragmentShader: [
-      'varying vec2 vUv; uniform float uTime; uniform float uAspect; uniform float uBoost;',
-      'void main(){',
-      '  vec2 c = vUv - vec2(.5, .46);',
-      '  c.x *= uAspect;',
-      '  c.x += sin(uTime * .21) * .012;',
-      '  c.y += cos(uTime * .17) * .010;',
-      '  float r = length(c);',
-      '  float breathe = .92 + .08 * sin(uTime * .55);',
-      '  float k = 1.0 + uBoost * .55;',
-      '  vec3 col = vec3(0.0);',
-      '  col += vec3(.62, .76, 1.0) * exp(-r * r * 34.0) * .58 * breathe * k;',
-      '  col += vec3(.24, .43, 1.0) * exp(-r * r * 9.5) * .46 * k;',
-      '  col += vec3(.08, .16, .55) * exp(-r * r * 3.1) * .5;',
-      '  float a = clamp(col.b * 1.15, 0.0, 1.0);',
-      '  gl_FragColor = vec4(col, a);',
-      '}'
-    ].join('\n')
-  });
-  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat));
+  var gl;
+  try {
+    gl = canvas.getContext('webgl2', { premultipliedAlpha: true, alpha: true, antialias: true });
+  } catch(e){ return; }
+  if (!gl) return;
+
+  var VERT = [
+    '#version 300 es',
+    'in vec4 a_position;',
+    'void main(){ gl_Position = a_position; }'
+  ].join('\n');
+
+  var FRAG = [
+    '#version 300 es',
+    'precision highp float;',
+    'uniform float u_time; uniform float u_pixelRatio; uniform vec2 u_resolution;',
+    'uniform float u_scale; uniform float u_rotation;',
+    'uniform vec4 u_color1; uniform vec4 u_color2; uniform vec4 u_color3;',
+    'uniform float u_proportion; uniform float u_softness; uniform float u_shape;',
+    'uniform float u_shapeScale; uniform float u_distortion; uniform float u_swirl;',
+    'uniform float u_swirlIterations;',
+    'out vec4 fragColor;',
+    '#define TWO_PI 6.28318530718',
+    '#define PI 3.14159265358979323846',
+    'vec2 rotate(vec2 uv, float th){ return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv; }',
+    'float random(vec2 st){ return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123); }',
+    'float noise(vec2 st){',
+    '  vec2 i = floor(st); vec2 f = fract(st);',
+    '  float a = random(i);',
+    '  float b = random(i + vec2(1.0, 0.0));',
+    '  float c = random(i + vec2(0.0, 1.0));',
+    '  float d = random(i + vec2(1.0, 1.0));',
+    '  vec2 u = f * f * (3.0 - 2.0 * f);',
+    '  float x1 = mix(a, b, u.x); float x2 = mix(c, d, u.x);',
+    '  return mix(x1, x2, u.y);',
+    '}',
+    'vec4 blend_colors(vec4 c1, vec4 c2, vec4 c3, float mixer, float edgesWidth, float edge_blur){',
+    '  vec3 color1 = c1.rgb * c1.a;',
+    '  vec3 color2 = c2.rgb * c2.a;',
+    '  vec3 color3 = c3.rgb * c3.a;',
+    '  float r1 = smoothstep(.0 + .35 * edgesWidth, .7 - .35 * edgesWidth + .5 * edge_blur, mixer);',
+    '  float r2 = smoothstep(.3 + .35 * edgesWidth, 1. - .35 * edgesWidth + edge_blur, mixer);',
+    '  vec3 blended_color_2 = mix(color1, color2, r1);',
+    '  float blended_opacity_2 = mix(c1.a, c2.a, r1);',
+    '  vec3 c = mix(blended_color_2, color3, r2);',
+    '  float o = mix(blended_opacity_2, c3.a, r2);',
+    '  return vec4(c, o);',
+    '}',
+    'void main(){',
+    '  vec2 uv = gl_FragCoord.xy / u_resolution.xy;',
+    '  float t = .5 * u_time;',
+    '  float noise_scale = .0005 + .006 * u_scale;',
+    '  uv -= .5;',
+    '  uv *= (noise_scale * u_resolution);',
+    '  uv = rotate(uv, u_rotation * .5 * PI);',
+    '  uv /= u_pixelRatio;',
+    '  uv += .5;',
+    '  float n1 = noise(uv * 1. + t);',
+    '  float n2 = noise(uv * 2. - t);',
+    '  float angle = n1 * TWO_PI;',
+    '  uv.x += 4. * u_distortion * n2 * cos(angle);',
+    '  uv.y += 4. * u_distortion * n2 * sin(angle);',
+    '  float iterations_number = ceil(clamp(u_swirlIterations, 1., 30.));',
+    '  for (float i = 1.; i <= iterations_number; i++){',
+    '    uv.x += clamp(u_swirl, 0., 2.) / i * cos(t + i * 1.5 * uv.y);',
+    '    uv.y += clamp(u_swirl, 0., 2.) / i * cos(t + i * 1. * uv.x);',
+    '  }',
+    '  float proportion = clamp(u_proportion, 0., 1.);',
+    '  float shape = 0.; float mixer = 0.;',
+    '  if (u_shape < .5){',
+    '    vec2 checks_shape_uv = uv * (.5 + 3.5 * u_shapeScale);',
+    '    shape = .5 + .5 * sin(checks_shape_uv.x) * cos(checks_shape_uv.y);',
+    '    mixer = shape + .48 * sign(proportion - .5) * pow(abs(proportion - .5), .5);',
+    '  } else if (u_shape < 1.5){',
+    '    vec2 stripes_shape_uv = uv * (.25 + 3. * u_shapeScale);',
+    '    float f = fract(stripes_shape_uv.y);',
+    '    shape = smoothstep(.0, .55, f) * smoothstep(1., .45, f);',
+    '    mixer = shape + .48 * sign(proportion - .5) * pow(abs(proportion - .5), .5);',
+    '  } else {',
+    '    float sh = 1. - uv.y;',
+    '    sh -= .5;',
+    '    sh /= (noise_scale * u_resolution.y);',
+    '    sh += .5;',
+    '    float shape_scaling = .2 * (1. - u_shapeScale);',
+    '    shape = smoothstep(.45 - shape_scaling, .55 + shape_scaling, sh + .3 * (proportion - .5));',
+    '    mixer = shape;',
+    '  }',
+    '  vec4 color_mix = blend_colors(u_color1, u_color2, u_color3, mixer, 1. - clamp(u_softness, 0., 1.), .01 + .01 * u_scale);',
+    '  fragColor = vec4(color_mix.rgb, color_mix.a);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src){
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)){ gl.deleteShader(s); return null; }
+    return s;
+  }
+  var vs = compile(gl.VERTEX_SHADER, VERT);
+  var fs = compile(gl.FRAGMENT_SHADER, FRAG);
+  if (!vs || !fs) return;
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  var U = {};
+  ['u_time','u_resolution','u_pixelRatio','u_scale','u_rotation','u_color1','u_color2',
+   'u_color3','u_proportion','u_softness','u_shape','u_shapeScale','u_distortion',
+   'u_swirl','u_swirlIterations'].forEach(function(n){ U[n] = gl.getUniformLocation(prog, n); });
+
+  // #rgb / #rrggbb / #rrggbbaa -> normalised rgba
+  function hexToRgba(hex){
+    var c = hex.replace('#',''), r = 0, g = 0, b = 0, a = 1;
+    if (c.length === 3){
+      r = parseInt(c[0]+c[0],16)/255; g = parseInt(c[1]+c[1],16)/255; b = parseInt(c[2]+c[2],16)/255;
+    } else if (c.length >= 6){
+      r = parseInt(c.slice(0,2),16)/255; g = parseInt(c.slice(2,4),16)/255; b = parseInt(c.slice(4,6),16)/255;
+      if (c.length === 8) a = parseInt(c.slice(6,8),16)/255;
+    }
+    return [r,g,b,a];
+  }
+  var C1 = hexToRgba(P.color1), C2 = hexToRgba(P.color2), C3 = hexToRgba(P.color3);
+
+  // Cap the ratio, and feed the SAME value to the shader that sized the
+  // buffer: u_pixelRatio divides the uv, so a mismatch rescales the pattern.
+  function ratio(){ return Math.min(window.devicePixelRatio || 1, 1.6); }
 
   function resize(){
-    var w = frame.clientWidth || 1, h = frame.clientHeight || 1;
-    renderer.setPixelRatio(Math.min(pxr(), 1.75));
-    renderer.setSize(w, h, false);
-    mat.uniforms.uAspect.value = w / h;
+    var w = host.clientWidth, h = host.clientHeight, pr = ratio();
+    if (!w || !h) return;
+    canvas.width  = Math.round(w * pr);
+    canvas.height = Math.round(h * pr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    gl.viewport(0, 0, canvas.width, canvas.height);
   }
   resize();
-  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(frame);
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(host);
 
-  var visible = true, hidden = false, t0 = null;
+  var visible = true, hidden = false, t0 = null, lit = false;
   if ('IntersectionObserver' in window){
     new IntersectionObserver(function(entries){
       entries.forEach(function(en){ visible = en.isIntersecting; });
-    }, { rootMargin: '140px' }).observe(canvas);
+    }, { rootMargin: '80px' }).observe(host);
   }
   document.addEventListener('visibilitychange', function(){ hidden = document.hidden; });
+  canvas.addEventListener('webglcontextlost', function(ev){
+    ev.preventDefault(); host.classList.remove('is-live'); visible = false;
+  });
 
   gsap.ticker.add(function(time){
     if (hidden || !visible) return;
     if (t0 === null) t0 = time;
-    mat.uniforms.uTime.value = time - t0;
-    mat.uniforms.uBoost.value = boost.value;
-    renderer.render(scene, cam);
-  });
+    var elapsed = time - t0;
+    var speed = (P.speed / 100) * 5;
 
-  var rT;
-  window.addEventListener('resize', function(){
-    clearTimeout(rT); rT = setTimeout(resize, 150);
-  }, { passive: true });
+    gl.useProgram(prog);
+    gl.uniform1f(U.u_time, elapsed * speed + P.offset * 0.01);
+    gl.uniform2f(U.u_resolution, canvas.width, canvas.height);
+    gl.uniform1f(U.u_pixelRatio, ratio());
+    gl.uniform1f(U.u_scale, P.scale);
+    gl.uniform1f(U.u_rotation, (P.rotation * Math.PI) / 180);
+    gl.uniform4f(U.u_color1, C1[0], C1[1], C1[2], C1[3]);
+    gl.uniform4f(U.u_color2, C2[0], C2[1], C2[2], C2[3]);
+    gl.uniform4f(U.u_color3, C3[0], C3[1], C3[2], C3[3]);
+    gl.uniform1f(U.u_proportion, P.proportion / 100);
+    gl.uniform1f(U.u_softness, P.softness / 100);
+    gl.uniform1f(U.u_shape, P.shape);
+    gl.uniform1f(U.u_shapeScale, P.shapeSize / 100);
+    gl.uniform1f(U.u_distortion, P.distortion / 50);
+    gl.uniform1f(U.u_swirl, P.swirl / 100);
+    gl.uniform1f(U.u_swirlIterations, P.swirl === 0 ? 0 : P.swirlIterations);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    if (!lit){ lit = true; host.classList.add('is-live'); }
+  });
 })();
 
 /* ---------- 4. Scroll choreography --------------------------------------- */
