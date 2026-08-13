@@ -63,7 +63,8 @@ if (hasGSAP && !reduced && h1){
     .to(masks, { yPercent: 0, duration: 1.05, ease: 'power4.out', stagger: .11 }, .18)
     .to(qsa('.gs-hero-inner .gsi').filter(function(el){ return el.id !== 'gs-hero-pill'; }),
         { opacity: 1, y: 0, duration: .85, stagger: .1 }, .72)
-    .to('.gsi-vsl', { opacity: 1, y: 0, scale: 1, duration: 1.25, ease: 'power3.out' }, .9);
+    .to('.gsi-vsl', { opacity: 1, y: 0, scale: 1, duration: 1.25, ease: 'power3.out' }, .9)
+    .to('.gsi-trust', { opacity: 1, y: 0, duration: .9 }, 1.25);
 
   // Watchdog: if rAF is throttled (hidden tab, constrained device), the
   // intro must never strand the hero half-revealed. Force-complete it.
@@ -72,7 +73,7 @@ if (hasGSAP && !reduced && h1){
   }, 4500);
 } else {
   // No GSAP or reduced motion: everything lands in its final state
-  qsa('.gsi, .gsi-vsl').forEach(function(el){ el.style.opacity = 1; el.style.transform = 'none'; });
+  qsa('.gsi, .gsi-vsl, .gsi-trust').forEach(function(el){ el.style.opacity = 1; el.style.transform = 'none'; });
   if (h1) h1.style.opacity = 1;
 }
 
