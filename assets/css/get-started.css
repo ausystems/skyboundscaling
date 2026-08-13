@@ -919,6 +919,7 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
   .gs-ba-frame{aspect-ratio:1/1.05}
   .gs-bar{gap:0;padding:9px 10px}
   .gs-bar-text{display:none}
+  .gs-bar .gs-btn{white-space:nowrap}
   .gs-cal iframe{height:580px}
   .gs-pill{white-space:normal;text-align:center;line-height:1.6;padding:9px 16px}
 }
