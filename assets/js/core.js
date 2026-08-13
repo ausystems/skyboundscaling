@@ -59,18 +59,79 @@ window.SKY = {
   lenis: lenis || null
 };
 
-/* ---------- Header state ---------- */
+/* ---------- Header state ----------
+   The bar hides on the way down and returns on the way up. Done naively that
+   flinches, because `y > lastY` is true for a single stray pixel and Lenis
+   eases in sub-pixel steps, so a settling scroll flips the class every frame.
+   Five things keep it steady:
+
+     1. A movement deadzone. Anything under DELTA is ignored, and lastY is
+        only re-baselined when we actually act, so slow scrolling still
+        accumulates to a real decision instead of being swallowed.
+     2. Hysteresis on the .scrolled background. One threshold at the boundary
+        restarts the .35s fade every frame while a scroll hovers on it.
+     3. rAF coalescing. Scroll fires far more often than we can paint; state
+        is computed once per frame.
+     4. Clamped, seeded position. scrollY is clamped at 0 so rubber-band
+        overscroll cannot fake a direction change, and lastY is seeded from
+        the real position so a reload restored mid-page does not hide the bar
+        on arrival.
+     5. A hold window. Programmatic scrolls (anchor links, back-to-top) and
+        the open mobile menu suppress auto-hide entirely, so the bar never
+        slides away underneath a click the user just made. */
 var header = document.getElementById('site-header');
-var lastY = 0;
-function onScroll(){
-  if (!header) return;
-  var y = window.scrollY;
-  header.classList.toggle('scrolled', y > 24);
-  header.classList.toggle('hidden', y > lastY && y > 300);
-  lastY = y;
+if (header){
+  var SHOW_ABOVE = 300;   // never hide this close to the top
+  var DELTA      = 8;     // ignore movement smaller than this
+  var SOLID_ON   = 32;    // .scrolled engages here
+  var SOLID_OFF  = 12;    // and only releases here
+
+  var lastY   = Math.max(0, window.scrollY || 0);
+  var ticking = false;
+  var holdUntil = 0;
+  var solid = false;
+
+  var applyHeader = function(){
+    ticking = false;
+    var y = Math.max(0, window.scrollY || 0);
+
+    if (!solid && y > SOLID_ON){ solid = true; header.classList.add('scrolled'); }
+    else if (solid && y < SOLID_OFF){ solid = false; header.classList.remove('scrolled'); }
+
+    // near the top, or held: always visible, and re-baseline so leaving the
+    // zone never carries a stale delta
+    if (y <= SHOW_ABOVE || Date.now() < holdUntil ||
+        document.body.classList.contains('menu-open')){
+      header.classList.remove('hidden');
+      lastY = y;
+      return;
+    }
+
+    var dy = y - lastY;
+    if (dy > DELTA){ header.classList.add('hidden'); lastY = y; }
+    else if (dy < -DELTA){ header.classList.remove('hidden'); lastY = y; }
+  };
+
+  var onScroll = function(){
+    if (!ticking){ ticking = true; requestAnimationFrame(applyHeader); }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  /* Any scroll the page starts itself calls this, so the bar stays put for
+     the duration instead of sliding off mid-flight. */
+  window.__headerHold = function(ms){
+    holdUntil = Date.now() + (ms || 1400);
+    header.classList.remove('hidden');
+  };
+  /* Released when the scroll actually lands, so the window is never the thing
+     deciding: the timer above is only an upper bound for the case where no
+     completion callback arrives. lastY is kept current inside the hold branch,
+     so releasing can never leave a stale delta that snaps the bar away. */
+  window.__headerRelease = function(){ holdUntil = 0; };
+
+  applyHeader();
 }
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
 
 /* ---------- Smooth in-page navigation (anchor links through Lenis) ---------- */
 document.addEventListener('click', function(e){
@@ -81,8 +142,14 @@ document.addEventListener('click', function(e){
   var el = document.querySelector(href);
   if (!el) return;
   e.preventDefault();
+  // hold the bar for the flight: every funnel CTA scrolls DOWN to #book, and
+  // auto-hide would otherwise pull the nav away the moment they click it
+  if (window.__headerHold) window.__headerHold(2500);
   if (lenis && lenis.scrollTo){
-    lenis.scrollTo(el, { offset: -80, duration: 1.1 });
+    lenis.scrollTo(el, {
+      offset: -80, duration: 1.1,
+      onComplete: function(){ if (window.__headerRelease) window.__headerRelease(); }
+    });
   } else {
     el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   }
@@ -301,8 +368,12 @@ if (hasST && !reduced){
   var toTop = document.querySelector('.sf-totop');
   if (toTop){
     toTop.addEventListener('click', function(){
+      if (window.__headerHold) window.__headerHold(2500);
       if (window.__lenis && typeof window.__lenis.scrollTo === 'function'){
-        window.__lenis.scrollTo(0, reduced ? { immediate: true } : { duration: 1.1 });
+        window.__lenis.scrollTo(0, reduced ? { immediate: true } : {
+          duration: 1.1,
+          onComplete: function(){ if (window.__headerRelease) window.__headerRelease(); }
+        });
       } else {
         try { window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); }
         catch(e){ window.scrollTo(0, 0); }
@@ -421,6 +492,9 @@ if (hasST && !reduced){
     if (v === isOpen) return;
     isOpen = v;
     document.body.classList.toggle('menu-open', v);
+    // the bar carries the close button, so it must never be mid-hide when the
+    // overlay opens, and must not snap away the instant it closes
+    if (window.__headerHold) window.__headerHold(v ? 600 : 900);
     toggle.setAttribute('aria-expanded', v ? 'true' : 'false');
     toggle.setAttribute('aria-label', v ? 'Close menu' : 'Open menu');
     menu.setAttribute('aria-hidden', v ? 'false' : 'true');
