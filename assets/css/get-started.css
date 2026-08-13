@@ -27,6 +27,12 @@ body.gs-page{
   --gsLine:rgba(146,176,255,.12);
   background:var(--gsD);
   color:var(--gsText);
+  /* main.css sets overflow-x:hidden here, which pairs with visible and
+     blockifies into (hidden, auto): body becomes a scroll container and
+     every position:sticky descendant silently stops sticking. `clip` is a
+     legal pair with visible, so it contains the same horizontal overflow
+     without creating a scrollport. The deck's sticky stage depends on it. */
+  overflow-x:clip;
 }
 /* The whole ambient field in one fixed, composited layer: the browser
    rasterizes it once instead of repainting gradients every scrolled frame. */
@@ -105,6 +111,10 @@ body.gs-page #site-header{border-bottom:0}
    the mobile layout viewport; vertical overflow stays visible so card lifts
    and the testimonial avatar notches are never cut. */
 .gs-sec{position:relative;padding:clamp(50px,5.2vw,80px) var(--pad);overflow-x:clip}
+/* The deck's sticky stage needs an unclipped ancestor chain. The clip on
+   <html> and <body> already contains this section's glow, so dropping it
+   here costs nothing and lets sticky work. */
+.gs-problem{overflow-x:visible}
 /* Lift real content above the glow layers. Every glow must be excluded here:
    one that slips through gets position:relative, drops into flow, and adds
    its full aspect-ratio height to the section as dead space. */
@@ -394,40 +404,95 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
 }
 .gs-avg{color:#8E99AF;font-weight:480;letter-spacing:.02em;filter:blur(.4px);opacity:.85}
 
-.gs-panel{
-  position:relative;overflow:hidden;border-radius:24px;
-  padding:clamp(22px,2.4vw,30px);
-  background:
-    radial-gradient(90% 60% at 82% 0%,rgba(46,107,255,.16) 0%,transparent 62%),
-    linear-gradient(180deg,rgba(15,22,38,.8) 0%,rgba(7,11,20,.92) 100%);
-  border:1px solid rgba(146,176,255,.16);
-  box-shadow:0 34px 84px rgba(2,4,12,.6),inset 0 1px 0 rgba(200,220,255,.07);
-  transition:border-color .5s;
-}
-.gs-panel:hover{border-color:rgba(160,190,255,.26)}
-.gs-panel > *{position:relative;z-index:1}
-.gs-panel-head{
+/* ---- The cost deck ----------------------------------------------------
+   Default (mobile, no-JS, reduced motion): three cards in normal flow.
+   JS adds .is-deck on wide viewports, which stacks them absolutely so a
+   scrubbed timeline can flip through the deck while the split sits sticky.
+   The track only takes its tall scroll height in that same mode, so with
+   JS off the section never leaves a void. */
+.gs-deck-wrap{display:grid;gap:15px}
+.gs-deck-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 4px}
+.gs-deck-label{
   font-size:11.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
-  color:rgba(180,202,248,.6);margin-bottom:16px;padding-left:4px;
+  color:rgba(180,202,248,.6);
 }
-.gs-costs{display:grid;gap:10px}
-.gs-cost{
-  display:flex;align-items:flex-start;gap:16px;
-  padding:17px 19px;border-radius:16px;
-  background:rgba(11,17,31,.72);
-  border:1px solid rgba(146,176,255,.1);
-  transition:border-color .4s,background .4s,transform .4s cubic-bezier(.2,.7,.2,1);
+.gs-deck-rail{display:flex;gap:6px;flex:none}
+.gs-deck-seg{position:relative;width:26px;height:3px;border-radius:2px;background:rgba(150,180,255,.15);overflow:hidden}
+.gs-deck-seg i{
+  position:absolute;inset:0;border-radius:2px;
+  background:linear-gradient(90deg,#3E77FF,#9EC4FF);
+  box-shadow:0 0 10px rgba(95,146,255,.85);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1);
 }
-.gs-cost:hover{border-color:rgba(160,190,255,.26);background:rgba(15,23,42,.8);transform:translateX(3px)}
-.gs-cost-n{
-  flex:none;font-size:15px;font-weight:700;letter-spacing:.01em;line-height:1.3;
-  color:transparent;
-  background:linear-gradient(180deg,#8FB4FF,#3E6FE0);
-  -webkit-background-clip:text;background-clip:text;
+.gs-deck-seg.is-active i,.gs-deck-seg.is-past i{transform:scaleX(1)}
+
+.gs-deck{display:grid;gap:12px}
+.gs-deck.is-deck{display:block;position:relative;perspective:1600px}
+.gs-deck.is-deck .gs-dcard{position:absolute;left:0;right:0;top:0;will-change:transform,opacity}
+
+.gs-dcard{
+  position:relative;overflow:hidden;border-radius:22px;
+  padding:24px 26px 27px;
+  background:
+    radial-gradient(120% 92% at 86% 0%,rgba(46,107,255,.2) 0%,transparent 58%),
+    linear-gradient(180deg,rgba(16,24,42,.93) 0%,rgba(7,11,20,.96) 100%);
+  border:1px solid rgba(146,176,255,.14);
+  box-shadow:0 28px 70px rgba(2,4,12,.62),inset 0 1px 0 rgba(200,220,255,.07);
+  transform-style:preserve-3d;backface-visibility:hidden;
+  transition:border-color .55s,box-shadow .55s;
 }
-.gs-cost-body{display:grid;gap:5px}
-.gs-cost-t{font-size:16.5px;font-weight:620;letter-spacing:-.008em;color:var(--gsText)}
-.gs-cost-c{font-size:14px;line-height:1.6;color:var(--gsDim)}
+/* Gradient hairline rim: a masked 1px ring, brighter while the card leads */
+.gs-dcard::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(150deg,rgba(160,196,255,.55) 0%,rgba(120,160,255,.08) 42%,transparent 68%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  opacity:.55;transition:opacity .55s;
+}
+.gs-dcard.is-active{
+  border-color:rgba(168,196,255,.3);
+  box-shadow:0 34px 84px rgba(2,4,12,.66),0 12px 40px rgba(30,70,200,.28),inset 0 1px 0 rgba(210,228,255,.12);
+}
+.gs-dcard.is-active::after{opacity:1}
+.gs-dcard > :not(.gs-dcard-aura){position:relative;z-index:1}
+.gs-dcard-aura{
+  position:absolute;left:50%;top:-38%;width:118%;aspect-ratio:1;transform:translateX(-50%);
+  border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(closest-side,rgba(46,107,255,.24),rgba(46,107,255,.06) 52%,transparent 74%);
+  opacity:0;transition:opacity .7s;
+}
+.gs-dcard.is-active .gs-dcard-aura{opacity:1}
+
+.gs-dcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:10px}
+.gs-dcard-n{
+  font-size:58px;font-weight:700;letter-spacing:-.045em;line-height:.86;
+  background:linear-gradient(180deg,#AECBFF 0%,rgba(120,160,255,.16) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.gs-dcard-ic{
+  flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;color:#C5D9FF;
+  background:linear-gradient(160deg,rgba(84,126,255,.3) 0%,rgba(16,24,54,.6) 100%);
+  border:1px solid rgba(154,188,255,.28);
+  box-shadow:0 10px 28px rgba(30,66,190,.34),inset 0 1px 0 rgba(255,255,255,.26);
+  transition:border-color .55s,box-shadow .55s;
+}
+.gs-dcard.is-active .gs-dcard-ic{
+  border-color:rgba(184,210,255,.5);
+  box-shadow:0 12px 34px rgba(43,94,255,.46),inset 0 1px 0 rgba(255,255,255,.34);
+}
+.gs-dcard-ic svg{width:21px;height:21px}
+.gs-dcard-t{font-size:21px;font-weight:620;letter-spacing:-.012em;color:var(--gsText);margin-bottom:7px}
+.gs-dcard-c{font-size:14.5px;line-height:1.62;color:var(--gsDim);max-width:42ch}
+
+/* Sticky scroll stage. Height and stickiness only exist in deck mode. */
+.gs-problem-track.is-deck{height:var(--track-h,300vh)}
+.gs-problem-track.is-deck .gs-split{
+  position:sticky;top:0;
+  min-height:100vh;align-content:center;
+  padding-block:calc(var(--header-h) + 12px) 24px;
+}
 
 /* ============ 05 SERVICES BENTO ============ */
 .gs-bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;max-width:1240px;margin:0 auto}
@@ -824,6 +889,14 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
 @media (max-width:900px){
   .gs-split{grid-template-columns:1fr;gap:30px;max-width:620px}
   .gs-split-copy .gs-h2{max-width:none}
+  /* No deck below this width: every card is on screen at once, so they all
+     wear the lead treatment. A single glowing card among three visible ones
+     reads as a bug, and the progress rail has nothing left to track. */
+  .gs-deck-rail{display:none}
+  .gs-dcard::after{opacity:1}
+  .gs-dcard-aura{opacity:.5}
+  .gs-dcard{border-color:rgba(168,196,255,.24)}
+  .gs-dcard-ic{border-color:rgba(184,210,255,.44)}
   .gs-steps{grid-template-columns:1fr;max-width:560px}
   .gs-vs-grid{grid-template-columns:1fr;max-width:560px}
   .gs-tstm-grid{grid-template-columns:1fr;max-width:500px;gap:40px}
@@ -868,8 +941,11 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
 /* ============ 14 MOTION SAFETY ============ */
 @media (prefers-reduced-motion:reduce){
   .gs-vsl-play-ring,.gs-vsl-halo-css,.tg-ring,.rp,.gs-live{animation:none}
-  .gs-btn,.gs-card,.gs-panel,.gs-cost,.gs-faq-ic,.gs-cta-tile-b,.gs-vsl-replay,.gs-tstm{transition:none}
+  .gs-btn,.gs-card,.gs-dcard,.gs-faq-ic,.gs-cta-tile-b,.gs-vsl-replay,.gs-tstm,.gs-deck-seg i{transition:none}
+  /* every card reads as active when the deck never animates */
+  .gs-deck-seg i{transform:scaleX(1)}
 }
+.reduced .gs-deck-seg i{transform:scaleX(1)}
 .reduced .gs-vsl-play-ring,.reduced .gs-vsl-halo-css,
 .reduced .tg-ring,.reduced .rp,.reduced .gs-live{animation:none}
 .no-js .gs-vsl-play,.reduced .gs-vsl-play{display:none}

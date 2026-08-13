@@ -294,6 +294,121 @@ if (hasGSAP && hasST && !reduced){
   }
 }
 
+/* ---------- 4b. The cost deck --------------------------------------------
+   A physical card deck that advances as the section scrolls. The split
+   holds sticky (CSS, no ScrollTrigger pin, so nothing fights Lenis or the
+   overflow:clip ancestors) while a scrubbed timeline lifts the leading
+   card away and promotes the one behind it. Wide viewports only: below
+   901px the cards stay a plain stacked list, which is also the no-JS and
+   reduced-motion state. */
+if (hasGSAP && hasST && !reduced && typeof gsap.matchMedia === 'function'){
+  gsap.matchMedia().add('(min-width:901px) and (prefers-reduced-motion: no-preference)', function(){
+    var track = qs('#gs-prob-track');
+    var deck  = qs('#gs-deck');
+    if (!track || !deck) return;
+    var cards = qsa('.gs-dcard', deck);
+    var segs  = qsa('.gs-deck-seg', track);
+    if (cards.length < 2) return;
+
+    var HOLD = .55, MOVE = 1;                 // timeline units per beat
+    var LAST = cards.length - 1;
+
+    // Resting pose for a card sitting `d` places back in the deck.
+    function pose(d){
+      return {
+        yPercent: 9 * d,
+        scale: 1 - .06 * d,
+        opacity: d === 0 ? 1 : (d === 1 ? .5 : .22),
+        filter: 'blur(' + (d * 2.2) + 'px)',
+        rotationX: 0
+      };
+    }
+
+    // The deck is absolutely stacked, so the container needs an explicit
+    // height: the tallest card. Measured, not guessed, so copy can change.
+    function sizeDeck(){
+      deck.style.height = 'auto';
+      var h = 0;
+      cards.forEach(function(c){ h = Math.max(h, c.offsetHeight); });
+      if (h) deck.style.height = h + 'px';
+    }
+
+    function setActive(i){
+      cards.forEach(function(c, n){ c.classList.toggle('is-active', n === i); });
+      segs.forEach(function(s, n){
+        s.classList.toggle('is-active', n === i);
+        s.classList.toggle('is-past', n < i);
+      });
+    }
+
+    deck.classList.add('is-deck');
+    track.classList.add('is-deck');
+    sizeDeck();
+
+    var ctx = gsap.context(function(){
+      cards.forEach(function(c, i){
+        gsap.set(c, { zIndex: cards.length - i, transformOrigin: '50% 100%' });
+        gsap.set(c, pose(i));
+      });
+
+      var tl = gsap.timeline({
+        onUpdate: function(){
+          var t = tl.time(), idx = 0;
+          for (var i = 1; i <= LAST; i++){
+            if (t >= HOLD + (i - 1) * (MOVE + HOLD) + MOVE * .45) idx = i;
+          }
+          setActive(idx);
+        },
+        scrollTrigger: {
+          trigger: track, start: 'top top', end: 'bottom bottom',
+          scrub: .7, invalidateOnRefresh: true
+        }
+      });
+
+      var at = HOLD;
+      for (var i = 1; i <= LAST; i++){
+        // The leading card peels off the top of the deck. Its fade runs at
+        // half the travel time so it is gone well before the next card is
+        // legible: overlap the two and both headlines read at once, which
+        // looks like a mistake rather than a transition.
+        tl.to(cards[i - 1], {
+          yPercent: -78, rotationX: 34, scale: .9,
+          duration: MOVE * .85, ease: 'power2.in'
+        }, at);
+        tl.to(cards[i - 1], {
+          opacity: 0, filter: 'blur(10px)',
+          duration: MOVE * .5, ease: 'power2.in'
+        }, at);
+        // Everything still in the deck advances one place, starting a beat
+        // later so the promotion lands into a clear frame.
+        for (var j = i; j <= LAST; j++){
+          tl.to(cards[j], Object.assign({ duration: MOVE * .78, ease: 'power3.out' }, pose(j - i)), at + MOVE * .22);
+        }
+        at += MOVE + HOLD;
+      }
+      // a final beat so the last card holds fully before the section releases
+      tl.to({}, { duration: HOLD });
+    }, track);
+
+    var rT;
+    function onResize(){ clearTimeout(rT); rT = setTimeout(function(){ sizeDeck(); ScrollTrigger.refresh(); }, 160); }
+    window.addEventListener('resize', onResize, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ sizeDeck(); ScrollTrigger.refresh(); });
+
+    // Teardown when the media query stops matching: hand the cards back to
+    // normal flow with no inline transforms left behind.
+    return function(){
+      window.removeEventListener('resize', onResize);
+      clearTimeout(rT);
+      ctx.revert();
+      deck.classList.remove('is-deck');
+      track.classList.remove('is-deck');
+      deck.style.height = '';
+      setActive(0);
+    };
+  });
+}
+
 /* ---------- 5. Micro-interactions ---------------------------------------- */
 if (fine && hasGSAP && !reduced){
 

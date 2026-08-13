@@ -38,7 +38,7 @@
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="assets/css/main.css?v=24">
-<link rel="stylesheet" href="assets/css/get-started.css?v=11">
+<link rel="stylesheet" href="assets/css/get-started.css?v=14">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -428,6 +428,7 @@
   <!-- ============ 02 THE PROBLEM ============ -->
   <section class="gs-sec gs-problem" aria-labelledby="gs-problem-t">
     <div class="gs-sec-glow gl-left" aria-hidden="true"></div>
+    <div class="gs-problem-track" id="gs-prob-track">
     <div class="gs-split">
       <div class="gs-split-copy">
         <p class="gs-pill rv">The Problem</p>
@@ -438,32 +439,49 @@
         <div class="gs-cta-line is-left rv"><a class="gs-btn gs-btn-blue" href="#book" data-magnet><span>Show Me How To Fix This</span><span class="gs-btn-tok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></span></a></div>
       </div>
 
-      <div class="gs-panel rv-card" data-glowcard>
-        <p class="gs-panel-head">What looking average quietly costs you</p>
-        <div class="gs-costs">
-          <div class="gs-cost">
-            <span class="gs-cost-n" aria-hidden="true">01</span>
-            <div class="gs-cost-body">
-              <h3 class="gs-cost-t">Judged In Seconds</h3>
-              <p class="gs-cost-c">Buyers decide whether you look credible long before they read a single word about your work.</p>
-            </div>
-          </div>
-          <div class="gs-cost">
-            <span class="gs-cost-n" aria-hidden="true">02</span>
-            <div class="gs-cost-body">
-              <h3 class="gs-cost-t">Compared On Price</h3>
-              <p class="gs-cost-c">When nothing about you looks different, the only thing left to compare is the number on the quote.</p>
-            </div>
-          </div>
-          <div class="gs-cost">
-            <span class="gs-cost-n" aria-hidden="true">03</span>
-            <div class="gs-cost-body">
-              <h3 class="gs-cost-t">Invisible On Google</h3>
-              <p class="gs-cost-c">The best work in town still loses every time to whoever shows up first in the search results.</p>
-            </div>
+      <div class="gs-deck-wrap rv-card">
+        <div class="gs-deck-top">
+          <p class="gs-deck-label">What looking average quietly costs you</p>
+          <div class="gs-deck-rail" aria-hidden="true">
+            <span class="gs-deck-seg is-active"><i></i></span>
+            <span class="gs-deck-seg"><i></i></span>
+            <span class="gs-deck-seg"><i></i></span>
           </div>
         </div>
+
+        <div class="gs-deck" id="gs-deck">
+          <article class="gs-dcard is-active">
+            <span class="gs-dcard-aura" aria-hidden="true"></span>
+            <div class="gs-dcard-head">
+              <span class="gs-dcard-n" aria-hidden="true">01</span>
+              <span class="gs-dcard-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            </div>
+            <h3 class="gs-dcard-t">Judged In Seconds</h3>
+            <p class="gs-dcard-c">Buyers decide whether you look credible long before they read a single word about your work.</p>
+          </article>
+
+          <article class="gs-dcard">
+            <span class="gs-dcard-aura" aria-hidden="true"></span>
+            <div class="gs-dcard-head">
+              <span class="gs-dcard-n" aria-hidden="true">02</span>
+              <span class="gs-dcard-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2V3.4h10l7.2 7.2a2 2 0 0 1 0 2.8z"/><circle cx="7.9" cy="7.9" r="1.4"/></svg></span>
+            </div>
+            <h3 class="gs-dcard-t">Compared On Price</h3>
+            <p class="gs-dcard-c">When nothing about you looks different, the only thing left to compare is the number on the quote.</p>
+          </article>
+
+          <article class="gs-dcard">
+            <span class="gs-dcard-aura" aria-hidden="true"></span>
+            <div class="gs-dcard-head">
+              <span class="gs-dcard-n" aria-hidden="true">03</span>
+              <span class="gs-dcard-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.8-4.8"/></svg></span>
+            </div>
+            <h3 class="gs-dcard-t">Invisible On Google</h3>
+            <p class="gs-dcard-c">The best work in town still loses every time to whoever shows up first in the search results.</p>
+          </article>
+        </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -848,6 +866,6 @@
 <script src="assets/js/vendor/three.min.js" defer></script>
 <!-- Site -->
 <script src="assets/js/core.js?v=18" defer></script>
-<script src="assets/js/get-started.js?v=11" defer></script>
+<script src="assets/js/get-started.js?v=13" defer></script>
 </body>
 </html>
