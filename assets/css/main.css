@@ -1528,3 +1528,66 @@ body.menu-open .logo{color:#fff}
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important}
 }
+
+/* ============ TESTIMONIALS (shared component) ============
+   One markup shape used on the home page, the case-study index, and the
+   Get Started funnel. Every surface colour is a custom property set on
+   .tstm-sec, so a dark page re-themes it by overriding those four values
+   rather than by forking the component. */
+.tstm-sec{
+  --tstm-surface:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(246,249,253,.78) 100%);
+  --tstm-border:var(--line);
+  --tstm-text:var(--ink);
+  --tstm-dim:rgba(10,12,20,.62);
+  --tstm-star:var(--blue);
+  --tstm-shadow:0 24px 60px rgba(12,22,48,.10);
+  position:relative;
+  padding:clamp(64px,8vw,120px) var(--pad);
+}
+.tstm-head{display:grid;justify-items:center;text-align:center;gap:14px;margin-bottom:clamp(32px,4vw,52px)}
+.tstm-eyebrow{color:var(--tstm-dim)}
+.tstm-head h2{
+  font-size:clamp(28px,4vw,46px);font-weight:620;letter-spacing:-.022em;line-height:1.1;
+  color:var(--tstm-text);max-width:20ch;text-wrap:balance;
+}
+.tstm-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  max-width:1180px;margin:0 auto;align-items:stretch;
+}
+.tstm{
+  display:flex;flex-direction:column;gap:16px;margin:0;
+  padding:clamp(24px,2.4vw,30px);
+  border-radius:22px;
+  background:var(--tstm-surface);
+  border:1px solid var(--tstm-border);
+  box-shadow:var(--tstm-shadow);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .5s,box-shadow .5s;
+}
+@media (hover:hover){
+  .tstm:hover{transform:translateY(-4px)}
+}
+.tstm-stars{display:inline-flex;gap:3px}
+.tstm-stars svg{width:15px;height:15px;fill:var(--tstm-star);flex:none}
+.tstm-quote{
+  margin:0;flex:1;
+  font-size:clamp(14.5px,1.55vw,16px);line-height:1.68;
+  color:var(--tstm-text);
+}
+/* the attribution row: face, then who they are */
+.tstm-by{
+  display:flex;align-items:center;gap:13px;
+  padding-top:16px;border-top:1px solid var(--tstm-border);
+}
+.tstm-ava{
+  flex:none;width:50px;height:50px;border-radius:50%;
+  object-fit:cover;display:block;
+  border:1px solid var(--tstm-border);
+  box-shadow:0 6px 18px rgba(10,20,45,.18);
+}
+.tstm-who{display:grid;gap:2px;min-width:0}
+.tstm-who b{font-size:14.5px;font-weight:650;letter-spacing:-.005em;color:var(--tstm-text)}
+.tstm-who i{font-style:normal;font-size:12.5px;color:var(--tstm-dim)}
+
+@media (max-width:900px){
+  .tstm-grid{grid-template-columns:1fr;max-width:560px}
+}

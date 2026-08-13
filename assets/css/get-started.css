@@ -997,33 +997,33 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
   display:block;
 }
 
-/* testimonial strip (lives inside the proof section) */
-.gs-tstm-grid{
+/* Testimonial strip (shared .tstm component, re-themed for the dark page).
+   The component reads its surface, border, text and star colours from custom
+   properties, so this is a palette swap rather than a second implementation. */
+.gs-page .tstm-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch;
-  max-width:1000px;margin:clamp(40px,4.6vw,60px) auto 0;
+  max-width:1080px;margin:26px auto 0;
 }
-.gs-tstm{
-  position:relative;padding:50px 24px 30px;text-align:center;border-radius:22px;
-  display:grid;gap:12px;justify-items:center;align-content:start;overflow:visible;
-  background:linear-gradient(180deg,rgba(15,22,38,.74) 0%,rgba(8,12,22,.88) 100%);
-  border:1px solid var(--gsLine);
-  box-shadow:0 24px 60px rgba(2,4,12,.5),inset 0 1px 0 rgba(200,220,255,.05);
-  transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .5s;
+.gs-page .tstm{
+  --tstm-surface:linear-gradient(180deg,rgba(15,22,38,.74) 0%,rgba(8,12,22,.88) 100%);
+  --tstm-border:var(--gsLine);
+  --tstm-text:var(--gsText);
+  --tstm-dim:var(--gsDim);
+  --tstm-star:#9EC4FF;
+  --tstm-shadow:0 24px 60px rgba(2,4,12,.5);
 }
-.gs-tstm:hover{transform:translateY(-4px);border-color:rgba(160,190,255,.22)}
-.gs-tstm-ava{
-  position:absolute;top:-24px;left:50%;transform:translateX(-50%);
-  display:grid;place-items:center;width:50px;height:50px;border-radius:50%;color:#D3E1FF;
-  background:linear-gradient(160deg,rgba(84,126,255,.4) 0%,rgba(14,22,48,.9) 100%);
-  border:1px solid rgba(170,200,255,.45);
-  box-shadow:0 14px 34px rgba(20,44,140,.5),inset 0 1px 0 rgba(255,255,255,.3);
+.gs-page .tstm-stars svg{filter:drop-shadow(0 0 7px rgba(95,146,255,.6))}
+.gs-page .tstm:hover{border-color:rgba(160,190,255,.22)}
+/* the lit middle card: .is-glow already paints the surface, so only the
+   inherited text colours need lifting for contrast against it */
+.gs-page .tstm.is-glow{
+  --tstm-text:#F4F8FF;
+  --tstm-dim:rgba(230,240,255,.78);
+  --tstm-border:rgba(210,226,255,.34);
+  --tstm-star:#EAF1FF;
 }
-.gs-tstm-ava svg{width:23px;height:23px}
-.gs-stars{color:#9EC4FF;font-size:15px;letter-spacing:5px;text-shadow:0 0 16px rgba(95,146,255,.6)}
-.gs-tstm.is-glow{border-color:rgba(178,203,255,.42)}
-.gs-tstm.is-glow .gs-stars{color:#EAF1FF;text-shadow:0 0 18px rgba(220,235,255,.7)}
-.gs-tstm-slot{color:var(--gsFaint);letter-spacing:.08em}
-.gs-tstm.is-glow .gs-tstm-slot{color:rgba(226,238,255,.72)}
+.gs-page .tstm.is-glow .tstm-stars svg{filter:drop-shadow(0 0 8px rgba(220,235,255,.7))}
+.gs-page .tstm-ava{border-color:rgba(190,214,255,.34)}
 
 /* ============ 07 HOW IT WORKS (ascending staircase) ============ */
 .gs-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:0 auto;align-items:start}
@@ -1185,7 +1185,7 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
   .gs-dcard-ic{border-color:rgba(184,210,255,.44)}
   .gs-steps{grid-template-columns:1fr;max-width:560px}
   .gs-vs-grid{grid-template-columns:1fr;max-width:560px}
-  .gs-tstm-grid{grid-template-columns:1fr;max-width:500px;gap:40px}
+  .gs-page .tstm-grid{grid-template-columns:1fr;max-width:520px}
 }
 @media (max-width:860px){
   .c-seo,.c-gads,.c-meta,.c-content{grid-column:span 12}
@@ -1229,7 +1229,7 @@ body.gs-page:not(.no-js) .gs-h1{opacity:0}
 /* ============ 14 MOTION SAFETY ============ */
 @media (prefers-reduced-motion:reduce){
   .gs-vsl-play-ring,.gs-vsl-halo-css,.gs-vsl-sheen::before,.gs-live{animation:none}
-  .gs-btn,.gs-card,.gs-dcard,.gs-faq-ic,.gs-vsl-replay,.gs-tstm,.gs-deck-seg i,
+  .gs-btn,.gs-card,.gs-dcard,.gs-faq-ic,.gs-vsl-replay,.tstm,.gs-deck-seg i,
   .c-cta-arr,.c-cta-arr svg,.c-cta-sheen::before{transition:none}
   /* every card reads as active when the deck never animates */
   .gs-deck-seg i{transform:scaleX(1)}
