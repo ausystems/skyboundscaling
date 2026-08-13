@@ -14,7 +14,7 @@
 <link rel="icon" href="/assets/icons/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css?v=24">
+<link rel="stylesheet" href="/assets/css/main.css?v=25">
 
 <style>
 /* ============ 404 - the dark stage ============
@@ -50,6 +50,11 @@ body.err-page{
 }
 .err-row .mono{color:rgba(238,242,247,.6)}
 .err-page .logo{color:#fff}
+/* This stage is permanently dark and its lockup sits outside #site-header,
+   so the header's on-dark swap never reaches it. Pin the white-wordmark
+   variant on instead, or SKYBOUND renders near-black on near-black. */
+.err-page .logo .logo-dark{opacity:0}
+.err-page .logo .logo-light{opacity:1}
 .err-center{
   position:relative;z-index:2;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -109,7 +114,7 @@ body.err-page{
   <div class="err-veil" aria-hidden="true"></div>
 
   <div class="err-row">
-    <a class="logo" href="/" aria-label="Skybound Scaling home"><img class="logo-dark" src="/assets/brand/logo-nav.webp" alt="Skybound Scaling" width="862" height="200" fetchpriority="high" decoding="async"></a>
+    <a class="logo" href="/" aria-label="Skybound Scaling home"><img class="logo-dark" src="/assets/brand/logo-nav.webp?v=2" alt="Skybound Scaling" width="1379" height="320" fetchpriority="high" decoding="async"><img class="logo-light" src="/assets/brand/logo-nav-light.webp?v=2" alt="" aria-hidden="true" width="1379" height="320" decoding="async"></a>
     <span class="mono">Error · 404</span>
   </div>
 

@@ -663,7 +663,7 @@ qsa('[data-ba]').forEach(function(ba){
 /* ---------- 9. Header staging: dark page, light footer ------------------- */
 if (hasST){
   ScrollTrigger.create({
-    trigger: '.sf', start: 'top 72px', end: 'bottom top',
+    trigger: '.sf', start: 'top ' + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 84) + 'px', end: 'bottom top',
     onToggle: function(self){
       document.body.classList.toggle('on-dark', !self.isActive);
     }

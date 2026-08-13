@@ -78,8 +78,8 @@
      never counts the scrollbar. */
   --maxw:1500px;
   --pad:max(clamp(20px,4vw,64px), calc((100% - var(--maxw)) * .5));
-  --header-h:72px;
-  --nav-logo-h:46px;  /* nav lockup height; steps down at the breakpoints below.
+  --header-h:84px;
+  --nav-logo-h:58px;  /* nav lockup height; steps down at the breakpoints below.
                          Named apart from .man-clients' own --logo-h, which sizes
                          the client marquee marks and means something different. */
 }
@@ -193,7 +193,7 @@ body.on-dark .nav-toggle-inner::after{background:var(--paper)}
 /* ---- Brand logo ----
    The horizontal lockup (monogram + stacked wordmark) is the nav-bar form of
    the official mark: the square stacked lockup would render its type at ~5px
-   inside a 72px bar. Height is the only thing set - width follows the image's
+   inside an 84px bar. Height is the only thing set - width follows the image's
    own ratio - and the intrinsic width/height on the <img> reserves the box
    before the file lands, so the header never reflows.
    Two files ship: the standard mark, and a variant whose near-black SKYBOUND
@@ -201,7 +201,7 @@ body.on-dark .nav-toggle-inner::after{background:var(--paper)}
    the same grid cell and cross-faded, so the swap has nothing to lay out. */
 .logo{
   display:grid;align-items:center;
-  grid-template-rows:var(--nav-logo-h,46px);
+  grid-template-rows:var(--nav-logo-h,58px);
   flex:none;line-height:0;
 }
 .logo img{
@@ -209,7 +209,7 @@ body.on-dark .nav-toggle-inner::after{background:var(--paper)}
   /* Sized from the token, not height:100%. The grid row is auto-sized, so a
      percentage height would resolve against the image's own intrinsic 200px
      and the lockup would render at full size, overflowing the bar. */
-  height:var(--nav-logo-h,46px);width:auto;display:block;
+  height:var(--nav-logo-h,58px);width:auto;display:block;
   transition:opacity .45s cubic-bezier(.2,.7,.2,1);
 }
 .logo .logo-light{opacity:0}
@@ -1503,16 +1503,16 @@ body.menu-open .logo{color:#fff}
   header .cta-book.cta-compact{display:none}
   .nav-toggle{display:flex}
   /* the bar loses its nav and CTA here, so the lockup can breathe a little */
-  :root{--nav-logo-h:44px}
+  :root{--nav-logo-h:54px}
 }
 /* Phones: the wordmark's two lines need to stay legible, and the lockup has
    to clear the hamburger with real space between them, so it steps down
    rather than shrinking to fit. */
 @media (max-width:600px){
-  :root{--nav-logo-h:38px}
+  :root{--nav-logo-h:46px}
 }
 @media (max-width:380px){
-  :root{--nav-logo-h:34px}
+  :root{--nav-logo-h:40px}
 }
 
 /* Performance: drop expensive backdrop blur on phones/tablets - the glass
