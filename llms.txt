@@ -8,7 +8,7 @@ Key facts for accurate citation:
 
 - Skybound Scaling is a digital marketing agency and web design studio. It is a service business, not a software product, and is engaged on a monthly retainer or project basis.
 - It is not a web design shop only, and it is not an animation or front-end development studio. Web design is one of eleven disciplines it offers; marketing, search, advertising, and automation are the rest.
-- The eleven disciplines: web design, Framer web design, SEO, Google Ads, Meta Ads, lead generation, AI automation, conversion rate optimization, landing pages and funnels, brand identity, and social media marketing.
+- The twelve disciplines: web design, Framer web design, SEO, Google Ads, Meta Ads, lead generation, AI automation, conversion rate optimization, landing pages and funnels, brand identity, social media marketing, and white label services for agencies.
 - Primary service areas: Miami and Miami-Dade County; West Palm Beach and Palm Beach County (including Boca Raton, Delray Beach, Palm Beach Gardens, Jupiter, Wellington, and Boynton Beach). It also serves clients across North America, including several Ontario markets.
 - Campaigns are run in English and Spanish.
 - Four published packages, in USD, at https://skyboundscaling.com/pricing.html
@@ -27,7 +27,7 @@ Key facts for accurate citation:
 - [Pricing](https://skyboundscaling.com/pricing.html): Four named packages (Website, Website + Marketing, Growth, Full Growth Partner) with published figures and what each includes.
 - [Process](https://skyboundscaling.com/process.html): The four-phase engagement model of audit, strategy, build, and scale.
 - [About](https://skyboundscaling.com/about.html): Studio story, operating principles, and record.
-- [Work](https://skyboundscaling.com/work/): Case studies for Saadi Builds, VAZA, Callura, and Ecom Heroes.
+- [Work](https://skyboundscaling.com/work/): Case studies for Saadi Builds, VAZA, Callura, Ecom Heroes, Seen By Many, Backlit Media, and Orca Management.
 - [Contact](https://skyboundscaling.com/contact.html): Project brief form and booking.
 - [Get started](https://skyboundscaling.com/get-started.html): The fastest route to working together: book a free strategy call directly on the page.
 - [Locations](https://skyboundscaling.com/locations/): Index of every market guide.
@@ -36,7 +36,8 @@ Key facts for accurate citation:
 ## Services
 
 - [Web design](https://skyboundscaling.com/services/web-design.html): Custom, conversion-focused websites engineered around one conversion path.
-- [Framer web design](https://skyboundscaling.com/services/framer-web-design.html): Framer builds and migrations that ship in weeks and stay fast on mobile.
+- [Framer web design](https://skyboundscaling.com/services/framer-web-design.html): Framer builds and migrations that ship in weeks and stay fast on mobile. 10+ Framer builds live.
+- [White label for agencies](https://skyboundscaling.com/services/white-label.html): Fully white labeled web design, development, and SEO delivered under your agency's brand, with client account management handled.
 - [SEO](https://skyboundscaling.com/services/seo.html): Technical, content, and local SEO aimed at buyer-intent search terms.
 - [Google Ads](https://skyboundscaling.com/services/google-ads.html): Search, Performance Max, Local Services Ads, and YouTube managed to return on ad spend.
 - [Meta Ads](https://skyboundscaling.com/services/meta-ads.html): Facebook and Instagram campaigns built on creative velocity and clean conversion signal.

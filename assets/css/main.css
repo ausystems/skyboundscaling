@@ -147,6 +147,54 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   padding:18px var(--pad);border-bottom:none;
 }
 
+/* ============ BREADCRUMBS ============
+   One compact mono trail on every inner page. It overlays the hero's top
+   padding (every hero already clears the fixed header), so it adds zero
+   layout shift and needs no per-page spacing surgery. Long trails scroll
+   sideways on small screens instead of wrapping or clipping, with a soft
+   fade that only appears once the trail actually overflows. */
+.crumbs{
+  position:absolute;top:calc(var(--header-h) + 6px);left:0;right:0;
+  z-index:60;
+  padding-inline:var(--pad);
+  pointer-events:none;
+}
+main:has(> .crumbs){position:relative}
+.crumbs ol{
+  list-style:none;margin:0;padding:2px 0;
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--sans);font-size:10.5px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  pointer-events:auto;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 16px),transparent);
+          mask-image:linear-gradient(90deg,#000 calc(100% - 16px),transparent);
+}
+.crumbs ol::-webkit-scrollbar{display:none}
+.crumbs li{display:inline-flex;align-items:center;gap:7px;flex:none}
+.crumbs li + li::before{
+  content:"\203A";
+  font-size:12px;line-height:1;
+  color:color-mix(in srgb,var(--crumb-ink,var(--ink)) 34%,transparent);
+}
+.crumbs a{
+  color:color-mix(in srgb,var(--crumb-ink,var(--ink)) 55%,transparent);
+  text-decoration:none;
+  transition:color .25s ease;
+}
+.crumbs a:hover,.crumbs a:focus-visible{color:var(--crumb-ink,var(--ink))}
+.crumbs [aria-current="page"]{color:color-mix(in srgb,var(--crumb-ink,var(--ink)) 86%,transparent)}
+/* dark cinematic pages flip the trail to paper */
+body.on-dark .crumbs{--crumb-ink:#EAF2F7}
+@media (max-width:720px){
+  .crumbs{top:calc(var(--header-h) + 2px)}
+  .crumbs ol{font-size:10px;gap:6px}
+  .crumbs li{gap:6px}
+}
+
 /* ============ HEADER ============ */
 #site-header{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -758,7 +806,7 @@ body.menu-open .logo{color:#fff}
 }
 .clients-track{
   display:inline-flex;align-items:center;
-  animation:tick 30s linear infinite;
+  animation:tick 38s linear infinite;
 }
 /* Real client marks, pre-baked to one ink tone on transparency. Every
    source canvas is 512px tall, so a single height rule sets one clean

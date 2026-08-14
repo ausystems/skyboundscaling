@@ -175,20 +175,13 @@
   display:flex;flex-direction:column;
 }
 
-/* index + sector share one optical line, split by a rule that carries the
-   card's own accent as it scrolls past */
+/* accent rule + sector share one optical line: the rule draws itself with the
+   card's own accent as it scrolls past, the sector label holds the far edge */
 .cs-index{
   display:grid;
-  grid-template-columns:auto minmax(0,1fr) auto;
+  grid-template-columns:minmax(0,1fr) auto;
   align-items:center;
   column-gap:clamp(12px,1.6vw,22px);
-}
-.cs-num{
-  font-weight:900;font-variation-settings:'wdth' 125;
-  font-size:clamp(46px,5.6vw,104px);
-  line-height:.78;letter-spacing:-.04em;
-  font-variant-numeric:tabular-nums;
-  color:var(--ac);
 }
 .cs-rule{position:relative;height:1px;background:var(--line);overflow:hidden}
 .cs-rule::after{
@@ -292,17 +285,12 @@
   .cs-foot{margin-top:auto}
   .cs-name{font-size:clamp(34px,3.6vw,62px)}
   .cs-rail{align-items:baseline}
-  /* The index numeral hangs out of the panel by exactly one gutter, so its
-     outer edge lands flush against the shot rather than floating in the gap.
-     That single registration is what bridges the two columns.
-     On mirrored cards the meta row runs the other way - sector, rule, numeral -
-     purely so the numeral stays the piece that touches the shot. Everything
-     below it stays left-aligned on both sides; flipping the body copy as well
-     would make the even cards read as a different component. */
-  .cs-case:nth-child(odd)  .cs-num{margin-left:calc(var(--cs-gap) * -1)}
+  /* Mirrored cards flip the meta line - sector first, rule after - so the
+     drawn rule always grows toward the shot it sits beside. Everything below
+     stays left-aligned on both sides; flipping the body copy as well would
+     make the even cards read as a different component. */
   .cs-case:nth-child(even) .cs-sector{order:1;text-align:left}
   .cs-case:nth-child(even) .cs-rule  {order:2}
-  .cs-case:nth-child(even) .cs-num   {order:3;margin-right:calc(var(--cs-gap) * -1)}
   /* "STUDIES" is the longer word, so hanging it off the right margin squares
      the block against both edges and turns the leftover space into one clean
      diagonal instead of a hole in the top-right corner. */
@@ -312,6 +300,16 @@
    rather than a billboard, and let the panel take the extra room. */
 @media (min-width:1500px){
   .cs-case{grid-template-columns:minmax(0,1fr) minmax(0,.88fr)}
+}
+
+/* ============ 06b UN-NUMBERED STANDARDS ROWS ============
+   The work index reuses the service-page .svc-row pattern for its standards
+   list, minus the index numerals. Without the auto column the two text tracks
+   take the full measure. */
+.svc-row.no-idx{grid-template-columns:minmax(0,.5fr) minmax(0,1fr)}
+@media (max-width:1020px){
+  .svc-row.no-idx{grid-template-columns:1fr}
+  .svc-row.no-idx .svc-row-desc{grid-column:auto}
 }
 
 /* ============ 07 PRESS + FOCUS ============ */

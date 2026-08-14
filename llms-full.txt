@@ -12,7 +12,7 @@ and North America. It is a service business engaged on a monthly retainer or a
 project basis. It is not a software product, not a template, and not an animation
 or front-end development studio.
 
-It sells eleven disciplines as one customer acquisition system: web design, Framer
+It sells twelve disciplines as one customer acquisition system: web design, Framer
 web design, SEO and local SEO, Google Ads, Meta Ads, lead generation, AI automation,
 conversion rate optimization, landing pages and funnels, brand identity, and social
 media marketing. Campaigns run in English and Spanish. Every engagement is run by a
@@ -51,7 +51,7 @@ Contact: contact@skyboundscaling.com
 - [AI Automation + CRM Systems](https://skyboundscaling.com/services/ai-automation.html): AI automation and CRM systems that answer every lead in seconds, book appointments, and keep your pipeline moving. Senior-built. Book a call.
 - [Brand Identity Agency | Logos and Visual Systems](https://skyboundscaling.com/services/brand-identity.html): Brand identity agency creating logos, palettes, typography, and complete visual systems that scale from pitch deck to product. Book a call today.
 - [Conversion Rate Optimization](https://skyboundscaling.com/services/conversion-rate-optimization.html): Conversion rate optimization that turns existing traffic into more leads and sales: research, testing, and compounding wins. Senior-run. Book a call.
-- [Framer Web Design Agency](https://skyboundscaling.com/services/framer-web-design.html): Framer web design agency shipping fast, editable marketing sites. Two flagship Framer builds live, launches in weeks. Book a call with Skybound in Toronto.
+- [Framer Web Design Agency](https://skyboundscaling.com/services/framer-web-design.html): Framer web design agency shipping fast, editable marketing sites. 10+ Framer builds live, launches in weeks. Book a call with Skybound in Toronto.
 - [Google Ads Agency | Managed to ROAS](https://skyboundscaling.com/services/google-ads.html): Google Ads agency tuning search, Performance Max, and YouTube to ROAS, not vanity clicks. Senior run, tracked to revenue. Book a call with Skybound.
 - [Digital Marketing Services](https://skyboundscaling.com/services/): Web design, SEO, Google and Meta ads, AI automation, lead generation, and CRO. Eleven services, one senior team, every number tied to revenue. Book a call.
 - [Landing Page &amp; Funnel Design Agency](https://skyboundscaling.com/services/landing-pages-funnels.html): Landing page and funnel design agency in Toronto. Pages, automation, and lead flow engineered to capture and convert. See the VAZA build, then book a call.
@@ -60,10 +60,14 @@ Contact: contact@skyboundscaling.com
 - [SEO Agency | Technical, Content, and Local SEO](https://skyboundscaling.com/services/seo.html): SEO agency earning page one for the terms buyers search before they buy. Technical, content, and local SEO tied to revenue. Book a call with Skybound.
 - [Social Media Marketing Agency | Content Engines](https://skyboundscaling.com/services/social-media-marketing.html): Social media marketing agency building content engines that turn attention into pipeline. Strategy, production, management. Book a call with Skybound.
 - [Web Design Agency | Conversion Focused Sites](https://skyboundscaling.com/services/web-design.html): Web design agency building fast, conversion focused websites on Framer or custom code. Senior team, launches in weeks. Book a call with Skybound.
+- [White Label Web Design &amp; SEO for Agencies](https://skyboundscaling.com/services/white-label.html): White label web design, development, and SEO for digital marketing agencies. We build under your brand and manage your client accounts. Partner with Skybound.
 
 ## Case studies
 
 - [Callura | Brand Identity &amp; Web Design](https://skyboundscaling.com/work/callura.html): How Skybound Scaling created Callura's complete brand identity and Framer website for AI-powered phone support built for healthcare clinics.
+- [Seen By Many | Brand Identity &amp; Framer Web Design](https://skyboundscaling.com/work/seen-by-many.html): How Skybound Scaling built Seen By Many's complete brand identity and Framer website from A to Z. Full branding for an AI powered advertising agency.
+- [Backlit Media | Brand Identity &amp; Web Design](https://skyboundscaling.com/work/backlit-media.html): How Skybound Scaling rebranded Backlit Media from A to Z: logo, identity system, and a conversion focused website for a Toronto and Miami marketing agency.
+- [Orca Management | Brand Identity &amp; Web Design](https://skyboundscaling.com/work/orca-management.html): How Skybound Scaling built Orca Management's brand from A to Z: identity, visual system, and website for a Houston performance marketing agency.
 - [Ecom Heroes | Brand Identity &amp; Web Design](https://skyboundscaling.com/work/ecom-heroes.html): How Skybound Scaling designed Ecom Heroes' complete brand identity and website for a remote hiring partner built for ecommerce brands.
 - [Case Studies &amp; Web Design Portfolio](https://skyboundscaling.com/work/): Web design, brand identity, and funnel case studies from Skybound Scaling. Real builds for real brands, from luxury home builders to healthcare AI.
 - [Saadi Builds | Custom Home Builder Website](https://skyboundscaling.com/work/saadi-builds.html): How Skybound Scaling designed and built the Framer marketing website for Saadi Builds, a Northern Virginia luxury custom home builder.

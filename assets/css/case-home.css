@@ -118,16 +118,11 @@
   display:flex;flex-direction:column;align-items:flex-start;
   min-width:0;
 }
-/* index, rule, sector on one optical line */
+/* accent rule + sector on one optical line */
 .csh-index{
-  display:grid;grid-template-columns:auto minmax(24px,1fr) auto;
+  display:grid;grid-template-columns:minmax(24px,1fr) auto;
   align-items:center;column-gap:clamp(12px,1.4vw,20px);
   width:100%;
-}
-.csh-num{
-  font-family:var(--sans);font-size:12px;font-weight:700;
-  letter-spacing:.14em;font-variant-numeric:tabular-nums;
-  color:var(--ac);
 }
 .csh-rule{position:relative;height:1px;background:var(--line);overflow:hidden}
 .csh-rule::after{
@@ -238,10 +233,6 @@
   .csh-index{column-gap:12px}
   .csh-go{gap:12px;margin-top:22px}
   .csh-go-disc{width:44px;height:44px}   /* stays a comfortable tap target */
-}
-@media (max-width:420px){
-  .csh-index{grid-template-columns:auto 1fr;row-gap:10px}
-  .csh-sector{grid-column:1 / -1;text-align:left}
 }
 
 /* ============ 09 PRESS, FOCUS, REDUCED MOTION ============ */

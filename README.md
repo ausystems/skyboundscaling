@@ -24,7 +24,8 @@ line items:
 | Discipline | What it covers |
 | --- | --- |
 | Web design | Custom, conversion-focused sites engineered around one conversion path |
-| Framer web design | Framer builds and migrations that ship in weeks and stay fast on mobile |
+| Framer web design | Framer builds and migrations that ship in weeks and stay fast on mobile, 10+ live |
+| White label for agencies | White label web design, development, and SEO under the partner agency's brand, with account management handled |
 | SEO | Technical, content, and local SEO aimed at buyer-intent search terms |
 | Google Ads | Search, Performance Max, Local Services Ads, and YouTube, managed to ROAS |
 | Meta Ads | Facebook and Instagram built on creative velocity and clean conversion signal |
@@ -53,7 +54,8 @@ any agency promising guaranteed rankings is a warning sign.
 ```
 ├── index.html              Home
 ├── services/               Service hub + 11 service pages (FAQ schema on each)
-├── work/                   Case studies: Saadi Builds, VAZA, Callura, Ecom Heroes
+├── work/                   Case studies: Saadi Builds, VAZA, Callura, Ecom Heroes,
+│                           Seen By Many, Backlit Media, Orca Management
 ├── industries/             Industry hub + 5 verticals (builders, healthcare,
 │                           ecommerce, professional services, SaaS)
 ├── locations/              Market guides. South Florida: miami/ (hub + 7 service

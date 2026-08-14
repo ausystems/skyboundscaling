@@ -23,7 +23,9 @@
   padding:calc(var(--header-h) + clamp(34px,5.5vh,68px)) var(--pad) clamp(34px,5vh,58px);
 }
 .case-eyebrow{
-  display:flex;align-items:center;
+  /* block, not flex: a flex row swallows the whitespace between the Work
+     link and the separator, setting "WORK· SECTOR" instead of "WORK · SECTOR" */
+  display:block;
   color:rgba(10,10,12,.62);
   letter-spacing:.22em;
   margin-bottom:clamp(22px,3.4vh,38px);
@@ -139,16 +141,11 @@
 }
 .scope-row{
   display:grid;
-  grid-template-columns:auto minmax(0,.55fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,.55fr) minmax(0,1fr);
   gap:clamp(20px,3.5vw,64px);
   align-items:baseline;
   padding:clamp(22px,3.2vh,34px) 0;
   border-top:1px solid var(--line);
-}
-.scope-idx{
-  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.12em;
-  color:var(--blue);
-  min-width:3ch;
 }
 .scope-title{
   margin:0;
@@ -221,8 +218,7 @@
   .case-intro{grid-template-columns:1fr;align-items:start}
   .case-hero-cta{justify-self:start}
   .case-facts{grid-template-columns:repeat(3,1fr)}
-  .scope-row{grid-template-columns:auto minmax(0,1fr)}
-  .scope-desc{grid-column:2/3}
+  .scope-row{grid-template-columns:1fr;gap:10px 20px}
 }
 @media (max-width:720px){
   .case-hero{padding-top:calc(var(--header-h) + clamp(28px,4.5vh,48px))}
