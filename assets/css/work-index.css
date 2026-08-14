@@ -86,9 +86,9 @@
   box-shadow:0 28px 56px -28px rgba(15,25,70,.32);
   transform:translateZ(0);
 }
+/* the shot shows whole at its own ratio - never cropped to a frame */
 .wk-media img{
   width:100%;height:auto;display:block;
-  aspect-ratio:2904/1672;object-fit:cover;object-position:top center;
 }
 .wk-name{
   grid-area:name;

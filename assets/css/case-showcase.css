@@ -10,10 +10,10 @@
    gutter rather than being clipped by it.
 
    Interaction is scroll-driven, never hover-driven, so a phone gets exactly
-   what a desktop gets. Two mechanics only, and they share one signal (--p,
-   the card's progress across the viewport, set by case-showcase.js):
-     1. the shot pans a few percent inside its frame
-     2. the accent rule beside the index numeral draws itself
+   what a desktop gets. One mechanic only, driven by the card's progress
+   across the viewport (set by case-showcase.js): the accent rule on the meta
+   line draws itself. The shot itself is never panned, scaled, or cropped -
+   the full screenshot shows from its very top edge, always.
    Rows carry :active press feedback and a :focus-visible ring. There is no
    hover state on the cards - the work is what is being sold, so it is shown
    outright rather than hidden behind an interaction a touch device can never
@@ -129,31 +129,21 @@
 /* ============ 04 THE SHOT ============ */
 .cs-shot{
   position:relative;z-index:2;display:block;overflow:hidden;
-  /* the frame owns the ratio, not the image - that is what gives the image a
-     definite height to be 106% of, and what stops the pan resizing the card */
-  aspect-ratio:2904/1672;
   background:var(--paper-deep);
   border:1px solid var(--line);
   /* the lift is tinted with the card's own accent, so the colour reaches the
-     imagery instead of living only in the numeral */
+     imagery instead of living only in the type */
   box-shadow:
     0 48px 92px -46px var(--ac-lift),
     0 16px 38px -20px rgba(15,25,70,.28),
     inset 0 1px 0 rgba(255,255,255,.5);
   transform:translateZ(0);
 }
+/* The screenshot displays whole at its own ratio: full width, natural height,
+   nothing cropped and nothing panned. The width/height attributes on the img
+   reserve the box before load, so the layout never shifts. */
 .cs-shot img{
-  position:absolute;top:0;left:0;
-  display:block;width:100%;height:100%;
-  object-fit:cover;object-position:top center;
-}
-/* Oversize only when the pan is actually running: 106% against the frame gives
-   it six points of travel, and the crop that buys is ~3% top and bottom,
-   invisible on a site screenshot. Left alone, the shot sits uncropped. */
-[data-cs-live] .cs-shot img{
-  height:106%;
-  transform:translate3d(0,calc(var(--p,.5) * -6%),0);
-  will-change:transform;
+  display:block;width:100%;height:auto;
 }
 /* Odd cards run off the left edge, even cards off the right. The flat side is
    always the side that leaves the page. */

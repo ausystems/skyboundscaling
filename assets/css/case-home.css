@@ -87,9 +87,6 @@
 /* ============ 04 THE SHOT ============ */
 .csh-shot{
   position:relative;display:block;overflow:hidden;
-  /* the frame owns the ratio so the image has a definite box to ease inside
-     and the row height never shifts as it loads */
-  aspect-ratio:2904/1672;
   border-radius:var(--csh-r);
   background:var(--paper-deep);
   border:1px solid var(--line);
@@ -99,18 +96,11 @@
     inset 0 1px 0 rgba(255,255,255,.5);
   transform:translateZ(0);
 }
+/* The screenshot displays whole at its own ratio: full width, natural height,
+   nothing cropped and nothing panned. The width/height attributes on the img
+   reserve the box before load, so the row never shifts as it loads. */
 .csh-shot img{
-  position:absolute;top:0;left:0;
-  display:block;width:100%;height:100%;
-  object-fit:cover;object-position:top center;
-}
-/* Oversize only while the pan is running: 105% against the frame gives it
-   five points of travel, a crop of ~2.5% top and bottom that is invisible on
-   a site screenshot. Left alone, the shot sits uncropped. */
-[data-cs-live] .csh-shot img{
-  height:105%;
-  transform:translate3d(0,calc(var(--p,.5) * -5%),0);
-  will-change:transform;
+  display:block;width:100%;height:auto;
 }
 
 /* ============ 05 THE TEXT COLUMN ============ */
