@@ -12,7 +12,7 @@
    03  Feature: stat band + particle visual
    04  Scope rows
    05  Story blocks
-   06  Next case
+   06  All work carousel
    07  Responsive
    08  Reduced motion
    09  Brand book (Brand DNA)
@@ -452,4 +452,145 @@
   .bb-swatch-body{padding:10px 11px 12px}
   .bb-swatch dl{grid-template-columns:1fr}
   .bb-swatch dt{margin-top:4px}
+}
+
+
+/* ============ 10 ALL WORK CAROUSEL ============
+   The shelf that closes every case study. It replaces the old single
+   "next case" link: every project is here, on one horizontal shelf, so a
+   reader who liked this build can reach any other in one move.
+
+   The mechanic is native horizontal scrolling with scroll-snap, which is
+   why it feels right on a phone (thumb swipe), on a trackpad (two-finger),
+   and with a keyboard (the viewport is focusable and arrow keys scroll it).
+   The arrow buttons are a pointer convenience layered on top by case.js and
+   stay hidden until that script confirms the shelf actually overflows, so
+   no-JS never shows a dead control.
+
+   Card count per view: one on phones, two on tablets, three on desktop.
+   The screenshot inside a card is never cropped - it keeps its own ratio,
+   matching the rule the rest of the site follows. */
+.cw-sec{padding:clamp(56px,9vh,110px) 0 0}
+.cw-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:20px clamp(20px,4vw,60px);
+  padding:0 var(--pad);
+  margin-bottom:clamp(22px,3.4vh,38px);
+}
+.cw-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  margin:0 0 10px;color:rgba(10,10,12,.62);
+}
+.cw-eyebrow::before{content:"";width:26px;height:1px;background:var(--blue);flex:none}
+.cw-title{
+  margin:0;font-family:var(--sans);
+  font-weight:800;font-variation-settings:'wdth' 114;
+  font-size:clamp(22px,2.4vw,32px);letter-spacing:-.015em;
+}
+
+/* ---- arrows ---- */
+.cw-nav{display:flex;gap:10px;flex:none}
+.cw-arrow{
+  width:46px;height:46px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;color:var(--ink);
+  border:1px solid var(--line-strong,rgba(10,20,40,.22));
+  cursor:pointer;
+  transition:background .3s cubic-bezier(.65,0,.35,1),
+             color .3s cubic-bezier(.65,0,.35,1),
+             border-color .3s cubic-bezier(.65,0,.35,1),
+             opacity .3s ease;
+}
+.cw-arrow svg{width:20px;height:20px}
+.cw-arrow:hover:not(:disabled),
+.cw-arrow:focus-visible{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cw-arrow:disabled{opacity:.28;cursor:default}
+.cw-arrow:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+/* ---- the shelf ---- */
+.cw-viewport{
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  /* the shelf runs to the page edge so it reads as continuing past the
+     viewport, while the first card still lines up with the type grid */
+  padding:4px var(--pad) clamp(30px,5vh,56px);
+  scroll-padding-inline:var(--pad);
+}
+.cw-viewport::-webkit-scrollbar{display:none}
+.cw-viewport:focus-visible{outline:2px solid var(--blue);outline-offset:-4px;border-radius:8px}
+.cw-track{
+  list-style:none;margin:0;padding:0;
+  display:flex;align-items:stretch;
+  gap:clamp(14px,1.6vw,24px);
+}
+.cw-item{
+  flex:0 0 auto;
+  width:84%;                       /* phones: one card, next one peeking */
+  scroll-snap-align:start;
+  display:flex;
+}
+@media (min-width:700px){ .cw-item{width:calc((100% - clamp(14px,1.6vw,24px)) / 2)} }
+@media (min-width:1100px){ .cw-item{width:calc((100% - 2 * clamp(14px,1.6vw,24px)) / 3)} }
+
+/* ---- the card ---- */
+.cw-card{
+  display:flex;flex-direction:column;width:100%;
+  text-decoration:none;color:inherit;
+  transition:transform .4s cubic-bezier(.65,0,.35,1);
+}
+.cw-shot{
+  position:relative;display:block;overflow:hidden;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:var(--paper-deep);
+  box-shadow:0 26px 52px -26px rgba(15,25,70,.34);
+}
+/* uncropped: the screenshot keeps its own ratio, exactly like the rest of
+   the site's previews */
+.cw-shot img{display:block;width:100%;height:auto}
+.cw-chip{
+  position:absolute;top:10px;left:10px;
+  padding:5px 10px;border-radius:999px;
+  background:rgba(10,10,12,.82);color:var(--paper);
+  font-size:9.5px;letter-spacing:.12em;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+}
+.cw-meta{
+  display:flex;flex-direction:column;gap:6px;
+  padding:14px 2px 0;
+}
+.cw-sect{color:rgba(10,10,12,.55)}
+.cw-name{
+  font-weight:900;font-variation-settings:'wdth' 118;
+  font-size:clamp(19px,1.9vw,26px);
+  line-height:1.05;letter-spacing:-.02em;text-transform:uppercase;
+}
+.cw-go{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:auto;padding-top:12px;
+  color:rgba(10,10,12,.62);
+}
+.cw-go .arr{transition:transform .35s cubic-bezier(.65,0,.35,1)}
+.cw-card:hover .cw-go .arr,
+.cw-card:focus-visible .cw-go .arr{transform:translateX(5px)}
+.cw-card:hover .cw-go,
+.cw-card:focus-visible .cw-go{color:var(--ink)}
+.cw-card:focus-visible{outline:2px solid var(--blue);outline-offset:6px;border-radius:6px}
+.cw-card:active .cw-shot{transform:scale(.99);transition:transform .18s ease}
+
+/* the project you are already reading stays on the shelf for completeness,
+   but steps back so the others read as the onward moves */
+.cw-card.is-current .cw-shot{opacity:.5}
+.cw-card.is-current .cw-go{color:rgba(10,10,12,.42)}
+
+@media (max-width:520px){
+  .cw-head{flex-direction:column;align-items:flex-start;gap:14px}
+  .cw-arrow{width:44px;height:44px}   /* stays a comfortable tap target */
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cw-card,.cw-go .arr,.cw-arrow{transition:none}
+  .cw-card:active .cw-shot{transform:none}
 }

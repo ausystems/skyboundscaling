@@ -43,12 +43,6 @@
 .wk-eyebrow{display:inline-flex;align-items:center;gap:10px;color:rgba(10,10,12,.62)}
 .wk-count{color:rgba(10,10,12,.6)}
 
-/* Next-case block on the individual case studies: the same list component,
-   showing the one project that follows. The section owns the page gutter,
-   so its head drops the duplicate padding and aligns with the inset rows. */
-.case-next-sec{padding:clamp(56px,9vh,110px) var(--pad) 0}
-.case-next-sec .wk-head{padding:0}
-
 /* ============ 02 PROJECT CARDS ============ */
 .wk-list{position:relative}
 /* Inset variant: used when the list sits inside a section that already

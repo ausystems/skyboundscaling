@@ -38,8 +38,8 @@
 <link rel="preload" href="../assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="../assets/css/main.css?v=28">
-<link rel="stylesheet" href="../assets/css/case.css?v=3">
-<link rel="stylesheet" href="../assets/css/work-index.css?v=24">
+<link rel="stylesheet" href="../assets/css/case.css?v=4">
+<link rel="stylesheet" href="../assets/css/work-index.css?v=25">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -543,22 +543,134 @@
     </div>
   </section>
 
-  <!-- NEXT CASE -->
-  <section class="case-next-sec" aria-label="Next case">
-    <header class="wk-head">
-      <p class="mono wk-eyebrow rv">Next case</p>
+  <!-- ALL WORK -->
+  <section class="cw-sec" aria-labelledby="cw-title">
+    <header class="cw-head">
+      <div class="cw-head-copy">
+        <p class="mono cw-eyebrow rv">More work</p>
+        <h2 class="cw-title rv" id="cw-title">Every project, one shelf</h2>
+      </div>
+      <div class="cw-nav" data-cw-nav hidden>
+        <button class="cw-arrow" type="button" data-cw-prev aria-controls="cw-track" aria-label="Previous projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="cw-arrow" type="button" data-cw-next aria-controls="cw-track" aria-label="Next projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
     </header>
-    <div class="wk-list is-inset" data-wk>
-      <a class="wk-row rv" href="/work/callura.html" data-wk-row data-url="calluravoice.ai">
-        <span class="wk-media" aria-hidden="true">
-          <img src="../assets/images/work/callura-cover-1600.jpg"
-               srcset="../assets/images/work/callura-cover-1600.jpg 1600w, ../assets/images/work/callura-cover-2560.jpg 2560w"
-               sizes="92vw" width="2560" height="1474" loading="lazy" decoding="async" alt="">
-        </span>
-        <span class="wk-name"><span class="wk-roll"><span class="wk-word">Callura</span></span></span>
-        <span class="mono wk-sect">Healthcare AI</span>
-        <span class="mono wk-read">Read case<span class="arr">&rarr;</span></span>
-      </a>
+
+    <div class="cw-viewport" data-cw-viewport tabindex="0" role="group" aria-label="All case studies, scroll to browse">
+      <ul class="cw-track" id="cw-track" data-cw-track>
+        <li class="cw-item">
+          <a class="cw-card" href="/work/saadi-builds.html">
+            <span class="cw-shot">
+              <img src="../assets/images/work/saadi-builds-cover-1600.jpg"
+                   srcset="../assets/images/work/saadi-builds-cover-1600.jpg 1600w, ../assets/images/work/saadi-builds-cover-2560.jpg 2560w"
+                   sizes="(min-width:1100px) 32vw, (min-width:700px) 46vw, 84vw"
+                   width="2560" height="1474" loading="lazy" decoding="async" alt="The Saadi Builds website homepage">
+              
+            </span>
+            <span class="cw-meta">
+              <span class="mono cw-sect">Luxury home builder</span>
+              <span class="cw-name">Saadi Builds</span>
+            </span>
+            <span class="mono cw-go">Read case<span class="arr">&rarr;</span></span>
+          </a>
+        </li>
+        <li class="cw-item">
+          <a class="cw-card is-current" aria-current="page" href="/work/vaza.html">
+            <span class="cw-shot">
+              <img src="../assets/images/work/vaza-cover-1600.jpg"
+                   srcset="../assets/images/work/vaza-cover-1600.jpg 1600w, ../assets/images/work/vaza-cover-2560.jpg 2560w"
+                   sizes="(min-width:1100px) 32vw, (min-width:700px) 46vw, 84vw"
+                   width="2560" height="1438" loading="lazy" decoding="async" alt="The VAZA website homepage">
+              <span class="mono cw-chip">Viewing</span>
+            </span>
+            <span class="cw-meta">
+              <span class="mono cw-sect">Opinion platform</span>
+              <span class="cw-name">VAZA</span>
+            </span>
+            <span class="mono cw-go">You are here<span class="arr">&rarr;</span></span>
+          </a>
+        </li>
+        <li class="cw-item">
+          <a class="cw-card" href="/work/callura.html">
+            <span class="cw-shot">
+              <img src="../assets/images/work/callura-cover-1600.jpg"
+                   srcset="../assets/images/work/callura-cover-1600.jpg 1600w, ../assets/images/work/callura-cover-2560.jpg 2560w"
+                   sizes="(min-width:1100px) 32vw, (min-width:700px) 46vw, 84vw"
+                   width="2560" height="1474" loading="lazy" decoding="async" alt="The Callura website homepage">
+              
+            </span>
+            <span class="cw-meta">
+              <span class="mono cw-sect">Healthcare AI</span>
+              <span class="cw-name">Callura</span>
+            </span>
+            <span class="mono cw-go">Read case<span class="arr">&rarr;</span></span>
+          </a>
+        </li>
+        <li class="cw-item">
+          <a class="cw-card" href="/work/ecom-heroes.html">
+            <span class="cw-shot">
+              <img src="../assets/images/work/ecom-heroes-cover-1600.jpg"
+                   srcset="../assets/images/work/ecom-heroes-cover-1600.jpg 1600w, ../assets/images/work/ecom-heroes-cover-2560.jpg 2560w"
+                   sizes="(min-width:1100px) 32vw, (min-width:700px) 46vw, 84vw"
+                   width="2560" height="1472" loading="lazy" decoding="async" alt="The Ecom Heroes website homepage">
+              
+            </span>
+            <span class="cw-meta">
+              <span class="mono cw-sect">Ecommerce staffing</span>
+              <span class="cw-name">Ecom Heroes</span>
+            </span>
+            <span class="mono cw-go">Read case<span class="arr">&rarr;</span></span>
+          </a>
+        </li>
+        <li class="cw-item">
+          <a class="cw-card" href="/work/seen-by-many.html">
+            <span class="cw-shot">
+              <img src="../assets/images/work/seen-by-many-cover-1600.jpg"
+                   srcset="../assets/images/work/seen-by-many-cover-1600.jpg 1600w, ../assets/images/work/seen-by-many-cover-2560.jpg 2560w"
+                   sizes="(min-width:1100px) 32vw, (min-width:700px) 46vw, 84vw"
+                   width="2560" height="1474" loading="lazy" decoding="async" alt="The Seen By Many website homepage">
+              
+            </span>
+            <span class="cw-meta">
+              <span class="mono cw-sect">AI advertising agency</span>
+              <span class="cw-name">Seen By Many</span>
+            </span>
+            <span class="mono cw-go">Read case<span class="arr">&rarr;</span></span>
+          </a>
+        </li>
+        <li class="cw-item">
+          <a class="cw-card" href="/work/backlit-media.html">
+            <span class="cw-shot">
+              <img src="../assets/images/work/backlit-media-cover-1600.jpg"
+                   srcset="../assets/images/work/backlit-media-cover-1600.jpg 1600w, ../assets/images/work/backlit-media-cover-2560.jpg 2560w"
+                   sizes="(min-width:1100px) 32vw, (min-width:700px) 46vw, 84vw"
+                   width="2560" height="1474" loading="lazy" decoding="async" alt="The Backlit Media website homepage">
+              
+            </span>
+            <span class="cw-meta">
+              <span class="mono cw-sect">Digital marketing agency</span>
+              <span class="cw-name">Backlit Media</span>
+            </span>
+            <span class="mono cw-go">Read case<span class="arr">&rarr;</span></span>
+          </a>
+        </li>
+        <li class="cw-item">
+          <a class="cw-card" href="/work/orca-management.html">
+            <span class="cw-shot">
+              <img src="../assets/images/work/orca-management-cover-1600.jpg"
+                   srcset="../assets/images/work/orca-management-cover-1600.jpg 1600w, ../assets/images/work/orca-management-cover-2560.jpg 2560w"
+                   sizes="(min-width:1100px) 32vw, (min-width:700px) 46vw, 84vw"
+                   width="2560" height="1474" loading="lazy" decoding="async" alt="The Orca Management website homepage">
+              
+            </span>
+            <span class="cw-meta">
+              <span class="mono cw-sect">Performance marketing</span>
+              <span class="cw-name">Orca Management</span>
+            </span>
+            <span class="mono cw-go">Read case<span class="arr">&rarr;</span></span>
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -654,6 +766,6 @@
 <script src="../assets/js/vendor/lenis.min.js" defer></script>
 <!-- Site -->
 <script src="../assets/js/core.js?v=19" defer></script>
-<script src="../assets/js/case.js" defer></script>
+<script src="../assets/js/case.js?v=3" defer></script>
 </body>
 </html>
