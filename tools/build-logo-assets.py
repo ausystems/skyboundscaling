@@ -32,6 +32,10 @@ ICONS = os.path.join(ROOT, "assets", "icons")
 WEBP = dict(format="WEBP", quality=95, method=6)
 # The lockup's tallest export. 4K-class: plenty for retina at any placement.
 FULL_H = 2160
+# Nav lockup export height. The bar shows it at ~58px, so this covers a 5x DPR
+# screen. The composition is built at 1000px tall, so this is a downscale and
+# stays genuinely sharp rather than upscaled.
+NAV_H = 320
 
 
 def log(*a):
@@ -81,36 +85,97 @@ def trim(im, pad=0):
     return im
 
 
-def dark_text_to_light(im, lum_max=110, target=(233, 239, 252)):
-    """Lift the near-black SKYBOUND wordmark to off-white for dark surfaces.
-
-    Touches only dark, low-saturation pixels, so the blue monogram, the
-    orange arrow, and the blue SCALING line keep their exact colours.
-    Alpha is preserved, so anti-aliased glyph edges stay smooth.
-    """
-    im = im.copy()
-    px = im.load()
+def _empty_rows(im):
     w, h = im.size
-    for y in range(h):
-        for x in range(w):
-            r, g, b, a = px[x, y]
-            if a == 0:
-                continue
-            lum = 0.299 * r + 0.587 * g + 0.114 * b
-            mn, mx = min(r, g, b), max(r, g, b)
-            if lum <= lum_max and (mx - mn) <= 40:
-                # Map the glyph's own shading onto a tight ramp near the target.
-                # A wide ramp reproduces the source's dark-to-light gradient and
-                # reads as patchy once inverted, so keep the spread small: the
-                # wordmark should look like one solid ink, not an embossed one.
-                k = 0.93 + 0.07 * (lum / lum_max)
-                px[x, y] = (
-                    int(target[0] * k),
-                    int(target[1] * k),
-                    int(target[2] * k),
-                    a,
-                )
-    return im
+    a = im.getchannel("A")
+    return [a.crop((0, y, w, y + 1)).getbbox() is None for y in range(h)]
+
+
+def _widest_interior_band(empty):
+    """The widest fully-empty row run that sits strictly between content."""
+    ys = [y for y, e in enumerate(empty) if not e]
+    if not ys:
+        return None
+    top, bot = ys[0], ys[-1]
+    best, run = None, None
+    for y in range(top, bot + 1):
+        if empty[y]:
+            if run is None:
+                run = y
+        elif run is not None:
+            if best is None or (y - run) > (best[1] - best[0]):
+                best = (run, y)
+            run = None
+    return best
+
+
+def skybound_to_white(im, from_y=0):
+    """Flatten the SKYBOUND line to pure #FFFFFF for dark surfaces.
+
+    Selecting the glyphs by colour does not work here. SKYBOUND is set in a
+    bevelled near-black with specular highlights that run brighter than any
+    luminance threshold low enough to spare the rest of the mark, so a
+    threshold pass leaves those highlights behind as grey patches inside the
+    letters - the wordmark reads as punched-out rather than solid.
+
+    So cut on geometry instead. The wordmark is two lines with a clean gutter
+    between them; every pixel above that gutter belongs to SKYBOUND and
+    nothing else. Those are set to pure white with alpha preserved, giving
+    one flat white ink with smooth edges and no second colour anywhere.
+    SCALING, the monogram and the arrow are never touched.
+
+    from_y lets the same pass run on the full stacked lockup, where the
+    wordmark starts below the monogram.
+    """
+    out = im.copy()
+    region = out.crop((0, from_y, out.width, out.height)) if from_y else out
+    band = _widest_interior_band(_empty_rows(region))
+    if band is None:
+        return out
+    cut = from_y + (band[0] + band[1]) // 2
+
+    px = out.load()
+    for y in range(from_y, cut):
+        for x in range(out.width):
+            a = px[x, y][3]
+            if a:
+                px[x, y] = (255, 255, 255, a)
+    return out
+
+
+def _empty_cols(im):
+    w, h = im.size
+    a = im.getchannel("A")
+    return [a.crop((x, 0, x + 1, h)).getbbox() is None for x in range(w)]
+
+
+def whiten_skybound_in_lockup(im):
+    """Flatten SKYBOUND to pure #FFFFFF in a composed horizontal lockup.
+
+    Runs on the FINAL export size, after every resample. Whitening earlier
+    and then scaling means LANCZOS re-mixes the flat white with its
+    neighbours and the pixels land at 249-253 instead of 255 - still neutral,
+    but no longer literally one colour. Applied last, the band is exact.
+
+    Locates the wordmark by the empty column gutter beside the monogram, then
+    the SKYBOUND line by the empty row gutter above SCALING, so only that one
+    block of glyphs is touched.
+    """
+    band_x = _widest_interior_band(_empty_cols(im))
+    x0 = (band_x[0] + band_x[1]) // 2 if band_x else 0
+    band_y = _widest_interior_band(_empty_rows(im.crop((x0, 0, im.width, im.height))))
+    if band_y is None:
+        return im
+    cut = (band_y[0] + band_y[1]) // 2
+
+    out = im.copy()
+    px = out.load()
+    for y in range(cut):
+        for x in range(x0, out.width):
+            a = px[x, y][3]
+            if a:
+                px[x, y] = (255, 255, 255, a)
+    return out
 
 
 def split_lockup(im):
@@ -146,7 +211,7 @@ def split_lockup(im):
     cut = int((best[0] + best[1]) / 2) if best else int(h * 0.74)
     mark = trim(im.crop((0, 0, w, cut)))
     word = trim(im.crop((0, cut, w, h)))
-    return mark, word
+    return mark, word, cut
 
 
 def horizontal_lockup(mark, word, gap_ratio=0.16):
@@ -184,10 +249,13 @@ def square_pad(im, size, margin=0.08):
     return out
 
 
-def save_webp(im, name):
+def save_webp(im, name, lossless=False):
+    """lossless is used for the -light variants: at q95 the encoder shifts the
+    flat SKYBOUND white off 255, which defeats the point of flattening it."""
     p = os.path.join(BRAND, name)
-    im.save(p, **WEBP)
-    log(f"  {name:34s} {im.width}x{im.height}  {os.path.getsize(p)//1024}KB")
+    im.save(p, **(dict(format="WEBP", lossless=True, method=6) if lossless else WEBP))
+    log(f"  {name:34s} {im.width}x{im.height}  {os.path.getsize(p)//1024}KB"
+        f"{'  (lossless)' if lossless else ''}")
 
 
 def save_png(im, path, label=None):
@@ -222,26 +290,31 @@ def main():
             f"(no upscaling - a bigger source would give a bigger asset)")
     target_h = min(FULL_H, im.height)
 
-    mark, word = split_lockup(im)
+    mark, word, word_top = split_lockup(im)
     log(f"  monogram {mark.width}x{mark.height} | wordmark {word.width}x{word.height}")
 
     # ---- stacked lockup ----
     full = fit_height(im, target_h)
     save_webp(full, "logo-full.webp")
     save_png(full, os.path.join(BRAND, "logo-full.png"), "logo-full.png")
-    save_webp(fit_height(dark_text_to_light(im), target_h), "logo-full-light.webp")
+    save_webp(skybound_to_white(fit_height(im, target_h),
+                                round(word_top * target_h / im.height)),
+              "logo-full-light.webp", lossless=True)
 
     # ---- horizontal lockup (nav) ----
     # Two sizes each: a 600px master for any large use, and a right-sized nav
-    # file. The nav displays at ~36-46px, so 200px covers a 4x DPR screen with
-    # headroom; shipping the master there would cost ~10x the bytes on every
+    # file. The nav shows it at ~58px, so NAV_H covers a 5x DPR screen;
+    # shipping the master there would cost several times the bytes on every
     # page and make the browser downscale a huge bitmap on each paint.
+    # The light variants are whitened AFTER scaling, so the flat white is
+    # never re-mixed by a resample.
     horiz = horizontal_lockup(mark, word)
-    save_webp(fit_height(horiz, min(600, horiz.height)), "logo-horizontal.webp")
-    save_webp(fit_height(horiz, 200), "logo-nav.webp")
-    horiz_light = horizontal_lockup(mark, dark_text_to_light(word))
-    save_webp(fit_height(horiz_light, min(600, horiz_light.height)), "logo-horizontal-light.webp")
-    save_webp(fit_height(horiz_light, 200), "logo-nav-light.webp")
+    h_master = fit_height(horiz, min(600, horiz.height))
+    h_nav = fit_height(horiz, NAV_H)
+    save_webp(h_master, "logo-horizontal.webp")
+    save_webp(h_nav, "logo-nav.webp")
+    save_webp(whiten_skybound_in_lockup(h_master), "logo-horizontal-light.webp", lossless=True)
+    save_webp(whiten_skybound_in_lockup(h_nav), "logo-nav-light.webp", lossless=True)
 
     # ---- monogram ----
     mk = fit_height(mark, min(1600, mark.height))

@@ -38,7 +38,7 @@
 <!-- Performance: the brand font drives every headline - fetch it first -->
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="stylesheet" href="assets/css/main.css?v=25">
+<link rel="stylesheet" href="assets/css/main.css?v=28">
 <link rel="stylesheet" href="assets/css/case-home.css?v=4">
 <link rel="stylesheet" href="assets/css/services-bento.css?v=5">
 
@@ -375,7 +375,7 @@
 
 <!-- HEADER -->
 <header id="site-header">
-  <a class="logo" href="#hero" aria-label="Skybound Scaling home"><img class="logo-dark" src="/assets/brand/logo-nav.webp" alt="Skybound Scaling" width="862" height="200" fetchpriority="high" decoding="async"><img class="logo-light" src="/assets/brand/logo-nav-light.webp" alt="" aria-hidden="true" width="862" height="200" decoding="async"></a>
+  <a class="logo" href="#hero" aria-label="Skybound Scaling home"><img class="logo-dark" src="/assets/brand/logo-nav.webp?v=2" alt="Skybound Scaling" width="1379" height="320" fetchpriority="high" decoding="async"><img class="logo-light" src="/assets/brand/logo-nav-light.webp?v=2" alt="" aria-hidden="true" width="1379" height="320" decoding="async"></a>
   <nav class="desktop-nav" aria-label="Primary">
     <a href="/services/">Services</a>
     <a href="/work/">Work</a>
@@ -985,6 +985,40 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="tstm-sec" aria-labelledby="tstm-t">
+  <header class="csh-head tstm-headline">
+    <p class="mono csh-eyebrow rv">In their words</p>
+    <h2 class="csh-title rv-title" id="tstm-t"><span class="csh-ln">Client</span> <span class="csh-ln">Voices</span></h2>
+  </header>
+  <div class="tstm-grid">
+    <figure class="tstm rv-card">
+      <span class="tstm-stars" aria-hidden="true"><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg></span>
+      <blockquote class="tstm-quote">&ldquo;The way our AI ideas were turned into such a clean, polished website was unreal. So easy to work with, and the final result looks amazing! Big shout out to Ahmad and his team at Skybound.&rdquo;</blockquote>
+      <figcaption class="tstm-by">
+        <img class="tstm-ava" src="/assets/images/testimonials/brandon-kim.webp" alt="Brandon Kim" width="400" height="400" loading="lazy" decoding="async">
+        <span class="tstm-who"><b>Brandon Kim</b><i>Founder of Callura</i></span>
+      </figcaption>
+    </figure>
+    <figure class="tstm rv-card">
+      <span class="tstm-stars" aria-hidden="true"><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg></span>
+      <blockquote class="tstm-quote">&ldquo;Ahmad handles all the website and SEO work for my clients at my marketing agency, and he's been amazing. He makes the whole process easy, builds great websites, and my clients are always happy with the results!&rdquo;</blockquote>
+      <figcaption class="tstm-by">
+        <img class="tstm-ava" src="/assets/images/testimonials/grant-goodbrand.webp" alt="Grant Goodbrand" width="400" height="400" loading="lazy" decoding="async">
+        <span class="tstm-who"><b>Grant Goodbrand</b><i>Owner of Backlit Media</i></span>
+      </figcaption>
+    </figure>
+    <figure class="tstm rv-card">
+      <span class="tstm-stars" aria-hidden="true"><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg><svg viewBox="0 0 20 19"><path d="M10 0l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L10 14.3 4.2 17.8l1.6-6.6L.6 6.8l6.8-.5L10 0z"/></svg></span>
+      <blockquote class="tstm-quote">&ldquo;Ahmad and his team at Skybound Scaling are the BEST. They handled our branding, website, positioning, and SEO so quickly. Ecom Heroes now looks way more premium and is positioned as the go-to business in our space. Couldn't be happier!&rdquo;</blockquote>
+      <figcaption class="tstm-by">
+        <img class="tstm-ava" src="/assets/images/testimonials/falah-sadiq.webp" alt="Falah Sadiq" width="400" height="400" loading="lazy" decoding="async">
+        <span class="tstm-who"><b>Falah Sadiq</b><i>Founder of Ecom Heroes</i></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta">
   <div class="cta-panel" id="cta-panel">
@@ -1093,7 +1127,7 @@
 <!-- Particle formation data (Process scene) -->
 <script src="assets/js/data/process-shapes.js" defer></script>
 <!-- Site -->
-<script src="assets/js/core.js?v=18" defer></script>
+<script src="assets/js/core.js?v=19" defer></script>
 <script src="assets/js/flow-field.js?v=1" defer></script>
 <script src="assets/js/home.js?v=19" defer></script>
 <script src="assets/js/services-bento.js?v=3" defer></script>

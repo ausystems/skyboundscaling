@@ -78,8 +78,8 @@
      never counts the scrollbar. */
   --maxw:1500px;
   --pad:max(clamp(20px,4vw,64px), calc((100% - var(--maxw)) * .5));
-  --header-h:72px;
-  --nav-logo-h:46px;  /* nav lockup height; steps down at the breakpoints below.
+  --header-h:84px;
+  --nav-logo-h:58px;  /* nav lockup height; steps down at the breakpoints below.
                          Named apart from .man-clients' own --logo-h, which sizes
                          the client marquee marks and means something different. */
 }
@@ -241,7 +241,7 @@ body.on-dark .nav-toggle-inner::after{background:var(--paper)}
 /* ---- Brand logo ----
    The horizontal lockup (monogram + stacked wordmark) is the nav-bar form of
    the official mark: the square stacked lockup would render its type at ~5px
-   inside a 72px bar. Height is the only thing set - width follows the image's
+   inside an 84px bar. Height is the only thing set - width follows the image's
    own ratio - and the intrinsic width/height on the <img> reserves the box
    before the file lands, so the header never reflows.
    Two files ship: the standard mark, and a variant whose near-black SKYBOUND
@@ -249,7 +249,7 @@ body.on-dark .nav-toggle-inner::after{background:var(--paper)}
    the same grid cell and cross-faded, so the swap has nothing to lay out. */
 .logo{
   display:grid;align-items:center;
-  grid-template-rows:var(--nav-logo-h,46px);
+  grid-template-rows:var(--nav-logo-h,58px);
   flex:none;line-height:0;
 }
 .logo img{
@@ -257,7 +257,7 @@ body.on-dark .nav-toggle-inner::after{background:var(--paper)}
   /* Sized from the token, not height:100%. The grid row is auto-sized, so a
      percentage height would resolve against the image's own intrinsic 200px
      and the lockup would render at full size, overflowing the bar. */
-  height:var(--nav-logo-h,46px);width:auto;display:block;
+  height:var(--nav-logo-h,58px);width:auto;display:block;
   transition:opacity .45s cubic-bezier(.2,.7,.2,1);
 }
 .logo .logo-light{opacity:0}
@@ -1551,16 +1551,16 @@ body.menu-open .logo{color:#fff}
   header .cta-book.cta-compact{display:none}
   .nav-toggle{display:flex}
   /* the bar loses its nav and CTA here, so the lockup can breathe a little */
-  :root{--nav-logo-h:44px}
+  :root{--nav-logo-h:54px}
 }
 /* Phones: the wordmark's two lines need to stay legible, and the lockup has
    to clear the hamburger with real space between them, so it steps down
    rather than shrinking to fit. */
 @media (max-width:600px){
-  :root{--nav-logo-h:38px}
+  :root{--nav-logo-h:46px}
 }
 @media (max-width:380px){
-  :root{--nav-logo-h:34px}
+  :root{--nav-logo-h:40px}
 }
 
 /* Performance: drop expensive backdrop blur on phones/tablets - the glass
@@ -1575,4 +1575,68 @@ body.menu-open .logo{color:#fff}
   .clients-track{animation:none}
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important}
+}
+
+/* ============ TESTIMONIALS (shared component) ============
+   One markup shape used on the home page, the case-study index, and the
+   Get Started funnel. Every surface colour is a custom property set on
+   .tstm-sec, so a dark page re-themes it by overriding those four values
+   rather than by forking the component. */
+.tstm-sec{
+  --tstm-surface:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(246,249,253,.78) 100%);
+  --tstm-border:var(--line);
+  --tstm-text:var(--ink);
+  --tstm-dim:rgba(10,12,20,.62);
+  --tstm-star:var(--blue);
+  --tstm-shadow:0 24px 60px rgba(12,22,48,.10);
+  position:relative;
+  padding:clamp(64px,8vw,120px) var(--pad);
+}
+/* The heading is NOT part of this component. Each page introduces sections in
+   its own voice - the home page with a blue-tick eyebrow over massive uppercase
+   type, the case-study index with a ruled label row - so the section reuses
+   that page's real header component and only neutralises the double gutter its
+   own padding would otherwise add. */
+.tstm-headline{margin-bottom:clamp(30px,4vw,54px)}
+.tstm-sec .csh-head{padding-inline:0}
+.tstm-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  max-width:1180px;margin:0 auto;align-items:stretch;
+}
+.tstm{
+  display:flex;flex-direction:column;gap:16px;margin:0;
+  padding:clamp(24px,2.4vw,30px);
+  border-radius:22px;
+  background:var(--tstm-surface);
+  border:1px solid var(--tstm-border);
+  box-shadow:var(--tstm-shadow);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .5s,box-shadow .5s;
+}
+@media (hover:hover){
+  .tstm:hover{transform:translateY(-4px)}
+}
+.tstm-stars{display:inline-flex;gap:3px}
+.tstm-stars svg{width:15px;height:15px;fill:var(--tstm-star);flex:none}
+.tstm-quote{
+  margin:0;flex:1;
+  font-size:clamp(14.5px,1.55vw,16px);line-height:1.68;
+  color:var(--tstm-text);
+}
+/* the attribution row: face, then who they are */
+.tstm-by{
+  display:flex;align-items:center;gap:13px;
+  padding-top:16px;border-top:1px solid var(--tstm-border);
+}
+.tstm-ava{
+  flex:none;width:50px;height:50px;border-radius:50%;
+  object-fit:cover;display:block;
+  border:1px solid var(--tstm-border);
+  box-shadow:0 6px 18px rgba(10,20,45,.18);
+}
+.tstm-who{display:grid;gap:2px;min-width:0}
+.tstm-who b{font-size:14.5px;font-weight:650;letter-spacing:-.005em;color:var(--tstm-text)}
+.tstm-who i{font-style:normal;font-size:12.5px;color:var(--tstm-dim)}
+
+@media (max-width:900px){
+  .tstm-grid{grid-template-columns:1fr;max-width:560px}
 }
