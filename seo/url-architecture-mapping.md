@@ -132,8 +132,17 @@ so the two index rules must precede the catch-all:
 | 2 | `/(.*)/index.html` | `/$1/` | nested index duplicates, e.g. `/work/index.html` |
 | 3 | `/((?!404\.html$).*)\.html` | `/$1/` | every legacy `.html` URL, in a single hop |
 
-Rule 3 carries a negative lookahead so `/404.html` is never redirected; redirecting it would
-serve the not-found body at `/404/` with a 200 and create a soft 404.
+Rule 3 carries a negative lookahead intended to leave `/404.html` alone. **Verified on
+production: Vercel's path-to-regexp does not honour negative lookaheads in `redirects.source`,
+with or without an anchor.** `/404.html` therefore 308s to `/404/`, which serves the not-found
+body with a 200 (a soft 404).
+
+This is knowingly accepted rather than worked around. The page carries
+`<meta name="robots" content="noindex">`, is linked from nowhere, and is absent from the
+sitemap, so it cannot be discovered or indexed; `noindex` governs regardless of status code.
+Genuine missing URLs are unaffected and return a real 404 (verified). The only fix that would
+work is enumerating 68 explicit redirects in place of the catch-all, which trades a large,
+brittle config for no measurable SEO gain.
 
 ### Bug this also fixes
 Before this change, `trailingSlash: true` was set while `cleanUrls` was false, so
@@ -143,4 +152,20 @@ non-index page led to a dead end. Verified live on 2026-08-19 before the fix.
 ### Post-deploy expectations
 - `/about/` → 200 · `/about.html` → 308 → `/about/` (one hop) · `/about` → 308 → `/about/`
 - `/index.html` → 308 → `/` · `/work/index.html` → 308 → `/work/`
-- `/404.html` → 200 (unchanged, unlinked, not in sitemap); unknown paths → real 404
+- `/404.html` → 308 → `/404/` (200, noindex) — known exception, see above; unknown paths → real 404
+
+## Verified live behaviour (2026-08-19, after deploy)
+
+| URL form | Result |
+|---|---|
+| `/`, `/about/`, `/work/`, `/services/seo/`, `/services/white-label/`, `/work/seen-by-many/`, `/blog/`, `/blog/framer-vs-webflow/`, `/locations/miami/`, `/locations/toronto/`, `/pricing/`, `/contact/`, `/get-started/`, `/privacy/` | 200 |
+| `/about.html`, `/services/seo.html`, `/work/vaza.html`, `/blog/what-is-a-good-roas.html`, `/pricing.html` | 308 → clean URL, single hop |
+| `/index.html` | 308 → `/` |
+| `/work/index.html`, `/locations/miami/index.html` | 308 → `/work/`, `/locations/miami/` |
+| `/about`, `/services/seo` (extensionless) | 308 → trailing-slash form |
+| `/this-does-not-exist-xyz/` | real 404 |
+| `/404.html` | 308 → `/404/` (200, noindex) — documented exception |
+
+Note: an extensionless *missing* path such as `/genuinely-missing` 308s to
+`/genuinely-missing/` before returning 404. That is inherent to `trailingSlash: true` and is
+handled correctly by search engines.
