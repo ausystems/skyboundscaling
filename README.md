@@ -8,7 +8,7 @@ CRM automation, conversion rate optimization, brand identity, and social media
 marketing. Every engagement is run by a senior practitioner and measured against
 revenue rather than impressions.
 
-- **Website:** https://skyboundscaling.com
+- **Website:** https://www.skyboundscaling.com
 - **Contact:** contact@skyboundscaling.com
 - **Founded:** 2025
 - **Languages:** campaigns run in English and Spanish
@@ -114,7 +114,7 @@ playbooks off the CDN.
 
 - Serve `404.html` for unknown routes. It uses root-absolute asset paths, so it
   renders correctly at any URL depth.
-- The canonical domain is `https://skyboundscaling.com`. If it changes, update
+- The canonical domain is `https://www.skyboundscaling.com`. If it changes, update
   `robots.txt`, `sitemap.xml`, every `<link rel="canonical">`, the Open Graph
   URLs, `llms.txt`, and `llms-full.txt` in the same change.
 - Long-cache `/assets/**` (immutable); no-cache the HTML for instant deploys.
@@ -217,7 +217,7 @@ exist for another city if the name changed?"
 5. **Form endpoint:** set `data-endpoint` on the contact form. Without it, briefs
    fall back to a `mailto:` draft only.
 6. **Search Console:** verify the domain, submit
-   `https://skyboundscaling.com/sitemap.xml`, confirm coverage after a week.
+   `https://www.skyboundscaling.com/sitemap.xml`, confirm coverage after a week.
 7. **Analytics:** GA4 or a privacy-first tool (Plausible/Fathom) plus a
    form-submit conversion event; then disclose it in `privacy.html`.
 8. **Validate socials + rich results:** run the homepage and one case page
