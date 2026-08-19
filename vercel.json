@@ -85,7 +85,7 @@
       "permanent": true
     },
     {
-      "source": "/((?!404\\.html$).*)\\.html",
+      "source": "/((?!404\\.html).*)\\.html",
       "destination": "/$1/",
       "permanent": true
     }
