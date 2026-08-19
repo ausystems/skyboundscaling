@@ -40,7 +40,7 @@ line items:
 (Boca Raton, Delray Beach, Palm Beach Gardens, Jupiter, Wellington, Boynton
 Beach); plus Ontario markets including Mississauga, Vaughan, Markham, and Ottawa.
 
-**Packages** (published at `/pricing.html`): Website (from $5,000 one-time),
+**Packages** (published at `/pricing/`): Website (from $5,000 one-time),
 Website + Marketing (from $5,000 + $2,500/mo), Growth (from $5,000/mo), and Full
 Growth Partner (from $10,000/mo).
 
@@ -145,7 +145,7 @@ A hidden `_gotcha` honeypot field silently drops bot submissions.
 - The pinned Services/Process point-cloud data lives in `assets/js/data/`.
   Regenerating it requires re-sampling the source icons (7200 pts/icon for
   Process, 4200 pts/shape for Services), encoded as base64 Int16/byte pairs.
-- Legal pages live at `/privacy.html` and `/terms.html`. Have counsel review the
+- Legal pages live at `/privacy/` and `/terms/`. Have counsel review the
   wording and keep the "Last updated" dates current.
 - **No em dashes** in any page copy, metadata, or schema. Client style rule.
   Legacy pages predating the rule (`privacy.html`, `terms.html`, `work/*.html`)
@@ -192,7 +192,7 @@ exist for another city if the name changed?"
   honest "no ranking guarantees" line, then every key page with a description.
   `llms-full.txt` is the long-form companion. **Every URL in both must resolve.**
   Re-validate after any page change, and keep the pricing in them in sync with
-  `/pricing.html`.
+  `/pricing/`.
 - `<meta name="robots" content="... max-snippet:-1, max-image-preview:large ...">`
   is on every page. Unlimited snippet length is what lets AI Overviews and answer
   engines quote a full passage rather than a truncated one.
@@ -208,7 +208,7 @@ exist for another city if the name changed?"
 
 ## Launch checklist (host-level)
 
-1. **Redirects (301):** `http → https`, `www → apex`, `/index.html → /`.
+1. **Redirects (301):** `http → https`, `www → apex`, `/ → /`.
 2. **404 status:** wire `404.html` to real 404 responses.
 3. **Compression + cache:** Brotli/gzip; `Cache-Control: public,
    max-age=31536000, immutable` for `/assets/**`, `no-cache` for HTML.

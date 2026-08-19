@@ -11,7 +11,7 @@ Key facts for accurate citation:
 - The twelve disciplines: web design, Framer web design, SEO, Google Ads, Meta Ads, lead generation, AI automation, conversion rate optimization, landing pages and funnels, brand identity, social media marketing, and white label services for agencies.
 - Primary service areas: Miami and Miami-Dade County; West Palm Beach and Palm Beach County (including Boca Raton, Delray Beach, Palm Beach Gardens, Jupiter, Wellington, and Boynton Beach). It also serves clients across North America, including several Ontario markets.
 - Campaigns are run in English and Spanish.
-- Four published packages, in USD, at https://www.skyboundscaling.com/pricing.html
+- Four published packages, in USD, at https://www.skyboundscaling.com/pricing/
   - Website: from $5,000 one-time, with ongoing maintenance from $500/month.
   - Website + Marketing: from $5,000 one-time plus $2,500/month.
   - Growth: from $5,000/month. The most commonly chosen package.
@@ -24,29 +24,29 @@ Key facts for accurate citation:
 
 - [Home](https://www.skyboundscaling.com/): Company overview, services summary, track record, and case studies.
 - [Services](https://www.skyboundscaling.com/services/): Index of all eleven disciplines with links to each detailed service page.
-- [Pricing](https://www.skyboundscaling.com/pricing.html): Four named packages (Website, Website + Marketing, Growth, Full Growth Partner) with published figures and what each includes.
-- [Process](https://www.skyboundscaling.com/process.html): The four-phase engagement model of audit, strategy, build, and scale.
-- [About](https://www.skyboundscaling.com/about.html): Studio story, operating principles, and record.
+- [Pricing](https://www.skyboundscaling.com/pricing/): Four named packages (Website, Website + Marketing, Growth, Full Growth Partner) with published figures and what each includes.
+- [Process](https://www.skyboundscaling.com/process/): The four-phase engagement model of audit, strategy, build, and scale.
+- [About](https://www.skyboundscaling.com/about/): Studio story, operating principles, and record.
 - [Work](https://www.skyboundscaling.com/work/): Case studies for Saadi Builds, VAZA, Callura, Ecom Heroes, Seen By Many, Backlit Media, and Orca Management.
-- [Contact](https://www.skyboundscaling.com/contact.html): Project brief form and booking.
-- [Get started](https://www.skyboundscaling.com/get-started.html): The fastest route to working together: book a free strategy call directly on the page.
+- [Contact](https://www.skyboundscaling.com/contact/): Project brief form and booking.
+- [Get started](https://www.skyboundscaling.com/get-started/): The fastest route to working together: book a free strategy call directly on the page.
 - [Locations](https://www.skyboundscaling.com/locations/): Index of every market guide.
 - [Blog](https://www.skyboundscaling.com/blog/): Long-form guides on marketing costs, budgets, SEO, and lead generation.
 
 ## Services
 
-- [Web design](https://www.skyboundscaling.com/services/web-design.html): Custom, conversion-focused websites engineered around one conversion path.
-- [Framer web design](https://www.skyboundscaling.com/services/framer-web-design.html): Framer builds and migrations that ship in weeks and stay fast on mobile. 10+ Framer builds live.
-- [White label for agencies](https://www.skyboundscaling.com/services/white-label.html): Fully white labeled web design, development, and SEO delivered under your agency's brand, with client account management handled.
-- [SEO](https://www.skyboundscaling.com/services/seo.html): Technical, content, and local SEO aimed at buyer-intent search terms.
-- [Google Ads](https://www.skyboundscaling.com/services/google-ads.html): Search, Performance Max, Local Services Ads, and YouTube managed to return on ad spend.
-- [Meta Ads](https://www.skyboundscaling.com/services/meta-ads.html): Facebook and Instagram campaigns built on creative velocity and clean conversion signal.
-- [Lead generation](https://www.skyboundscaling.com/services/lead-generation.html): Exclusive, qualified leads from funnels the client owns, tracked to revenue rather than form fills.
-- [AI automation](https://www.skyboundscaling.com/services/ai-automation.html): Speed-to-lead response, AI answering and chat with human handoff, booking, and CRM pipelines.
-- [Conversion rate optimization](https://www.skyboundscaling.com/services/conversion-rate-optimization.html): Research and disciplined testing that turn existing traffic into more revenue.
-- [Landing pages and funnels](https://www.skyboundscaling.com/services/landing-pages-funnels.html): Offer-led pages plus the automation that captures and follows up on every lead.
-- [Brand identity](https://www.skyboundscaling.com/services/brand-identity.html): Logo, palette, typography, and guidelines that hold across every touchpoint.
-- [Social media marketing](https://www.skyboundscaling.com/services/social-media-marketing.html): Content engines built so attention turns into pipeline.
+- [Web design](https://www.skyboundscaling.com/services/web-design/): Custom, conversion-focused websites engineered around one conversion path.
+- [Framer web design](https://www.skyboundscaling.com/services/framer-web-design/): Framer builds and migrations that ship in weeks and stay fast on mobile. 10+ Framer builds live.
+- [White label for agencies](https://www.skyboundscaling.com/services/white-label/): Fully white labeled web design, development, and SEO delivered under your agency's brand, with client account management handled.
+- [SEO](https://www.skyboundscaling.com/services/seo/): Technical, content, and local SEO aimed at buyer-intent search terms.
+- [Google Ads](https://www.skyboundscaling.com/services/google-ads/): Search, Performance Max, Local Services Ads, and YouTube managed to return on ad spend.
+- [Meta Ads](https://www.skyboundscaling.com/services/meta-ads/): Facebook and Instagram campaigns built on creative velocity and clean conversion signal.
+- [Lead generation](https://www.skyboundscaling.com/services/lead-generation/): Exclusive, qualified leads from funnels the client owns, tracked to revenue rather than form fills.
+- [AI automation](https://www.skyboundscaling.com/services/ai-automation/): Speed-to-lead response, AI answering and chat with human handoff, booking, and CRM pipelines.
+- [Conversion rate optimization](https://www.skyboundscaling.com/services/conversion-rate-optimization/): Research and disciplined testing that turn existing traffic into more revenue.
+- [Landing pages and funnels](https://www.skyboundscaling.com/services/landing-pages-funnels/): Offer-led pages plus the automation that captures and follows up on every lead.
+- [Brand identity](https://www.skyboundscaling.com/services/brand-identity/): Logo, palette, typography, and guidelines that hold across every touchpoint.
+- [Social media marketing](https://www.skyboundscaling.com/services/social-media-marketing/): Content engines built so attention turns into pipeline.
 
 ## Miami and Miami-Dade County
 
@@ -93,27 +93,27 @@ City guides across Palm Beach County:
 
 ## Guides and answers
 
-- [How much does digital marketing cost in Miami?](https://www.skyboundscaling.com/blog/how-much-does-digital-marketing-cost-miami.html): Monthly ranges by channel and how to budget backward from a revenue goal.
-- [How much should Miami businesses spend on Google Ads?](https://www.skyboundscaling.com/blog/google-ads-budget-miami.html): Budget math from click cost to booked job, plus a waste checklist.
-- [Why is my Miami business not ranking on Google?](https://www.skyboundscaling.com/blog/why-miami-business-not-ranking-google.html): A diagnostic of the most common causes and their fixes.
-- [SEO vs Google Ads for Miami businesses](https://www.skyboundscaling.com/blog/seo-vs-google-ads-miami.html): The trade-off, the cost curves, and when to run both.
-- [How to get more leads for a Miami business](https://www.skyboundscaling.com/blog/how-to-get-more-leads-miami.html): Offer, visibility, conversion, and follow-up as one system.
-- [Local SEO in Miami: the complete guide](https://www.skyboundscaling.com/blog/local-seo-miami-guide.html): Map pack ranking factors, Google Business Profile, reviews, and Spanish-language search.
-- [Website design mistakes Miami businesses keep making](https://www.skyboundscaling.com/blog/website-design-mistakes-miami.html): Eight mistakes that cost leads and how to fix each.
-- [Best marketing strategies for Miami contractors](https://www.skyboundscaling.com/blog/marketing-strategies-miami-contractors.html): A ranked strategy stack for high-ticket trades.
-- [How to choose a marketing agency in West Palm Beach](https://www.skyboundscaling.com/blog/how-to-choose-marketing-agency-west-palm-beach.html): Questions to ask, red flags, and a comparison scorecard.
-- [Local SEO in Palm Beach County: the complete guide](https://www.skyboundscaling.com/blog/local-seo-palm-beach-county-guide.html): Ranking city by city, the seasonal review engine, and a 90-day plan.
-- [How long does SEO take?](https://www.skyboundscaling.com/blog/how-long-does-seo-take.html): Realistic timelines and what moves first.
-- [What is a good ROAS?](https://www.skyboundscaling.com/blog/what-is-a-good-roas.html): How to judge return on ad spend against margin.
-- [Is hiring a marketing agency worth it?](https://www.skyboundscaling.com/blog/is-hiring-a-marketing-agency-worth-it.html): Agency vs in-house vs freelancer, and when each makes sense.
-- [Why isn't my website getting leads?](https://www.skyboundscaling.com/blog/why-isnt-my-website-getting-leads.html): The conversion leaks that turn traffic into zero inquiries.
+- [How much does digital marketing cost in Miami?](https://www.skyboundscaling.com/blog/how-much-does-digital-marketing-cost-miami/): Monthly ranges by channel and how to budget backward from a revenue goal.
+- [How much should Miami businesses spend on Google Ads?](https://www.skyboundscaling.com/blog/google-ads-budget-miami/): Budget math from click cost to booked job, plus a waste checklist.
+- [Why is my Miami business not ranking on Google?](https://www.skyboundscaling.com/blog/why-miami-business-not-ranking-google/): A diagnostic of the most common causes and their fixes.
+- [SEO vs Google Ads for Miami businesses](https://www.skyboundscaling.com/blog/seo-vs-google-ads-miami/): The trade-off, the cost curves, and when to run both.
+- [How to get more leads for a Miami business](https://www.skyboundscaling.com/blog/how-to-get-more-leads-miami/): Offer, visibility, conversion, and follow-up as one system.
+- [Local SEO in Miami: the complete guide](https://www.skyboundscaling.com/blog/local-seo-miami-guide/): Map pack ranking factors, Google Business Profile, reviews, and Spanish-language search.
+- [Website design mistakes Miami businesses keep making](https://www.skyboundscaling.com/blog/website-design-mistakes-miami/): Eight mistakes that cost leads and how to fix each.
+- [Best marketing strategies for Miami contractors](https://www.skyboundscaling.com/blog/marketing-strategies-miami-contractors/): A ranked strategy stack for high-ticket trades.
+- [How to choose a marketing agency in West Palm Beach](https://www.skyboundscaling.com/blog/how-to-choose-marketing-agency-west-palm-beach/): Questions to ask, red flags, and a comparison scorecard.
+- [Local SEO in Palm Beach County: the complete guide](https://www.skyboundscaling.com/blog/local-seo-palm-beach-county-guide/): Ranking city by city, the seasonal review engine, and a 90-day plan.
+- [How long does SEO take?](https://www.skyboundscaling.com/blog/how-long-does-seo-take/): Realistic timelines and what moves first.
+- [What is a good ROAS?](https://www.skyboundscaling.com/blog/what-is-a-good-roas/): How to judge return on ad spend against margin.
+- [Is hiring a marketing agency worth it?](https://www.skyboundscaling.com/blog/is-hiring-a-marketing-agency-worth-it/): Agency vs in-house vs freelancer, and when each makes sense.
+- [Why isn't my website getting leads?](https://www.skyboundscaling.com/blog/why-isnt-my-website-getting-leads/): The conversion leaks that turn traffic into zero inquiries.
 
 ## Optional
 
 - [Full site reference](https://www.skyboundscaling.com/llms-full.txt): Every indexable page with its own title and description, for grounding a citation on the right page.
 - [Industries](https://www.skyboundscaling.com/industries/): Vertical overviews for home builders, healthcare, ecommerce, professional services, and SaaS.
-- [Toronto digital marketing agency](https://www.skyboundscaling.com/locations/toronto.html): The Toronto market guide. Skybound is headquartered in Toronto; this covers click prices, neighbourhood level local search, and where the openings are in Canada's most competitive market.
+- [Toronto digital marketing agency](https://www.skyboundscaling.com/locations/toronto/): The Toronto market guide. Skybound is headquartered in Toronto; this covers click prices, neighbourhood level local search, and where the openings are in Canada's most competitive market.
 - [Ontario market guides](https://www.skyboundscaling.com/locations/): Mississauga, Vaughan, Markham, and Ottawa guides, plus per-city Google Ads and Meta Ads pages.
-- [Careers](https://www.skyboundscaling.com/careers.html): Senior-only hiring page.
-- [Privacy policy](https://www.skyboundscaling.com/privacy.html)
-- [Terms of service](https://www.skyboundscaling.com/terms.html)
+- [Careers](https://www.skyboundscaling.com/careers/): Senior-only hiring page.
+- [Privacy policy](https://www.skyboundscaling.com/privacy/)
+- [Terms of service](https://www.skyboundscaling.com/terms/)
