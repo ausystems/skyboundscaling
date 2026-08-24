@@ -1,0 +1,536 @@
+/* ==========================================================================
+   SKYBOUND SCALING - founder.css
+   The founder gallery: a dark exhibition wing for Ahmad Khalid.
+
+   Two installations share this file:
+     .ak-wing  (about page)  - the full six room walk-through
+     .ak-band  (home page)   - the compressed single room teaser
+
+   Design language: the site's own dark idiom (the footer's navy-blue ramp,
+   grain, and ring strata) pushed into a museum register. Archivo variable
+   is the only face, worked at both extremes of its width axis: condensed
+   black caps for monuments, extended light for placards.
+
+   Palette: brand tokens only. Ink room derived from the footer ramp
+   (#2E40FF / #1D2AD0 / #131C8E / #0A1152), text #EAF0FF, accent
+   var(--blue) #2230FE family, one scarce orange moment (var(--orange)).
+
+   Degrades: .no-js and .reduced render every room fully visible and
+   static. Without the portrait file, frames fall back to an engraved
+   plinth (.ak-noimg) so the wing still reads as intentional.
+   ========================================================================== */
+
+/* ============ WING TOKENS ============ */
+.ak-wing{
+  --ak-room:#070C3B;                 /* deep room, from the footer ramp family */
+  --ak-room-2:#05082B;               /* deepest corner of the room */
+  --ak-blue:#2E40FF;                 /* footer's lifted brand blue */
+  --ak-blue-soft:rgba(46,64,255,.32);
+  --ak-glow:#7B8CFF;                 /* light haze around the lamps */
+  --ak-paper:#EAF0FF;                /* text on dark, matches footer */
+  --ak-dim:rgba(234,240,255,.56);
+  --ak-faint:rgba(234,240,255,.30);
+  --ak-line:rgba(234,240,255,.14);
+  --ak-line-soft:rgba(234,240,255,.07);
+  position:relative;
+  margin:clamp(10px,1.2vw,18px);
+  border-radius:clamp(20px,2.4vw,34px);
+  overflow:hidden;
+  isolation:isolate;
+  color:var(--ak-paper);
+  background:
+    radial-gradient(120% 70% at 88% 0%, rgba(46,64,255,.30) 0%, rgba(46,64,255,0) 52%),
+    radial-gradient(90% 60% at 4% 30%, rgba(29,42,208,.24) 0%, rgba(29,42,208,0) 58%),
+    radial-gradient(100% 80% at 50% 108%, rgba(19,28,142,.36) 0%, rgba(19,28,142,0) 60%),
+    linear-gradient(168deg, #0E1560 0%, #0A1152 30%, var(--ak-room) 62%, var(--ak-room-2) 100%);
+}
+/* fine grain, same recipe as the footer card */
+.ak-wing::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27180%27%20height%3D%27180%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.85%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");
+  background-size:200px 200px;opacity:.05;mix-blend-mode:overlay;
+}
+/* ring strata rising from the lower left, the footer's signature, quieter here */
+.ak-wing::before{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  width:150%;aspect-ratio:1;left:-52%;bottom:-96%;border-radius:50%;
+  background:repeating-radial-gradient(circle, transparent 0 92px, rgba(234,240,255,.035) 92px 94px);
+  -webkit-mask-image:radial-gradient(closest-side,#000 52%,transparent 100%);
+          mask-image:radial-gradient(closest-side,#000 52%,transparent 100%);
+}
+.ak-wing > *{position:relative;z-index:1}
+.ak-wing ::selection{background:var(--ak-blue);color:var(--ak-paper)}
+.ak-wing :focus-visible{outline:2px solid var(--ak-glow);outline-offset:3px}
+
+/* rooms share the page grid */
+.ak-room{
+  position:relative;
+  padding:clamp(84px,12vh,150px) var(--pad);
+}
+
+/* ============ PLACARDS (museum labels) ============ */
+.ak-placard{
+  display:flex;align-items:center;gap:14px;
+  color:var(--ak-dim);
+}
+.ak-placard::after{
+  content:"";flex:1;height:1px;background:var(--ak-line);
+}
+.ak-placard .mono{color:inherit;white-space:nowrap}
+.ak-placard b{color:var(--ak-paper);font-weight:500}
+
+/* ============ ROOM 01 - THE ARRIVAL ============ */
+.ak-arrival{
+  min-height:min(96vh,1060px);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding-top:clamp(96px,14vh,170px);
+}
+.ak-name{
+  margin:auto 0;
+  font-weight:840;
+  font-variation-settings:'wdth' 68;
+  text-transform:uppercase;
+  line-height:.84;
+  letter-spacing:-.014em;
+  font-size:clamp(84px,15.8vw,292px);
+}
+.ak-name .ak-ln{display:block;overflow:hidden}
+.ak-name .ak-ch{display:inline-block;will-change:transform}
+/* second line hangs as an outline; a blue fill wipes across it on scroll */
+.ak-name .ak-outline{
+  position:relative;
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(234,240,255,.82);
+  margin-left:clamp(28px,7vw,150px);   /* stepped baseline, editorial offset */
+}
+.ak-name .ak-fill{
+  position:absolute;inset:0;left:0;
+  color:var(--ak-blue);
+  -webkit-text-stroke:0;
+  background:linear-gradient(100deg,#4A5CFF 0%, var(--ak-blue) 55%, #1D2AD0 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  clip-path:inset(0 100% 0 0);
+  pointer-events:none;
+}
+.ak-sub{
+  max-width:52ch;
+  margin-top:clamp(22px,3.4vh,40px);
+  font-size:clamp(15px,1.25vw,19px);
+  font-weight:330;
+  font-variation-settings:'wdth' 112;
+  line-height:1.6;
+  color:var(--ak-dim);
+}
+.ak-sub b{color:var(--ak-paper);font-weight:520}
+.ak-arrival-foot{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  padding-top:clamp(26px,4vh,48px);
+  border-top:1px solid var(--ak-line-soft);
+}
+.ak-coords{display:flex;gap:clamp(18px,3.4vw,56px);flex-wrap:wrap}
+.ak-coord{display:flex;flex-direction:column;gap:6px}
+.ak-coord .mono{color:var(--ak-faint)}
+.ak-coord b{
+  font-weight:480;font-size:14px;color:var(--ak-paper);
+  font-variation-settings:'wdth' 108;
+}
+.ak-enter{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--ak-dim);
+}
+.ak-enter .ak-tick{
+  display:inline-block;width:1px;height:34px;
+  background:linear-gradient(var(--ak-glow),transparent);
+  animation:ak-drip 2.2s ease-in-out infinite;
+}
+@keyframes ak-drip{
+  0%{transform:scaleY(.2);transform-origin:top;opacity:0}
+  45%{transform:scaleY(1);opacity:1}
+  100%{transform:scaleY(.2);transform-origin:bottom;opacity:0}
+}
+
+/* ============ ROOM 02 - THE PERSON (the lit portrait) ============ */
+.ak-person-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(32px,5vw,96px);
+  align-items:center;
+  margin-top:clamp(40px,7vh,92px);
+}
+/* enormous rotated wall label behind the frame */
+.ak-wall-word{
+  position:absolute;top:50%;right:calc(-1 * clamp(8px,1vw,20px));
+  transform:translateY(-50%) rotate(180deg);
+  writing-mode:vertical-rl;
+  font-weight:860;font-variation-settings:'wdth' 64;
+  font-size:clamp(70px,10vw,180px);
+  letter-spacing:.02em;text-transform:uppercase;
+  color:transparent;-webkit-text-stroke:1px rgba(234,240,255,.10);
+  user-select:none;pointer-events:none;
+}
+.ak-frame{
+  --mx:50%;--my:38%;--spot:0px;
+  position:relative;
+  /* children are all absolutely positioned, so the box must claim its own
+     width: with aspect-ratio alone, auto width resolves from empty content */
+  width:100%;
+  aspect-ratio:3/4;
+  max-width:560px;
+  margin-inline:auto;
+  border-radius:clamp(14px,1.6vw,22px);
+  overflow:hidden;
+  background:
+    radial-gradient(90% 70% at 70% 10%, rgba(46,64,255,.22) 0%, transparent 60%),
+    linear-gradient(160deg,#0C1250 0%, #080D3A 100%);
+  box-shadow:
+    0 0 0 1px var(--ak-line),
+    0 40px 90px rgba(3,5,26,.55),
+    0 0 120px rgba(46,64,255,.10);
+}
+.ak-frame img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 18%;
+  display:block;
+}
+/* base layer: navy duotone, the room's grading */
+.ak-ph-tone{
+  filter:grayscale(1) brightness(.94) contrast(1.06);
+}
+.ak-frame .ak-tint{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(165deg, rgba(46,64,255,.42) 0%, rgba(10,17,82,.55) 100%);
+  mix-blend-mode:color;
+}
+.ak-frame .ak-shade{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(5,8,43,.52) 0%, transparent 42%);
+}
+/* top layer: true color, revealed only inside the cursor's beam */
+.ak-ph-color{
+  -webkit-mask-image:radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0 58%, transparent 100%);
+          mask-image:radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0 58%, transparent 100%);
+}
+/* soft lamp that follows the same beam */
+.ak-frame .ak-lamp{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle calc(var(--spot) * 1.5) at var(--mx) var(--my), rgba(123,140,255,.20) 0%, transparent 70%);
+  mix-blend-mode:screen;
+}
+/* entrance slices: three vertical panes reconstruct the portrait */
+.ak-slice{will-change:transform}
+.ak-slice-1{clip-path:inset(0 66.7% 0 0)}
+.ak-slice-2{clip-path:inset(0 33.3% 0 33.4%)}
+.ak-slice-3{clip-path:inset(0 0 0 66.7%)}
+/* frame caption, engraved under the plinth */
+.ak-caption{
+  display:flex;justify-content:space-between;gap:16px;
+  max-width:560px;margin:14px auto 0;
+  color:var(--ak-faint);
+}
+.ak-hint{transition:opacity .4s ease}
+@media (hover:none){ .ak-hint{display:none} }
+.no-js .ak-hint,.reduced .ak-hint{display:none}
+/* missing portrait: the plinth waits, engraved */
+.ak-frame.ak-noimg img,
+.ak-frame.ak-noimg .ak-tint,
+.ak-frame.ak-noimg .ak-lamp{display:none}
+.ak-frame.ak-noimg::after{
+  content:"AK";
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-weight:860;font-variation-settings:'wdth' 66;
+  font-size:clamp(90px,10vw,170px);letter-spacing:.02em;
+  color:transparent;-webkit-text-stroke:1px rgba(234,240,255,.22);
+}
+/* copy column */
+.ak-person-copy .ak-cross{
+  font-weight:780;font-variation-settings:'wdth' 74;
+  font-size:clamp(34px,3.6vw,62px);
+  line-height:1.02;letter-spacing:-.01em;text-transform:uppercase;
+  margin:18px 0 22px;
+}
+.ak-person-copy .ak-cross em{
+  font-style:normal;color:transparent;
+  -webkit-text-stroke:1px rgba(234,240,255,.62);
+}
+.ak-body{
+  font-size:clamp(15px,1.2vw,18px);font-weight:330;
+  font-variation-settings:'wdth' 108;line-height:1.7;
+  color:var(--ak-dim);max-width:54ch;
+}
+.ak-body + .ak-body{margin-top:1em}
+.ak-body b{color:var(--ak-paper);font-weight:520}
+.ak-spec{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1px;margin-top:clamp(24px,3.4vh,40px);
+  background:var(--ak-line-soft);
+  border:1px solid var(--ak-line-soft);
+  border-radius:14px;overflow:hidden;
+  max-width:460px;
+}
+.ak-spec > div{background:rgba(5,8,43,.45);padding:14px 16px}
+.ak-spec .mono{color:var(--ak-faint);display:block;margin-bottom:6px}
+.ak-spec b{font-weight:500;font-size:14px;font-variation-settings:'wdth' 106}
+
+/* ============ ROOM 03 - THE STORY ============ */
+.ak-story-track{
+  position:relative;
+  margin-top:clamp(44px,7vh,90px);
+  padding-left:clamp(26px,4vw,64px);
+}
+.ak-thread{
+  position:absolute;left:6px;top:0;bottom:0;width:1px;
+  background:var(--ak-line-soft);
+}
+.ak-thread i{
+  position:absolute;inset:0;
+  background:linear-gradient(var(--ak-glow),var(--ak-blue));
+  transform:scaleY(0);transform-origin:top;
+}
+.ak-ch-block{
+  position:relative;
+  max-width:70ch;
+  padding:clamp(26px,4vh,48px) 0;
+}
+.ak-ch-block + .ak-ch-block{border-top:1px solid var(--ak-line-soft)}
+.ak-ch-num{
+  position:absolute;right:0;top:8px;
+  font-weight:860;font-variation-settings:'wdth' 64;
+  font-size:clamp(58px,7vw,124px);line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(234,240,255,.14);
+  transition:color .7s ease, -webkit-text-stroke-color .7s ease;
+  user-select:none;
+}
+.ak-ch-block.on .ak-ch-num{color:var(--ak-blue);-webkit-text-stroke-color:transparent}
+.ak-ch-block h3{
+  font-weight:700;font-variation-settings:'wdth' 82;
+  font-size:clamp(22px,2.2vw,34px);letter-spacing:-.005em;
+  margin-bottom:12px;
+}
+.ak-ch-block .mono{color:var(--ak-faint);display:block;margin-bottom:14px}
+
+/* ============ ROOM 04 - THE PHILOSOPHY (lit quote) ============ */
+.ak-quote{padding:0 var(--pad)}
+.ak-quote-track{height:280vh;position:relative}
+.ak-quote-stick{
+  position:sticky;top:0;height:100vh;height:100svh;
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(26px,5vh,52px);
+}
+.ak-quote-line{
+  font-weight:760;font-variation-settings:'wdth' 76;
+  font-size:clamp(38px,5.2vw,92px);
+  line-height:1.04;letter-spacing:-.012em;
+  max-width:18ch;
+}
+.ak-w{
+  display:inline-block;
+  opacity:.13;filter:blur(5px);
+  transition:opacity .45s ease, filter .45s ease, color .45s ease;
+}
+.ak-w.lit{opacity:1;filter:blur(0)}
+.ak-w.ak-spark.lit{color:var(--orange)}
+.ak-quote-by{color:var(--ak-faint)}
+.ak-quote-by b{color:var(--ak-dim);font-weight:500}
+
+/* ============ ROOM 05 - THE MIND (growth system) ============ */
+.ak-sys-grid{
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:clamp(32px,5vw,90px);align-items:center;
+  margin-top:clamp(40px,6vh,80px);
+}
+.ak-sys-copy h3{
+  font-weight:760;font-variation-settings:'wdth' 76;
+  font-size:clamp(30px,3.2vw,54px);line-height:1.04;
+  letter-spacing:-.01em;text-transform:uppercase;margin-bottom:20px;
+}
+.ak-sys{width:100%;height:auto;display:block;overflow:visible}
+.ak-sys .ak-edge{
+  stroke:rgba(234,240,255,.22);stroke-width:1;fill:none;
+  stroke-dasharray:340;stroke-dashoffset:340;
+}
+.ak-sys .ak-node circle{
+  fill:rgba(5,8,43,.72);
+  stroke:rgba(234,240,255,.30);stroke-width:1;
+  transition:stroke .35s ease, filter .35s ease;
+}
+.ak-sys .ak-node text{
+  fill:var(--ak-dim);
+  font-family:var(--sans);font-size:12.5px;font-weight:520;letter-spacing:.10em;
+  text-anchor:middle;text-transform:uppercase;
+  transition:fill .35s ease;
+}
+.ak-sys .ak-core circle{
+  fill:var(--ak-blue);stroke:none;
+  filter:drop-shadow(0 0 26px rgba(46,64,255,.65));
+  animation:ak-pulse 4.5s ease-in-out infinite;
+}
+.ak-sys .ak-core text{fill:#fff;font-weight:700}
+@keyframes ak-pulse{
+  0%,100%{filter:drop-shadow(0 0 18px rgba(46,64,255,.45))}
+  50%{filter:drop-shadow(0 0 36px rgba(123,140,255,.75))}
+}
+.ak-sys .ak-node{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease}
+.ak-sys.on .ak-node{opacity:1;transform:none}
+.ak-sys.on .ak-edge{transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);stroke-dashoffset:0}
+.ak-sys .ak-node:hover circle,
+.ak-sys .ak-node:focus-visible circle{stroke:var(--ak-glow);filter:drop-shadow(0 0 18px rgba(123,140,255,.5))}
+.ak-sys .ak-node:hover text{fill:var(--ak-paper)}
+
+/* ============ MARQUEE DIVIDER ============ */
+.ak-mq{
+  overflow:hidden;padding:clamp(30px,5vh,56px) 0;
+  border-top:1px solid var(--ak-line-soft);
+  border-bottom:1px solid var(--ak-line-soft);
+  display:flex;flex-direction:column;gap:10px;
+}
+.ak-mq-row{display:flex;white-space:nowrap;width:max-content}
+.ak-mq-seq{
+  display:flex;align-items:baseline;
+  animation:ak-scroll 46s linear infinite;
+}
+.ak-mq-row.rtl .ak-mq-seq{animation-direction:reverse;animation-duration:56s}
+.ak-mq:hover .ak-mq-seq{animation-play-state:paused}
+.ak-mq-seq span{
+  font-weight:820;font-variation-settings:'wdth' 66;
+  font-size:clamp(38px,5.6vw,96px);line-height:1;
+  text-transform:uppercase;letter-spacing:-.01em;
+  color:transparent;-webkit-text-stroke:1px rgba(234,240,255,.24);
+  padding-right:.7em;
+}
+.ak-mq-seq span::after{content:"\00B7";padding-left:.7em;color:rgba(234,240,255,.20);-webkit-text-stroke:0}
+.ak-mq-seq span.solid{color:rgba(234,240,255,.9);-webkit-text-stroke:0}
+@keyframes ak-scroll{to{transform:translateX(-50%)}}
+
+/* ============ ROOM 06 - THE VISION + CLOSING ============ */
+.ak-close{
+  text-align:center;
+  padding-bottom:clamp(100px,14vh,180px);
+  background:
+    radial-gradient(70% 46% at 50% 118%, rgba(46,64,255,.34) 0%, rgba(46,64,255,0) 62%),
+    radial-gradient(46% 30% at 50% 112%, rgba(123,140,255,.22) 0%, transparent 70%);
+}
+.ak-vision-copy{
+  max-width:64ch;margin:clamp(30px,5vh,56px) auto 0;
+  font-size:clamp(16px,1.35vw,20px);font-weight:330;
+  font-variation-settings:'wdth' 108;line-height:1.7;color:var(--ak-dim);
+}
+.ak-vision-copy b{color:var(--ak-paper);font-weight:520}
+.ak-close-lines{
+  margin:clamp(48px,8vh,100px) 0 clamp(30px,5vh,54px);
+  font-weight:800;font-variation-settings:'wdth' 72;
+  font-size:clamp(34px,4.6vw,80px);line-height:1.06;
+  letter-spacing:-.012em;text-transform:uppercase;
+}
+.ak-close-lines .ln{display:block}
+.ak-close-lines .ghost{
+  color:transparent;-webkit-text-stroke:1.2px rgba(234,240,255,.55);
+}
+.ak-sig{
+  display:block;margin:0 auto clamp(34px,5vh,58px);
+  font-style:italic;font-weight:270;
+  font-variation-settings:'wdth' 120;
+  font-size:clamp(24px,2.6vw,42px);letter-spacing:.01em;
+  color:var(--ak-glow);
+}
+.ak-cta-row{display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap}
+.ak-cta-row .cta-book{background:var(--ak-paper);color:var(--ink)}
+.ak-cta-row .ak-alt{
+  color:var(--ak-dim);
+  border-bottom:1px solid var(--ak-line);
+  padding-bottom:3px;
+  transition:color .3s ease, border-color .3s ease;
+}
+.ak-cta-row .ak-alt:hover{color:var(--ak-paper);border-color:var(--ak-glow)}
+
+/* ============ GALLERY RAIL (wayfinding dots) ============ */
+.ak-rail{
+  position:absolute;top:0;bottom:0;right:clamp(14px,1.8vw,30px);
+  width:10px;pointer-events:none;z-index:2;
+}
+.ak-rail-in{
+  position:sticky;top:50vh;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:14px;align-items:center;
+}
+.ak-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(234,240,255,.22);
+  transition:background .4s ease, transform .4s ease, box-shadow .4s ease;
+}
+.ak-dot.on{
+  background:var(--ak-glow);transform:scale(1.5);
+  box-shadow:0 0 12px rgba(123,140,255,.8);
+}
+@media (max-width:1023px){ .ak-rail{display:none} }
+
+/* ============ HOME BAND (compressed room) ============ */
+.ak-band .ak-room{padding-top:clamp(70px,10vh,120px);padding-bottom:clamp(70px,10vh,120px)}
+.ak-band-grid{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
+  gap:clamp(30px,5vw,80px);align-items:center;
+  margin-top:clamp(36px,5vh,64px);
+}
+.ak-band .ak-name{font-size:clamp(64px,9.6vw,176px)}
+.ak-band .ak-frame{max-width:420px;aspect-ratio:3/4}
+.ak-band .ak-sub{margin-top:clamp(18px,2.6vh,30px)}
+.ak-band-link{
+  display:inline-flex;align-items:center;gap:12px;
+  margin-top:clamp(26px,4vh,44px);
+  color:var(--ak-paper);
+  font-weight:520;font-size:15px;font-variation-settings:'wdth' 106;
+}
+.ak-band-link .ak-arr{
+  display:inline-grid;place-items:center;
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--ak-line);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), background .35s ease, border-color .35s ease;
+}
+.ak-band-link:hover .ak-arr{
+  transform:translateX(6px);
+  background:var(--ak-blue);border-color:var(--ak-blue);
+}
+.ak-band-link:hover u{text-decoration-color:var(--ak-glow)}
+.ak-band-link u{
+  text-decoration:underline;text-underline-offset:6px;
+  text-decoration-color:var(--ak-line);
+  transition:text-decoration-color .35s ease;
+}
+
+/* ============ IN-WING REVEAL UNITS (choreographed by founder.js) ============ */
+.akv{opacity:0;transform:translateY(30px)}
+.no-js .akv,.reduced .akv{opacity:1;transform:none}
+.no-js .ak-name .ak-fill,.reduced .ak-name .ak-fill{clip-path:inset(0 0 0 0)}
+.no-js .ak-thread i,.reduced .ak-thread i{transform:none}
+.no-js .ak-w,.reduced .ak-w{opacity:1;filter:none}
+.no-js .ak-sys .ak-node,.reduced .ak-sys .ak-node{opacity:1;transform:none;animation:none}
+.no-js .ak-sys .ak-edge,.reduced .ak-sys .ak-edge{stroke-dashoffset:0}
+.no-js .ak-ch-block .ak-ch-num{color:var(--ak-blue);-webkit-text-stroke-color:transparent}
+.no-js .ak-quote-track,.reduced .ak-quote-track{height:auto}
+.no-js .ak-quote-stick,.reduced .ak-quote-stick{position:static;height:auto;padding:clamp(60px,10vh,120px) 0}
+.no-js .ak-ph-color,.reduced .ak-ph-color{display:none}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1023px){
+  .ak-person-grid,.ak-sys-grid,.ak-band-grid{grid-template-columns:1fr}
+  .ak-wall-word{display:none}
+  .ak-ch-num{position:static;display:block;margin-bottom:6px;font-size:clamp(44px,10vw,80px)}
+  .ak-frame{max-width:520px;margin-inline:0}
+  .ak-caption{margin-inline:0}
+}
+@media (max-width:600px){
+  .ak-room{padding-left:calc(var(--pad));padding-right:calc(var(--pad))}
+  .ak-name{font-size:clamp(58px,18.5vw,120px);line-height:.9}
+  .ak-name .ak-outline{margin-left:8vw}
+  .ak-quote-line{font-size:clamp(30px,9vw,44px)}
+  .ak-quote-track{height:220vh}
+  .ak-spec{grid-template-columns:1fr 1fr}
+  .ak-arrival-foot{flex-direction:column;align-items:flex-start;gap:20px}
+  .ak-mq-seq span{font-size:clamp(30px,9vw,48px)}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion:reduce){
+  .ak-enter .ak-tick,
+  .ak-sys .ak-core circle,
+  .ak-mq-seq{animation:none}
+  .ak-w,.ak-ch-num,.ak-sys .ak-node,.ak-sys .ak-edge{transition:none}
+}
