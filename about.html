@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="/assets/css/main.css?v=29">
 <link rel="stylesheet" href="/assets/css/services.css?v=2">
 <link rel="stylesheet" href="/assets/css/work-index.css?v=25">
-<link rel="stylesheet" href="/assets/css/founder.css?v=4">
+<link rel="stylesheet" href="/assets/css/founder.css?v=5">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -282,6 +282,9 @@
       "@id": "https://www.skyboundscaling.com/#founder",
       "name": "Ahmad Khalid",
       "jobTitle": "Founder",
+      "description": "Ahmad Khalid is a digital marketer, entrepreneur, and growth strategist based in Toronto, and the founder of Skybound Scaling, a digital marketing and growth agency.",
+      "url": "https://www.skyboundscaling.com/about/#founder",
+      "image": "https://www.skyboundscaling.com/assets/images/founder/ahmad-khalid-portrait.webp",
       "worksFor": {
         "@id": "https://www.skyboundscaling.com/#organization"
       },
@@ -364,33 +367,24 @@
 
   <!-- ================================================================
        THE FOUNDER
-       One quiet room. Typography only, no images, no custom motion.
+       Quiet and native to the page: label, name, portrait, short copy.
        ================================================================ -->
-  <section id="founder" class="ak-wing" aria-label="Ahmad Khalid, founder of Skybound Scaling">
-    <div class="ak-room">
-      <p class="ak-eyebrow mono rv">The founder</p>
-      <h2 class="ak-name rv" aria-label="Ahmad Khalid, founder of Skybound Scaling">
-        <span class="ak-ln ak-ln-light" aria-hidden="true">AHMAD</span>
-        <span class="ak-ln ak-ln-sheen" aria-hidden="true">KHALID</span>
-      </h2>
-      <div class="ak-grid">
-        <div>
-          <p class="ak-lede rv">Digital marketer, entrepreneur, and growth strategist. Ahmad Khalid founded Skybound Scaling on one conviction: <b>creativity and performance are one discipline</b>, not two departments.</p>
-          <p class="ak-body rv">His work spans the whole of digital growth. Conversion focused web design, brand identity, SEO, Google and Meta advertising, content, lead generation, and AI automation, carried to one standard and engineered as one system for long term business growth.</p>
-        </div>
-        <img class="ak-portrait rv" src="/assets/images/founder/ahmad-khalid-portrait.webp" alt="Ahmad Khalid, founder of Skybound Scaling" width="768" height="1254" loading="lazy" decoding="async">
+  <section id="founder" class="fdr" aria-labelledby="fdr-title">
+    <div class="fdr-grid">
+      <div>
+        <p class="mono fdr-label rv">The founder</p>
+        <h2 class="fdr-title rv" id="fdr-title">Ahmad Khalid<span class="punct">.</span></h2>
+        <p class="mono fdr-role rv">Founder of Skybound Scaling</p>
+        <p class="fdr-lede rv">Ahmad Khalid is a digital marketer, entrepreneur, and growth strategist. He built Skybound Scaling on one conviction: <b>creativity and performance are one discipline</b>, not two departments.</p>
+        <p class="fdr-body rv">His work spans the whole of digital growth: conversion focused web design, brand identity, SEO, Google Ads and Meta Ads, content, lead generation, and AI automation, engineered as one system for long term business growth.</p>
+        <p class="fdr-quote rv">Marketing should not just make a business look better. It should help the business <em>grow</em>.</p>
+        <p class="mono fdr-meta rv">Toronto, Canada &middot; Founded 2025</p>
       </div>
-      <figure class="ak-quote rv">
-        <blockquote>
-          <p>Marketing should not just make a business look better. It should help the business <em>grow.</em></p>
-        </blockquote>
-        <figcaption class="mono">Ahmad Khalid &middot; <b>Founder of Skybound Scaling</b></figcaption>
-      </figure>
-      <div class="ak-coords rv">
-        <div class="ak-coord"><span class="mono">Base</span><b>Toronto, Canada</b></div>
-        <div class="ak-coord"><span class="mono">Founded</span><b>2025</b></div>
-        <div class="ak-coord"><span class="mono">Motto</span><b>Growth, engineered.</b></div>
-      </div>
+      <img class="fdr-portrait rv"
+           src="/assets/images/founder/ahmad-khalid-portrait-480.webp"
+           srcset="/assets/images/founder/ahmad-khalid-portrait-240.webp 240w, /assets/images/founder/ahmad-khalid-portrait-480.webp 480w, /assets/images/founder/ahmad-khalid-portrait.webp 768w"
+           sizes="(max-width: 820px) min(64vw, 300px), 300px"
+           alt="Ahmad Khalid, founder of Skybound Scaling" width="768" height="1254" loading="lazy" decoding="async">
     </div>
   </section>
 
@@ -586,6 +580,5 @@
 <!-- Site -->
 <script src="/assets/js/core.js?v=19" defer></script>
 <script src="/assets/js/services.js" defer></script>
-<script src="/assets/js/founder.js?v=3" defer></script>
 </body>
 </html>
