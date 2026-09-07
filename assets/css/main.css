@@ -79,9 +79,11 @@
   --maxw:1500px;
   --pad:max(clamp(20px,4vw,64px), calc((100% - var(--maxw)) * .5));
   --header-h:84px;
-  --nav-logo-h:58px;  /* nav lockup height; steps down at the breakpoints below.
-                         Named apart from .man-clients' own --logo-h, which sizes
-                         the client marquee marks and means something different. */
+  --nav-logo-fs:21px; /* nav lockup type size; the whole live-text lockup
+                         scales from this one value. Steps down at the
+                         breakpoints below. Named apart from .man-clients'
+                         own --logo-h, which sizes the client marquee marks
+                         and means something different. */
 }
 *{margin:0;padding:0;box-sizing:border-box}
 /* Keep every word intact on one line: never auto-hyphenate or break inside a word */
@@ -239,30 +241,30 @@ body.on-dark .nav-toggle-inner::after{background:var(--paper)}
 }
 
 /* ---- Brand logo ----
-   The horizontal lockup (monogram + stacked wordmark) is the nav-bar form of
-   the official mark: the square stacked lockup would render its type at ~5px
-   inside an 84px bar. Height is the only thing set - width follows the image's
-   own ratio - and the intrinsic width/height on the <img> reserves the box
-   before the file lands, so the header never reflows.
-   Two files ship: the standard mark, and a variant whose near-black SKYBOUND
-   line is lifted to off-white for the dark header state. Both are stacked in
-   the same grid cell and cross-faded, so the swap has nothing to lay out. */
+   The Clearance lockup, built the way the brand kit recommends for the nav:
+   the disc mark inlined as SVG on currentColor, the wordmark as live Archivo
+   text. One font-size scales the whole lockup, the dark header state is a
+   plain color change (no second image, nothing to lay out), and it renders
+   crisp at every zoom. Masters live in assets/brand/ with the kit README. */
 .logo{
-  display:grid;align-items:center;
-  grid-template-rows:var(--nav-logo-h,58px);
-  flex:none;line-height:0;
+  display:flex;align-items:baseline;gap:.4em;
+  font-size:var(--nav-logo-fs,21px);
+  color:var(--ink);line-height:1;flex:none;
 }
-.logo img{
-  grid-area:1/1;
-  /* Sized from the token, not height:100%. The grid row is auto-sized, so a
-     percentage height would resolve against the image's own intrinsic 200px
-     and the lockup would render at full size, overflowing the bar. */
-  height:var(--nav-logo-h,58px);width:auto;display:block;
-  transition:opacity .45s cubic-bezier(.2,.7,.2,1);
+.logo .logo-mark{
+  height:1.04em;width:1.04em;margin-bottom:-.165em;
+  flex:none;fill:currentColor;
 }
-.logo .logo-light{opacity:0}
-body.on-dark #site-header .logo .logo-dark{opacity:0}
-body.on-dark #site-header .logo .logo-light{opacity:1}
+.logo .logo-word{
+  font-family:var(--sans);font-weight:600;
+  font-variation-settings:'wght' 620,'wdth' 112;
+  letter-spacing:.05em;word-spacing:.12em;
+  line-height:1;white-space:nowrap;
+}
+/* the brand's own blue takes the full stop; on dark it joins the wordmark */
+.logo .logo-dot{color:#155EEF;font-style:normal;margin-left:-.105em}
+body.on-dark #site-header .logo .logo-dot,
+body.menu-open .logo .logo-dot{color:currentColor}
 nav.desktop-nav{display:flex;gap:36px}
 nav.desktop-nav a{
   font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
@@ -1551,16 +1553,15 @@ body.menu-open .logo{color:#fff}
   header .cta-book.cta-compact{display:none}
   .nav-toggle{display:flex}
   /* the bar loses its nav and CTA here, so the lockup can breathe a little */
-  :root{--nav-logo-h:54px}
+  :root{--nav-logo-fs:20px}
 }
-/* Phones: the wordmark's two lines need to stay legible, and the lockup has
-   to clear the hamburger with real space between them, so it steps down
-   rather than shrinking to fit. */
+/* Phones: the wordmark has to clear the hamburger with real space between
+   them, so it steps down rather than shrinking to fit. */
 @media (max-width:600px){
-  :root{--nav-logo-h:46px}
+  :root{--nav-logo-fs:16.5px}
 }
 @media (max-width:380px){
-  :root{--nav-logo-h:40px}
+  :root{--nav-logo-fs:14.5px}
 }
 
 /* Performance: drop expensive backdrop blur on phones/tablets - the glass
