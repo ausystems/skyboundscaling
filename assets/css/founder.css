@@ -1,38 +1,32 @@
 /* ==========================================================================
-   SKYBOUND SCALING - founder.css  (v2)
-   The founder gallery: a dark exhibition wing for Ahmad Khalid.
+   SKYBOUND SCALING - founder.css  (v3, minimal)
+   The founder section: one quiet dark room, typography only.
 
-   Two installations share this file:
-     .ak-wing  (about page)  - the full six room walk-through
-     .ak-band  (home page)   - the compressed single room teaser
+   Two placements share this file:
+     .ak-wing            (about page)  - the full section
+     .ak-wing.ak-band    (home page)   - the compact doorway to it
 
-   v2 design language, after the refinement pass:
-     One signature type system of paired contrast. Every headline pairs an
-     ultralight extended line against a heavy condensed line that carries a
-     scrolling light sheen. No outline strokes anywhere. Hairlines at .08
-     alpha do the structural work. The room sits deeper than v1, near black
-     with blue lamplight, so the type and the portrait carry the light.
+   v3 replaces the six room gallery with a single calm composition:
+   no images, no pinned scenes, no canvas, no marquee, no cursor
+   effects, no custom animation. The only motion is the site's own
+   .rv fade system from core.js, and every state below is static, so
+   there is nothing left that can stutter.
 
-   Palette: brand tokens only. The dark ramp extends the footer family
-   downward, text #EAF0FF, accent #2E40FF and its glow #7B8CFF, and one
-   scarce orange moment reserved for the final word of the quote.
-
-   Degrades: .no-js and .reduced render every room complete and static.
-   The Three.js orbital in room 05 falls back to a static SVG. Without the
-   portrait file, frames fall back to an engraved plinth (.ak-noimg).
+   Type: the one signature pairing kept from the gallery. An ultralight
+   extended line over a heavy condensed line that carries a fixed light
+   gradient. Palette: the footer's dark ramp, paper text, the brand's
+   scarce orange reserved for the last word of the quote.
    ========================================================================== */
 
-/* ============ WING TOKENS ============ */
 .ak-wing{
-  --ak-room:#04051D;                 /* near black, blue cast */
-  --ak-room-2:#060A38;               /* lifted end of the ramp */
+  --ak-room:#04051D;
+  --ak-room-2:#060A38;
   --ak-blue:#2E40FF;
   --ak-glow:#7B8CFF;
   --ak-paper:#EAF0FF;
-  --ak-dim:rgba(234,240,255,.52);
-  --ak-faint:rgba(234,240,255,.28);
-  --ak-hair:rgba(234,240,255,.08);
-  --ak-hair-strong:rgba(234,240,255,.16);
+  --ak-dim:rgba(234,240,255,.56);
+  --ak-faint:rgba(234,240,255,.30);
+  --ak-hair:rgba(234,240,255,.10);
   position:relative;
   margin:clamp(10px,1.2vw,18px);
   border-radius:clamp(20px,2.4vw,34px);
@@ -40,498 +34,158 @@
   isolation:isolate;
   color:var(--ak-paper);
   background:
-    radial-gradient(110% 60% at 82% 0%, rgba(46,64,255,.26) 0%, rgba(46,64,255,0) 54%),
-    radial-gradient(80% 50% at 0% 38%, rgba(29,42,208,.16) 0%, rgba(29,42,208,0) 60%),
-    radial-gradient(90% 70% at 50% 112%, rgba(46,64,255,.20) 0%, rgba(46,64,255,0) 58%),
-    linear-gradient(170deg, var(--ak-room-2) 0%, var(--ak-room) 40%, #030414 100%);
+    radial-gradient(100% 56% at 84% 0%, rgba(46,64,255,.22) 0%, rgba(46,64,255,0) 54%),
+    radial-gradient(80% 60% at 0% 100%, rgba(29,42,208,.16) 0%, rgba(29,42,208,0) 58%),
+    linear-gradient(168deg, var(--ak-room-2) 0%, var(--ak-room) 46%, #030414 100%);
 }
-/* fine grain, the footer's recipe */
+/* fine grain, the footer's recipe; the room's only texture */
 .ak-wing::after{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27180%27%20height%3D%27180%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.85%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");
-  background-size:200px 200px;opacity:.045;mix-blend-mode:overlay;
-}
-/* two slow aurora lamps behind everything: the room's living light */
-.ak-wing::before{
-  content:"";position:absolute;z-index:0;pointer-events:none;inset:-20%;
-  background:
-    radial-gradient(34% 26% at 26% 22%, rgba(46,64,255,.20) 0%, transparent 70%),
-    radial-gradient(30% 24% at 76% 64%, rgba(123,140,255,.10) 0%, transparent 70%);
-  animation:ak-aurora 46s ease-in-out infinite alternate;
-}
-@keyframes ak-aurora{
-  0%{transform:translate3d(-2%, -1.5%, 0) scale(1)}
-  100%{transform:translate3d(2%, 2%, 0) scale(1.06)}
+  background-size:200px 200px;opacity:.04;mix-blend-mode:overlay;
 }
 .ak-wing > *{position:relative;z-index:1}
 .ak-wing ::selection{background:var(--ak-blue);color:var(--ak-paper)}
 .ak-wing :focus-visible{outline:2px solid var(--ak-glow);outline-offset:3px}
 
-.ak-room{
-  position:relative;
-  padding:clamp(96px,13vh,168px) var(--pad);
-}
+.ak-room{padding:clamp(96px,13vh,170px) var(--pad)}
 
-/* ============ PLACARD (quiet wayfinding, one per room) ============ */
-.ak-placard{
-  display:flex;align-items:baseline;gap:18px;
+.ak-eyebrow{
   color:var(--ak-faint);
+  margin-bottom:clamp(28px,4.5vh,52px);
 }
-.ak-placard .ak-ix{
-  font-size:11px;font-weight:500;letter-spacing:.1em;
-  color:var(--ak-glow);
-}
-.ak-placard::after{content:"";flex:1;align-self:center;height:1px;background:var(--ak-hair)}
-.ak-placard b{color:var(--ak-dim);font-weight:500}
 
-/* ============ THE SIGNATURE TYPE PAIR ============ */
-/* light line: ultralight, extended, airborne */
+/* the signature pair: light over mass, mass carrying a fixed light gradient */
 .ak-name{
-  margin:auto 0;
   text-transform:uppercase;
-  font-size:clamp(72px,13vw,236px);
-  line-height:.94;
+  font-size:clamp(58px,9.5vw,164px);
+  line-height:.96;
   letter-spacing:.005em;
+  margin-bottom:clamp(34px,5.5vh,64px);
 }
-.ak-name .ak-ln{display:block;overflow:hidden}
-.ak-name .ak-ch{display:inline-block;will-change:transform}
+.ak-name .ak-ln{display:block}
 .ak-ln-light{
   font-weight:250;
   font-variation-settings:'wdth' 106;
-  color:rgba(234,240,255,.84);
+  color:rgba(234,240,255,.82);
 }
-/* heavy line: condensed mass carrying a light sheen that scrolls through it */
-.ak-ln-sheen{margin-left:clamp(20px,4.5vw,96px)}
-.ak-ln-sheen .ak-mass{
-  display:inline-block;will-change:transform;
+.ak-ln-sheen{
+  margin-left:clamp(16px,3.4vw,64px);
   font-weight:790;
   font-variation-settings:'wdth' 70;
   letter-spacing:-.012em;
   background:linear-gradient(102deg,
-    rgba(234,240,255,.22) 0%,
-    #9FB0FF 26%,
-    #4A5CFF 44%,
-    var(--ak-blue) 58%,
-    #1D2AD0 72%,
-    rgba(234,240,255,.20) 100%);
-  background-size:240% 100%;
-  background-position:96% 0;
+    rgba(234,240,255,.30) 0%,
+    #9FB0FF 22%,
+    #4A5CFF 46%,
+    var(--ak-blue) 64%,
+    #1D2AD0 100%);
+  background-size:160% 100%;
+  background-position:34% 0;
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;color:transparent;
 }
-.ak-sub{
-  max-width:44ch;
-  margin-top:clamp(26px,4vh,48px);
-  font-size:clamp(15px,1.2vw,18px);
+
+.ak-lede{
+  max-width:46ch;
+  font-size:clamp(18px,1.55vw,23px);
+  font-weight:330;
+  font-variation-settings:'wdth' 108;
+  line-height:1.55;
+  color:rgba(234,240,255,.86);
+}
+.ak-lede b{color:var(--ak-paper);font-weight:520}
+.ak-body{
+  max-width:52ch;
+  margin-top:1.2em;
+  font-size:clamp(15px,1.15vw,17.5px);
   font-weight:320;
-  font-variation-settings:'wdth' 110;
-  line-height:1.7;
+  font-variation-settings:'wdth' 108;
+  line-height:1.75;
   color:var(--ak-dim);
 }
-.ak-sub b{color:var(--ak-paper);font-weight:500}
 
-/* ============ ROOM 01 - THE ARRIVAL ============ */
-.ak-arrival{
-  min-height:min(96vh,1040px);
-  display:flex;flex-direction:column;justify-content:space-between;
-  padding-top:clamp(100px,15vh,180px);
+.ak-quote{
+  margin:clamp(56px,9vh,110px) 0 0;
 }
-.ak-arrival-foot{
-  display:flex;justify-content:space-between;align-items:flex-end;gap:28px;
-  padding-top:clamp(24px,3.6vh,42px);
+.ak-quote blockquote p{
+  max-width:24ch;
+  font-size:clamp(26px,3vw,48px);
+  font-weight:600;
+  font-variation-settings:'wdth' 88;
+  letter-spacing:-.012em;
+  line-height:1.18;
+}
+.ak-quote em{font-style:normal;color:var(--orange)}
+.ak-quote figcaption{
+  margin-top:clamp(18px,2.6vh,28px);
+  color:var(--ak-faint);
+}
+.ak-quote figcaption b{color:var(--ak-dim);font-weight:500}
+
+.ak-coords{
+  display:flex;gap:clamp(28px,5vw,90px);flex-wrap:wrap;
+  margin-top:clamp(56px,9vh,110px);
+  padding-top:clamp(24px,3.6vh,40px);
   border-top:1px solid var(--ak-hair);
 }
-.ak-coords{display:flex;gap:clamp(24px,4.5vw,84px);flex-wrap:wrap}
 .ak-coord{display:flex;flex-direction:column;gap:7px}
 .ak-coord .mono{color:var(--ak-faint)}
 .ak-coord b{
   font-weight:440;font-size:13.5px;color:var(--ak-paper);
   font-variation-settings:'wdth' 106;letter-spacing:.01em;
 }
-.ak-enter{display:inline-flex;align-items:center;gap:12px;color:var(--ak-faint)}
-.ak-enter .ak-tick{
-  display:inline-block;width:1px;height:44px;
-  background:linear-gradient(var(--ak-glow),transparent);
-  animation:ak-drip 2.6s cubic-bezier(.45,0,.2,1) infinite;
-}
-@keyframes ak-drip{
-  0%{transform:scaleY(.12);transform-origin:top;opacity:0}
-  40%{transform:scaleY(1);opacity:.9}
-  100%{transform:scaleY(.12);transform-origin:bottom;opacity:0}
-}
 
-/* ============ ROOM 02 - THE PERSON (the lit portrait) ============ */
-.ak-person-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(40px,6vw,110px);
-  align-items:center;
-  margin-top:clamp(52px,8vh,104px);
-}
-.ak-cross{
-  margin:0 0 clamp(22px,3vh,34px);
-  text-transform:uppercase;
-  font-size:clamp(30px,3.1vw,52px);
-  line-height:1.05;letter-spacing:.004em;
-}
-.ak-cross .lt{
-  display:block;
-  font-weight:240;font-variation-settings:'wdth' 108;
-  color:rgba(234,240,255,.62);
-}
-.ak-cross .hv{
-  display:block;
-  font-weight:760;font-variation-settings:'wdth' 72;
-  letter-spacing:-.01em;
-}
-.ak-body{
-  font-size:clamp(14.5px,1.12vw,17px);font-weight:320;
-  font-variation-settings:'wdth' 108;line-height:1.75;
-  color:var(--ak-dim);max-width:46ch;
-}
-.ak-body + .ak-body{margin-top:1.1em}
-.ak-body b{color:var(--ak-paper);font-weight:500}
-/* spec: a single hairline row system, no boxes */
-.ak-spec{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:0 clamp(24px,3vw,48px);
-  margin:clamp(28px,4vh,46px) 0 0;
-  max-width:440px;
-}
-.ak-spec > div{
-  padding:13px 0;
-  border-top:1px solid var(--ak-hair);
-  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
-}
-.ak-spec dt{color:var(--ak-faint);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
-.ak-spec dd{margin:0;font-weight:460;font-size:13.5px;font-variation-settings:'wdth' 106}
-
-/* the frame */
-.ak-fig{perspective:1200px}
-.ak-frame{
-  --mx:50%;--my:38%;--spot:0px;
-  position:relative;
-  /* children are all absolutely positioned, so the box must claim its own
-     width: with aspect-ratio alone, auto width resolves from empty content */
-  width:100%;
-  aspect-ratio:3/4;
-  max-width:540px;
-  margin-inline:auto;
-  border-radius:clamp(16px,1.8vw,24px);
-  overflow:hidden;
-  transform-style:preserve-3d;
-  background:
-    radial-gradient(90% 66% at 68% 8%, rgba(46,64,255,.16) 0%, transparent 62%),
-    linear-gradient(164deg,#0A0F46 0%, #050727 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(234,240,255,.07),
-    0 0 0 1px rgba(234,240,255,.07),
-    0 60px 120px rgba(1,2,14,.62),
-    0 0 140px rgba(46,64,255,.08);
-}
-.ak-frame img{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:50% 16%;
-  display:block;
-}
-.ak-ph-tone{filter:grayscale(1) brightness(.9) contrast(1.08)}
-.ak-frame .ak-tint{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(168deg, rgba(46,64,255,.38) 0%, rgba(6,8,40,.55) 100%);
-  mix-blend-mode:color;
-}
-.ak-frame .ak-shade{
-  position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to top, rgba(3,4,20,.55) 0%, transparent 40%);
-}
-.ak-ph-color{
-  -webkit-mask-image:radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0 56%, transparent 100%);
-          mask-image:radial-gradient(circle var(--spot) at var(--mx) var(--my), #000 0 56%, transparent 100%);
-}
-.ak-frame .ak-lamp{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle calc(var(--spot) * 1.6) at var(--mx) var(--my), rgba(123,140,255,.16) 0%, transparent 70%);
-  mix-blend-mode:screen;
-}
-.ak-slice{will-change:transform}
-.ak-slice-1{clip-path:inset(0 66.7% 0 0)}
-.ak-slice-2{clip-path:inset(0 33.3% 0 33.4%)}
-.ak-slice-3{clip-path:inset(0 0 0 66.7%)}
-.ak-caption{
-  display:flex;justify-content:space-between;gap:16px;
-  max-width:540px;margin:16px auto 0;
-  color:var(--ak-faint);
-}
-.ak-hint{transition:opacity .4s ease}
-@media (hover:none){ .ak-hint{display:none} }
-.no-js .ak-hint,.reduced .ak-hint{display:none}
-/* missing portrait: the plinth waits, engraved */
-.ak-frame.ak-noimg img,
-.ak-frame.ak-noimg .ak-tint,
-.ak-frame.ak-noimg .ak-lamp{display:none}
-.ak-frame.ak-noimg::after{
-  content:"AK";
-  position:absolute;inset:0;display:grid;place-items:center;
-  font-weight:210;font-variation-settings:'wdth' 108;
-  font-size:clamp(88px,9vw,150px);letter-spacing:.06em;
-  color:rgba(234,240,255,.16);
-}
-
-/* ============ ROOM 03 - THE STORY ============ */
-.ak-story-track{
-  position:relative;
-  max-width:760px;
-  margin:clamp(52px,8vh,104px) auto 0;
-  padding-left:clamp(34px,4vw,64px);
-}
-.ak-thread{
-  position:absolute;left:0;top:6px;bottom:6px;width:1px;
-  background:var(--ak-hair);
-}
-.ak-thread i{
-  position:absolute;inset:0;
-  background:linear-gradient(var(--ak-glow),var(--ak-blue));
-  transform:scaleY(0);transform-origin:top;
-  box-shadow:0 0 14px rgba(123,140,255,.5);
-}
-.ak-ch-block{
-  position:relative;
-  padding:clamp(30px,4.6vh,54px) 0;
-}
-.ak-ch-block + .ak-ch-block{border-top:1px solid var(--ak-hair)}
-.ak-ch-head{
-  display:flex;align-items:baseline;gap:16px;margin-bottom:14px;
-  color:var(--ak-faint);
-}
-.ak-ch-head .ak-ix{
-  font-size:11px;font-weight:500;letter-spacing:.12em;
-  color:var(--ak-faint);
-  transition:color .6s ease, text-shadow .6s ease;
-}
-.ak-ch-block.on .ak-ch-head .ak-ix{
-  color:var(--ak-glow);text-shadow:0 0 16px rgba(123,140,255,.65);
-}
-.ak-ch-block h3{
-  text-transform:uppercase;
-  font-weight:720;font-variation-settings:'wdth' 76;
-  font-size:clamp(21px,2vw,30px);letter-spacing:-.004em;
-  margin-bottom:12px;
-  color:rgba(234,240,255,.5);
-  transition:color .7s ease;
-}
-.ak-ch-block.on h3{color:var(--ak-paper)}
-
-/* ============ ROOM 04 - THE PHILOSOPHY (lit quote) ============ */
-.ak-quote{padding:0 var(--pad)}
-.ak-quote-track{height:280vh;position:relative}
-.ak-quote-stick{
-  position:sticky;top:0;height:100vh;height:100svh;
-  display:flex;flex-direction:column;justify-content:center;gap:clamp(30px,5.5vh,58px);
-}
-.ak-quote-line{
-  font-weight:660;font-variation-settings:'wdth' 82;
-  font-size:clamp(34px,4.6vw,80px);
-  line-height:1.12;letter-spacing:-.014em;
-  max-width:19ch;
-}
-.ak-w{
-  display:inline-block;
-  opacity:.1;filter:blur(6px);transform:translateY(.28em);
-  transition:opacity .5s ease, filter .5s ease, transform .5s cubic-bezier(.2,.7,.2,1), color .5s ease;
-}
-.ak-w.lit{opacity:1;filter:blur(0);transform:none}
-.ak-w.ak-spark.lit{color:var(--orange)}
-.ak-quote-by{color:var(--ak-faint)}
-.ak-quote-by b{color:var(--ak-dim);font-weight:500}
-
-/* ============ ROOM 05 - THE MIND (orbital system) ============ */
-.ak-sys-grid{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
-  gap:clamp(36px,5.5vw,100px);align-items:center;
-  margin-top:clamp(48px,7vh,92px);
-}
-.ak-orbit{
-  position:relative;
-  width:100%;
-  aspect-ratio:1;
-  max-width:640px;
-  margin-inline:auto;
-}
-.ak-orbit-canvas{
-  position:absolute;inset:0;width:100%;height:100%;display:block;
-}
-.ak-orbit-fallback{
-  position:absolute;inset:0;width:100%;height:100%;display:none;
-}
-.ak-orbit-fallback .ring{
-  fill:none;stroke:rgba(234,240,255,.14);stroke-width:1;
-  stroke-dasharray:1 7;stroke-linecap:round;
-}
-.ak-orbit-fallback .core{
-  fill:var(--ak-blue);
-  filter:drop-shadow(0 0 30px rgba(46,64,255,.8));
-}
-.ak-orbit-fallback .core2{fill:rgba(159,176,255,.9)}
-.ak-orbit-static .ak-orbit-canvas{display:none}
-.ak-orbit-static .ak-orbit-fallback{display:block}
-.ak-legend{
-  display:flex;justify-content:center;flex-wrap:wrap;gap:6px 0;
-  margin-top:clamp(16px,2.4vh,26px);
-  color:var(--ak-faint);letter-spacing:.14em;
-}
-.ak-legend i{font-style:normal;padding:0 12px;color:rgba(234,240,255,.22)}
-
-/* ============ MARQUEE (one thin ribbon of light) ============ */
-.ak-mq{
-  overflow:hidden;padding:clamp(34px,5.5vh,60px) 0;
-  border-top:1px solid var(--ak-hair);
-  border-bottom:1px solid var(--ak-hair);
-}
-.ak-mq-row{display:flex;white-space:nowrap;width:max-content}
-.ak-mq-seq{display:flex;align-items:baseline;animation:ak-scroll 58s linear infinite}
-.ak-mq:hover .ak-mq-seq{animation-play-state:paused}
-.ak-mq-seq span{
-  font-weight:210;font-variation-settings:'wdth' 108;
-  font-size:clamp(30px,4vw,66px);line-height:1;
-  text-transform:uppercase;letter-spacing:.06em;
-  color:rgba(234,240,255,.30);
-  padding-right:.9em;
-  transition:color .4s ease;
-}
-.ak-mq-seq span:hover{color:var(--ak-paper)}
-.ak-mq-seq span::after{content:"\00B7";padding-left:.9em;color:rgba(234,240,255,.14)}
-@keyframes ak-scroll{to{transform:translateX(-50%)}}
-
-/* ============ ROOM 06 - THE VISION + CLOSING ============ */
-.ak-close{
-  text-align:center;
-  padding-bottom:clamp(110px,15vh,190px);
-  background:
-    radial-gradient(64% 40% at 50% 118%, rgba(46,64,255,.30) 0%, rgba(46,64,255,0) 62%),
-    radial-gradient(40% 26% at 50% 112%, rgba(123,140,255,.18) 0%, transparent 70%);
-}
-.ak-vision-copy{
-  max-width:56ch;margin:clamp(34px,5.5vh,62px) auto 0;
-  font-size:clamp(15.5px,1.28vw,19px);font-weight:320;
-  font-variation-settings:'wdth' 108;line-height:1.75;color:var(--ak-dim);
-}
-.ak-vision-copy b{color:var(--ak-paper);font-weight:500}
-.ak-close-lines{
-  margin:clamp(56px,9vh,110px) 0 clamp(30px,5vh,52px);
-  text-transform:uppercase;
-  font-size:clamp(30px,3.9vw,66px);line-height:1.12;
-  letter-spacing:-.008em;
-}
-.ak-close-lines .ln{display:block}
-.ak-close-lines .hv{font-weight:760;font-variation-settings:'wdth' 72;letter-spacing:-.012em}
-.ak-close-lines .lt{font-weight:240;font-variation-settings:'wdth' 106;color:rgba(234,240,255,.44)}
-.ak-sig{
-  display:block;margin:0 auto clamp(38px,5.5vh,62px);
-  font-style:italic;font-weight:260;
-  font-variation-settings:'wdth' 118;
-  font-size:clamp(22px,2.3vw,36px);letter-spacing:.02em;
-  color:var(--ak-glow);
-}
-.ak-cta-row{display:flex;justify-content:center;align-items:center;gap:26px;flex-wrap:wrap}
-.ak-cta-row .cta-book{background:var(--ak-paper);color:var(--ink);will-change:transform}
-.ak-cta-row .ak-alt{
-  color:var(--ak-dim);
-  border-bottom:1px solid var(--ak-hair-strong);
-  padding-bottom:3px;
-  transition:color .3s ease, border-color .3s ease;
-}
-.ak-cta-row .ak-alt:hover{color:var(--ak-paper);border-color:var(--ak-glow)}
-
-/* ============ GALLERY RAIL ============ */
-.ak-rail{
-  position:absolute;top:0;bottom:0;right:clamp(14px,1.8vw,30px);
-  width:10px;pointer-events:none;z-index:2;
-}
-.ak-rail-in{
-  position:sticky;top:50vh;transform:translateY(-50%);
-  display:flex;flex-direction:column;gap:16px;align-items:center;
-}
-.ak-dot{
-  width:4px;height:4px;border-radius:50%;
-  background:rgba(234,240,255,.20);
-  transition:background .4s ease, transform .4s ease, box-shadow .4s ease;
-}
-.ak-dot.on{
-  background:var(--ak-glow);transform:scale(1.6);
-  box-shadow:0 0 12px rgba(123,140,255,.8);
-}
-@media (max-width:1023px){ .ak-rail{display:none} }
-
-/* ============ HOME BAND (compressed room) ============ */
-.ak-band .ak-room{padding-top:clamp(76px,11vh,132px);padding-bottom:clamp(76px,11vh,132px)}
-.ak-band-grid{
-  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
-  gap:clamp(34px,5.5vw,88px);align-items:center;
-  margin-top:clamp(40px,5.5vh,72px);
-}
-.ak-band .ak-name{font-size:clamp(56px,8.6vw,158px)}
-.ak-band .ak-frame{max-width:400px}
-.ak-band .ak-caption{max-width:400px}
-.ak-band .ak-sub{margin-top:clamp(20px,3vh,34px)}
-.ak-band-link{
+/* ---- home band: the same voice, compact, with one doorway ---- */
+.ak-band .ak-room{padding:clamp(72px,10vh,124px) var(--pad)}
+.ak-band .ak-name{font-size:clamp(48px,7.4vw,128px);margin-bottom:clamp(26px,4vh,44px)}
+.ak-band .ak-lede{max-width:44ch}
+.ak-link{
   display:inline-flex;align-items:center;gap:14px;
-  margin-top:clamp(30px,4.5vh,50px);
+  margin-top:clamp(30px,4.5vh,52px);
   color:var(--ak-paper);
   font-weight:480;font-size:14.5px;font-variation-settings:'wdth' 106;
 }
-.ak-band-link .ak-arr{
-  display:inline-grid;place-items:center;
-  width:42px;height:42px;border-radius:50%;
-  border:1px solid var(--ak-hair-strong);
-  transition:background .35s ease, border-color .35s ease;
-  will-change:transform;
-}
-.ak-band-link:hover .ak-arr{background:var(--ak-blue);border-color:var(--ak-blue)}
-.ak-band-link u{
+.ak-link u{
   text-decoration:underline;text-underline-offset:7px;
   text-decoration-thickness:1px;
-  text-decoration-color:var(--ak-hair-strong);
-  transition:text-decoration-color .35s ease;
+  text-decoration-color:rgba(234,240,255,.28);
+  transition:text-decoration-color .3s ease;
 }
-.ak-band-link:hover u{text-decoration-color:var(--ak-glow)}
-
-/* ============ IN-WING REVEAL UNITS (choreographed by founder.js) ============ */
-.akv{opacity:0;transform:translateY(26px)}
-.no-js .akv,.reduced .akv{opacity:1;transform:none}
-.no-js .ak-mass,.reduced .ak-mass{background-position:42% 0}
-.no-js .ak-thread i,.reduced .ak-thread i{transform:none}
-.no-js .ak-w,.reduced .ak-w{opacity:1;filter:none;transform:none}
-.no-js .ak-ch-block .ak-ix{color:var(--ak-glow)}
-.no-js .ak-ch-block h3{color:var(--ak-paper)}
-.no-js .ak-quote-track,.reduced .ak-quote-track{height:auto}
-.no-js .ak-quote-stick,.reduced .ak-quote-stick{position:static;height:auto;padding:clamp(70px,11vh,130px) 0}
-.no-js .ak-ph-color,.reduced .ak-ph-color{display:none}
-.no-js .ak-orbit-canvas,.reduced .ak-orbit-canvas{display:none}
-.no-js .ak-orbit-fallback,.reduced .ak-orbit-fallback{display:block}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:1023px){
-  .ak-person-grid,.ak-sys-grid,.ak-band-grid{grid-template-columns:1fr}
-  .ak-frame{max-width:500px;margin-inline:0}
-  .ak-caption{margin-inline:0;max-width:500px}
-  .ak-orbit{max-width:480px;margin-inline:0}
-  .ak-story-track{margin-inline:0}
+.ak-link .ak-arr{
+  display:inline-grid;place-items:center;
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid rgba(234,240,255,.18);
+  transition:background .3s ease, border-color .3s ease;
 }
+.ak-link:hover u{text-decoration-color:var(--ak-glow)}
+.ak-link:hover .ak-arr{background:var(--ak-blue);border-color:var(--ak-blue)}
+
+/* ---- responsive ---- */
 @media (max-width:600px){
-  .ak-name{font-size:clamp(52px,15.5vw,104px);line-height:.98}
-  .ak-ln-sheen{margin-left:7vw}
-  .ak-quote-line{font-size:clamp(27px,8vw,40px)}
-  .ak-quote-track{height:220vh}
-  .ak-arrival-foot{flex-direction:column;align-items:flex-start;gap:22px}
-  .ak-mq-seq span{font-size:clamp(24px,7vw,40px)}
-  .ak-spec{grid-template-columns:1fr;max-width:none}
-  .ak-close-lines{font-size:clamp(24px,6.4vw,40px)}
+  .ak-name{font-size:clamp(44px,13.5vw,88px)}
+  .ak-band .ak-name{font-size:clamp(40px,12vw,76px)}
+  .ak-ln-sheen{margin-left:6vw}
+  .ak-quote blockquote p{font-size:clamp(23px,7vw,34px)}
+  .ak-coords{gap:22px 34px}
 }
 
-/* ============ REDUCED MOTION ============ */
-@media (prefers-reduced-motion:reduce){
-  .ak-wing::before,
-  .ak-enter .ak-tick,
-  .ak-mq-seq{animation:none}
-  .ak-w,.ak-ch-block h3,.ak-ch-head .ak-ix{transition:none}
+/* ---- the portrait: one clean image, nothing performing ---- */
+.ak-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  gap:clamp(44px,6vw,110px);
+  align-items:center;
+}
+.ak-portrait{
+  width:100%;max-width:420px;height:auto;display:block;
+  justify-self:end;
+  border-radius:clamp(16px,1.8vw,24px);
+  box-shadow:
+    0 0 0 1px rgba(234,240,255,.10),
+    0 40px 90px rgba(1,2,14,.5);
+}
+@media (max-width:1023px){
+  .ak-grid{grid-template-columns:1fr}
+  .ak-portrait{justify-self:start;max-width:380px;margin-top:clamp(28px,4vh,44px)}
 }
